@@ -19,18 +19,14 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--data', type=str, default='../data/wikitext-103',
                     help='location of the data corpus')
 parser.add_argument('--dataset', type=str, default='wt103',
-                    choices=['wt103', 'lm1b', 'enwik8', 'text8', 'nesmdb'],
-                    help='dataset name')
+                    choices=['wt103', 'lm1b', 'enwik8', 'text8', 'nesmdb'], help='dataset name')
 parser.add_argument('--n_layer', type=int, default=12,
                     help='number of total layers')
-parser.add_argument('--n_head', type=int, default=10,
-                    help='number of heads')
-parser.add_argument('--d_head', type=int, default=50,
-                    help='head dimension')
-parser.add_argument('--d_embed', type=int, default=-1,
-                    help='embedding dimension')
-parser.add_argument('--d_model', type=int, default=500,
-                    help='model dimension')
+parser.add_argument('--n_head', type=int, default=10, help='number of heads')
+parser.add_argument('--d_head', type=int, default=50, help='head dimension')
+parser.add_argument('--d_embed', type=int, default=-
+                    1, help='embedding dimension')
+parser.add_argument('--d_model', type=int, default=500, help='model dimension')
 parser.add_argument('--d_inner', type=int, default=1000,
                     help='inner dimension in FF')
 parser.add_argument('--dropout', type=float, default=0.0,
@@ -50,17 +46,14 @@ parser.add_argument('--init_std', type=float, default=0.02,
 parser.add_argument('--proj_init_std', type=float, default=0.01,
                     help='parameters initialized by N(0, init_std)')
 parser.add_argument('--optim', default='adam', type=str,
-                    choices=['adam', 'sgd', 'adagrad'],
-                    help='optimizer to use.')
+                    choices=['adam', 'sgd', 'adagrad'], help='optimizer to use.')
 parser.add_argument('--lr', type=float, default=0.00025,
                     help='initial learning rate (0.00025|5 for adam|sgd)')
-parser.add_argument('--mom', type=float, default=0.0,
-                    help='momentum for sgd')
-parser.add_argument('--scheduler', default='cosine', type=str,
-                    choices=['cosine', 'inv_sqrt', 'dev_perf', 'constant'],
-                    help='lr scheduler to use.')
-parser.add_argument('--warmup_step', type=int, default=0,
-                    help='upper epoch limit')
+parser.add_argument('--mom', type=float, default=0.0, help='momentum for sgd')
+parser.add_argument('--scheduler', default='cosine', type=str, choices=[
+                    'cosine', 'inv_sqrt', 'dev_perf', 'constant'], help='lr scheduler to use.')
+parser.add_argument('--warmup_step', type=int,
+                    default=0, help='upper epoch limit')
 parser.add_argument('--decay_rate', type=float, default=0.5,
                     help='decay factor when ReduceLROnPlateau is used')
 parser.add_argument('--lr_min', type=float, default=0.0,
@@ -71,8 +64,7 @@ parser.add_argument('--clip_nonemb', action='store_true',
                     help='only clip the gradient of non-embedding params')
 parser.add_argument('--max_step', type=int, default=100000,
                     help='upper epoch limit')
-parser.add_argument('--batch_size', type=int, default=60,
-                    help='batch size')
+parser.add_argument('--batch_size', type=int, default=60, help='batch size')
 parser.add_argument('--batch_chunk', type=int, default=1,
                     help='split batch into chunks to save memory')
 parser.add_argument('--augment_transpose', action='store_true',
@@ -97,10 +89,8 @@ parser.add_argument('--mem_len', type=int, default=0,
                     help='length of the retained previous heads')
 parser.add_argument('--not_tied', action='store_true',
                     help='do not tie the word embedding and softmax weights')
-parser.add_argument('--seed', type=int, default=1111,
-                    help='random seed')
-parser.add_argument('--cuda', action='store_true',
-                    help='use CUDA')
+parser.add_argument('--seed', type=int, default=1111, help='random seed')
+parser.add_argument('--cuda', action='store_true', help='use CUDA')
 parser.add_argument('--adaptive', action='store_true',
                     help='use adaptive softmax')
 parser.add_argument('--div_val', type=int, default=1,
@@ -111,47 +101,34 @@ parser.add_argument('--varlen', action='store_true',
                     help='use variable length')
 parser.add_argument('--multi_gpu', action='store_true',
                     help='use multiple GPU')
-parser.add_argument('--log-interval', type=int, default=200,
-                    help='report interval')
-parser.add_argument('--eval-interval', type=int, default=4000,
-                    help='evaluation interval')
-parser.add_argument('--work_dir', default='LM-TFM', type=str,
-                    help='experiment directory.')
+parser.add_argument('--log-interval', type=int,
+                    default=200, help='report interval')
+parser.add_argument('--eval-interval', type=int,
+                    default=4000, help='evaluation interval')
+parser.add_argument('--work_dir', default='LM-TFM',
+                    type=str, help='experiment directory.')
 parser.add_argument('--restart', action='store_true',
                     help='restart training from the saved checkpoint')
-parser.add_argument('--restart_dir', type=str, default='',
-                    help='restart dir')
+parser.add_argument('--restart_dir', type=str, default='', help='restart dir')
 parser.add_argument('--debug', action='store_true',
                     help='run in debug mode (do not create exp dir)')
 parser.add_argument('--same_length', action='store_true',
                     help='use the same attn length for all tokens')
 parser.add_argument('--attn_type', type=int, default=0,
-                    help='attention type. 0 for ours, 1 for Shaw et al,'
-                    '2 for Vaswani et al, 3 for Al Rfou et al.')
+                    help='attention type. 0 for ours, 1 for Shaw et al, 2 for Vaswani et al, 3 for Al Rfou et al.')
 parser.add_argument('--clamp_len', type=int, default=-1,
                     help='use the same pos embeddings after clamp_len')
 parser.add_argument('--eta_min', type=float, default=0.0,
                     help='min learning rate for cosine scheduler')
-parser.add_argument('--gpu0_bsz', type=int, default=-1,
-                    help='batch size on gpu 0')
-parser.add_argument('--max_eval_steps', type=int, default=-1,
-                    help='max eval steps')
+parser.add_argument('--gpu0_bsz', type=int, default=-
+                    1, help='batch size on gpu 0')
+parser.add_argument('--max_eval_steps', type=int,
+                    default=-1, help='max eval steps')
 parser.add_argument('--sample_softmax', type=int, default=-1,
                     help='number of samples in sampled softmax')
-parser.add_argument('--patience', type=int, default=0,
-                    help='patience')
-parser.add_argument('--finetune_v2', action='store_true',
-                    help='finetune v2')
-parser.add_argument('--finetune_v3', action='store_true',
-                    help='finetune v3')
-parser.add_argument('--fp16', action='store_true',
-                    help='Run in pseudo-fp16 mode (fp16 storage fp32 math).')
-parser.add_argument('--static-loss-scale', type=float, default=1,
-                    help='Static loss scale, positive power of 2 values can '
-                    'improve fp16 convergence.')
-parser.add_argument('--dynamic-loss-scale', action='store_true',
-                    help='Use dynamic loss scaling.  If supplied, this argument'
-                    ' supersedes --static-loss-scale.')
+parser.add_argument('--patience', type=int, default=0, help='patience')
+parser.add_argument('--finetune_v2', action='store_true', help='finetune v2')
+parser.add_argument('--finetune_v3', action='store_true', help='finetune v3')
 args = parser.parse_args()
 args.tied = not args.not_tied
 
@@ -163,8 +140,11 @@ assert args.batch_size % args.batch_chunk == 0
 
 args.work_dir = '{}-{}'.format(args.work_dir, args.dataset)
 args.work_dir = os.path.join(args.work_dir, time.strftime('%Y%m%d-%H%M%S'))
-logging = create_exp_dir(args.work_dir,
-                         scripts_to_save=['train.py', 'mem_transformer.py'], debug=args.debug)
+train_script_path = os.path.abspath(__file__)
+mem_transformer_script_path = os.path.join(
+    os.path.dirname(train_script_path), 'mem_transformer.py')
+logging = create_exp_dir(args.work_dir, scripts_to_save=[
+                         train_script_path, mem_transformer_script_path], debug=args.debug)
 
 # Set the random seed manually for reproducibility.
 np.random.seed(args.seed)
@@ -174,18 +154,6 @@ if torch.cuda.is_available():
         print('WARNING: You have a CUDA device, so you should probably run with --cuda')
     else:
         torch.cuda.manual_seed_all(args.seed)
-
-# Validate `--fp16` option
-if args.fp16:
-    if not args.cuda:
-        print('WARNING: --fp16 requires --cuda, ignoring --fp16 option')
-        args.fp16 = False
-    else:
-        try:
-            from apex.fp16_utils import FP16_Optimizer
-        except:
-            print('WARNING: apex not installed, ignoring --fp16 option')
-            args.fp16 = False
 
 device = torch.device('cuda' if args.cuda else 'cpu')
 
@@ -198,12 +166,12 @@ ntokens = len(corpus.vocab)
 args.n_token = ntokens
 
 eval_batch_size = 10
-tr_iter = corpus.get_iterator('train', args.batch_size, args.tgt_len,
-                              device=device, ext_len=args.ext_len, augment_transpose=args.augment_transpose, augment_stretch=args.augment_stretch, augment_switchp1p2=args.augment_switchp1p2, augment_selectens=args.augment_selectens, skip_short=args.skip_short, trim_padding=args.trim_padding)
-va_iter = corpus.get_iterator('valid', eval_batch_size, args.eval_tgt_len,
-                              device=device, ext_len=args.ext_len)
-te_iter = corpus.get_iterator('test', eval_batch_size, args.eval_tgt_len,
-                              device=device, ext_len=args.ext_len)
+tr_iter = corpus.get_iterator('train', args.batch_size, args.tgt_len, device=device, ext_len=args.ext_len, augment_transpose=args.augment_transpose, augment_stretch=args.augment_stretch,
+                              augment_switchp1p2=args.augment_switchp1p2, augment_selectens=args.augment_selectens, skip_short=args.skip_short, trim_padding=args.trim_padding)
+va_iter = corpus.get_iterator(
+    'valid', eval_batch_size, args.eval_tgt_len, device=device, ext_len=args.ext_len)
+te_iter = corpus.get_iterator(
+    'test', eval_batch_size, args.eval_tgt_len, device=device, ext_len=args.ext_len)
 
 # adaptive softmax / embedding
 cutoffs, tie_projs = [], [False]
@@ -286,32 +254,22 @@ def update_dropatt(m):
 if args.restart:
     with open(os.path.join(args.restart_dir, 'model.pt'), 'rb') as f:
         model = torch.load(f)
-    if not args.fp16:
-        model = model.float()
     model.apply(update_dropout)
     model.apply(update_dropatt)
 else:
-    model = MemTransformerLM(ntokens, args.n_layer, args.n_head, args.d_model,
-                             args.d_head, args.d_inner, args.dropout, args.dropatt,
-                             tie_weight=args.tied, d_embed=args.d_embed, div_val=args.div_val,
-                             tie_projs=tie_projs, pre_lnorm=args.pre_lnorm, tgt_len=args.tgt_len,
-                             ext_len=args.ext_len, mem_len=args.mem_len, cutoffs=cutoffs,
-                             same_length=args.same_length, attn_type=args.attn_type,
-                             clamp_len=args.clamp_len, sample_softmax=args.sample_softmax)
+    model = MemTransformerLM(ntokens, args.n_layer, args.n_head, args.d_model, args.d_head, args.d_inner, args.dropout, args.dropatt, tie_weight=args.tied, d_embed=args.d_embed, div_val=args.div_val, tie_projs=tie_projs,
+                             pre_lnorm=args.pre_lnorm, tgt_len=args.tgt_len, ext_len=args.ext_len, mem_len=args.mem_len, cutoffs=cutoffs, same_length=args.same_length, attn_type=args.attn_type, clamp_len=args.clamp_len, sample_softmax=args.sample_softmax)
     model.apply(weights_init)
     # ensure embedding init is not overridden by out_layer in case of weight sharing
     model.word_emb.apply(weights_init)
 args.n_all_param = sum([p.nelement() for p in model.parameters()])
 args.n_nonemb_param = sum([p.nelement() for p in model.layers.parameters()])
 
-if args.fp16:
-    model = model.half()
-
 if args.multi_gpu:
     model = model.to(device)
     if args.gpu0_bsz >= 0:
-        para_model = BalancedDataParallel(args.gpu0_bsz // args.batch_chunk,
-                                          model, dim=1).to(device)
+        para_model = BalancedDataParallel(
+            args.gpu0_bsz // args.batch_chunk, model, dim=1).to(device)
     else:
         para_model = nn.DataParallel(model, dim=1).to(device)
 else:
@@ -329,8 +287,8 @@ if args.optim.lower() == 'sgd':
         optimizer_sparse = optim.SGD(sparse_params, lr=args.lr * 2)
         optimizer = optim.SGD(dense_params, lr=args.lr, momentum=args.mom)
     else:
-        optimizer = optim.SGD(model.parameters(), lr=args.lr,
-                              momentum=args.mom)
+        optimizer = optim.SGD(model.parameters(),
+                              lr=args.lr, momentum=args.mom)
 elif args.optim.lower() == 'adam':
     if args.sample_softmax > 0:
         dense_params, sparse_params = [], []
@@ -351,11 +309,11 @@ if args.scheduler == 'cosine':
     # here we do not set eta_min to lr_min to be backward compatible
     # because in previous versions eta_min is default to 0
     # rather than the default value of lr_min 1e-6
-    scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer,
-                                                     args.max_step, eta_min=args.eta_min)  # should use eta_min arg
+    scheduler = optim.lr_scheduler.CosineAnnealingLR(
+        optimizer, args.max_step, eta_min=args.eta_min)  # should use eta_min arg
     if args.sample_softmax > 0:
-        scheduler_sparse = optim.lr_scheduler.CosineAnnealingLR(optimizer_sparse,
-                                                                args.max_step, eta_min=args.eta_min)  # should use eta_min arg
+        scheduler_sparse = optim.lr_scheduler.CosineAnnealingLR(
+            optimizer_sparse, args.max_step, eta_min=args.eta_min)  # should use eta_min arg
 elif args.scheduler == 'inv_sqrt':
     # originally used for Transformer (in Attention is all you need)
     def lr_lambda(step):
@@ -363,25 +321,16 @@ elif args.scheduler == 'inv_sqrt':
         if step == 0 and args.warmup_step == 0:
             return 1.
         else:
-            return 1. / (step ** 0.5) if step > args.warmup_step \
-                else step / (args.warmup_step ** 1.5)
+            return 1. / (step ** 0.5) if step > args.warmup_step else step / (args.warmup_step ** 1.5)
     scheduler = optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_lambda)
 elif args.scheduler == 'dev_perf':
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer,
-                                                     factor=args.decay_rate, patience=args.patience, min_lr=args.lr_min)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer, factor=args.decay_rate, patience=args.patience, min_lr=args.lr_min)
     if args.sample_softmax > 0:
-        scheduler_sparse = optim.lr_scheduler.ReduceLROnPlateau(optimizer_sparse,
-                                                                factor=args.decay_rate, patience=args.patience, min_lr=args.lr_min)
+        scheduler_sparse = optim.lr_scheduler.ReduceLROnPlateau(
+            optimizer_sparse, factor=args.decay_rate, patience=args.patience, min_lr=args.lr_min)
 elif args.scheduler == 'constant':
     pass
-
-if args.cuda and args.fp16:
-    # If args.dynamic_loss_scale is False, static_loss_scale will be used.
-    # If args.dynamic_loss_scale is True, it will take precedence over static_loss_scale.
-    optimizer = FP16_Optimizer(optimizer,
-                               static_loss_scale=args.static_loss_scale,
-                               dynamic_loss_scale=args.dynamic_loss_scale,
-                               dynamic_loss_args={'init_scale': 2 ** 16})
 
 if args.restart:
     if os.path.exists(os.path.join(args.restart_dir, 'optimizer.pt')):
@@ -409,11 +358,11 @@ def evaluate(eval_iter):
     # If the model does not use memory at all, make the ext_len longer.
     # Otherwise, make the mem_len longer and keep the ext_len the same.
     if args.mem_len == 0:
-        model.reset_length(args.eval_tgt_len,
-                           args.ext_len+args.tgt_len-args.eval_tgt_len, args.mem_len)
+        model.reset_length(args.eval_tgt_len, args.ext_len +
+                           args.tgt_len-args.eval_tgt_len, args.mem_len)
     else:
-        model.reset_length(args.eval_tgt_len,
-                           args.ext_len, args.mem_len+args.tgt_len-args.eval_tgt_len)
+        model.reset_length(args.eval_tgt_len, args.ext_len,
+                           args.mem_len+args.tgt_len-args.eval_tgt_len)
 
     # Evaluation
     total_len, total_loss = 0, 0.
@@ -455,26 +404,16 @@ def train():
                 ret = para_model(data_i, target_i, *mems[i])
                 loss, mems[i] = ret[0], ret[1:]
                 loss = loss.float().mean().type_as(loss) / args.batch_chunk
-                if args.fp16:
-                    optimizer.backward(loss)
-                else:
-                    loss.backward()
+                loss.backward()
                 train_loss += loss.float().item()
         else:
             ret = para_model(data, target, *mems)
             loss, mems = ret[0], ret[1:]
             loss = loss.float().mean().type_as(loss)
-            if args.fp16:
-                optimizer.backward(loss)
-            else:
-                loss.backward()
+            loss.backward()
             train_loss += loss.float().item()
 
-        if args.fp16:
-            optimizer.clip_master_grads(args.clip)
-        else:
-            torch.nn.utils.clip_grad_norm_(model.parameters(), args.clip)
-
+        torch.nn.utils.clip_grad_norm_(model.parameters(), args.clip)
         optimizer.step()
         if args.sample_softmax > 0:
             optimizer_sparse.step()
