@@ -1,9 +1,9 @@
 ## Download Datasets
-1. [NES-MDB Dataset](https://github.com/suhree777/AAI2002-ITP/blob/main/Project_v2_1/nesmdb_nlm.tar.gz)<br />
+1. [NES-MDB Dataset](https://drive.google.com/file/d/1Z6RtPpKWCTYUJjvRV3PhyYuEDzdT82r4/view)<br />
    **Language Modeling Format (155 MB)** <br />
    This format is specifically designed for tasks that involve sequence modelling, such as training a Transformer model. Given that the LakhNES project involves generating music based on learned patterns from a dataset, the Language Modeling Format is the most suitable. It structures the data in a way that is optimized for models that learn to predict subsequent events in a sequence, which is exactly what you need for music generation.
 
-2. [Lakh MIDI Dataset](https://github.com/suhree777/AAI2002-ITP/blob/main/Project_v2_1/lmd_full.tar.gz)<br />
+2. [Lakh MIDI Dataset](https://colinraffel.com/projects/lmd/)<br />
    **LMD-full (The full collection of 176,581 deduped MIDI files)** <br />
    For pre-training, you want the broadest possible diversity and quantity of data to give the model a solid foundation in music from various genres, not just chiptune or video game music. LMD-full offers the largest collection of MIDI files, providing the model with a wide variety of musical structures and patterns. Although it contains some corrupt files, the sheer volume and diversity of the dataset make it the best choice for pre-training before fine-tuning on the more specific NES-MDB dataset.
 
