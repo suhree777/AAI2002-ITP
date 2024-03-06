@@ -214,7 +214,9 @@ class Corpus(object):
             self.vocab.count_file(os.path.join(path, 'valid.txt'))
             self.vocab.count_file(os.path.join(path, 'test.txt'))
         elif self.dataset == 'wt103':
-            self.vocab.count_file(os.path.join(path, 'train.txt'))
+            self.train = self.vocab.encode_file(os.path.join(path, 'wiki.train.tokens'), ordered=True)
+            self.valid = self.vocab.encode_file(os.path.join(path, 'wiki.valid.tokens'), ordered=True)
+            self.test = self.vocab.encode_file(os.path.join(path, 'wiki.test.tokens'), ordered=True)
         elif self.dataset == 'lm1b':
             train_path_pattern = os.path.join(
                 path, '1-billion-word-language-modeling-benchmark-r13output',
