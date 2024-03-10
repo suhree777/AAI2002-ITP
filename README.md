@@ -17,5 +17,6 @@
    Type <code>tar</code> to specify a source and destination file path. <br />
    <code>tar -xvzf C:\PATH\TO\SOURCE\filename.tar.gz -C C:\PATH\TO\DESTINATION</code>
    
-   
+   ## getdata.bat
+   This batch script is to download and prepare various language modelling datasets -- WikiText-2, WikiText-103, enwik8, text8, and Penn Treebank.
    

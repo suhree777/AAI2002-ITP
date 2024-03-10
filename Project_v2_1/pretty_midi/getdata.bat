@@ -20,6 +20,7 @@ if not exist wikitext-2 (
 
 echo - Downloading WikiText-103 (WT103)
 if not exist wikitext-103 (
+    @REM dataset downloaded from https://developer.ibm.com/exchanges/data/all/wikitext-103/
     tar -xzf %HOMEPATH%\Downloads\wikitext-103.tar.gz -C .
     cd wikitext-103
     ren wiki.train.tokens train.txt
