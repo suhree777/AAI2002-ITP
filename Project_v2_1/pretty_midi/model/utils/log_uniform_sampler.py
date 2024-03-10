@@ -82,6 +82,41 @@ def sample_logits(embedding, bias, labels, inputs, sampler):
     return logits
 
 
+# class LogUniformSampler(object):
+#     def __init__(self, range_max, unique=False):
+#         """
+#         Reference : https://github.com/tensorflow/tensorflow/blob/r1.10/tensorflow/python/ops/candidate_sampling_ops.py
+#             `P(class) = (log(class + 2) - log(class + 1)) / log(range_max + 1)`
+#         """
+#         self.range_max = range_max
+#         log_indices = torch.arange(1., range_max+2., 1.).log_()
+#         self.dist = (log_indices[1:] - log_indices[:-1]) / log_indices[-1]
+
+#         self.unique = unique
+
+#         if self.unique:
+#             self.exclude_mask = torch.ByteTensor(range_max).fill_(0)
+
+#     def sample(self, n_sample, labels):
+#         pos_sample, new_labels = labels.unique(return_inverse=True)
+#         n_pos_sample = pos_sample.size(0)
+#         n_neg_sample = n_sample - n_pos_sample
+
+#         if self.unique:
+#             self.exclude_mask.index_fill_(0, pos_sample, 1)
+#             sample_dist = self.dist.clone().masked_fill_(self.exclude_mask, 0)
+#             self.exclude_mask.index_fill_(0, pos_sample, 0)
+#         else:
+#             sample_dist = self.dist
+
+#         neg_sample = torch.multinomial(sample_dist, n_neg_sample)
+
+#         sample = torch.cat([pos_sample, neg_sample])
+#         sample_prob = self.dist[sample]
+
+#         return new_labels, sample, sample_prob
+
+
 if __name__ == '__main__':
     S, B = 3, 4
     n_vocab = 10000
@@ -89,7 +124,21 @@ if __name__ == '__main__':
     H = 32
 
     labels = torch.LongTensor(S, B).random_(0, n_vocab)
+
+    # sampler = LogUniformSampler(n_vocab, unique=False)
+    # new_labels, sample, sample_prob = sampler.sample(n_sample, labels)
+
     sampler = LogUniformSampler(n_vocab, unique=True)
+    # true_probs, samp_probs, neg_samples = sampler.sample(n_sample, labels)
+
+    # print('true_probs', true_probs.numpy().tolist())
+    # print('samp_probs', samp_probs.numpy().tolist())
+    # print('neg_samples', neg_samples.numpy().tolist())
+
+    # print('sum', torch.sum(sampler.dist).item())
+
+    # assert torch.all(torch.sort(sample.unique())[0].eq(torch.sort(sample)[0])).item()
+
     embedding = nn.Embedding(n_vocab, H)
     bias = torch.zeros(n_vocab)
     inputs = torch.Tensor(S, B, H).normal_()

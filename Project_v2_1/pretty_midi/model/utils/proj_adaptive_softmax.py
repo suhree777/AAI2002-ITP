@@ -4,8 +4,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 from collections import defaultdict
 
-CUDA_MAJOR = int(torch.version.cuda.split('.')[0]) if torch.version.cuda is not None else 0
-CUDA_MINOR = int(torch.version.cuda.split('.')[1]) if torch.version.cuda is not None else 0
+if torch.version.cuda is not None:
+    CUDA_MAJOR = int(torch.version.cuda.split('.')[0])
+    CUDA_MINOR = int(torch.version.cuda.split('.')[1])
+else:
+    CUDA_MAJOR = 0
+    CUDA_MINOR = 0
 
 
 class ProjectedAdaptiveLogSoftmax(nn.Module):

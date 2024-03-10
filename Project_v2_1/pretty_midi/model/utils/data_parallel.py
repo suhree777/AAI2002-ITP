@@ -5,8 +5,10 @@ from torch.nn.parallel.parallel_apply import parallel_apply
 
 
 def scatter(inputs, target_gpus, chunk_sizes, dim=0):
-    """
-    Slices tensors into approximately equal chunks and distributes them across given GPUs. Duplicates references to objects that are not tensors.
+    r"""
+    Slices tensors into approximately equal chunks and
+    distributes them across given GPUs. Duplicates
+    references to objects that are not tensors.
     """
     def scatter_map(obj):
         if isinstance(obj, torch.Tensor):
@@ -37,7 +39,7 @@ def scatter(inputs, target_gpus, chunk_sizes, dim=0):
 
 
 def scatter_kwargs(inputs, kwargs, target_gpus, chunk_sizes, dim=0):
-    """Scatter with support for kwargs dictionary"""
+    r"""Scatter with support for kwargs dictionary"""
     inputs = scatter(inputs, target_gpus, chunk_sizes, dim) if inputs else []
     kwargs = scatter(kwargs, target_gpus, chunk_sizes, dim) if kwargs else []
     if len(inputs) < len(kwargs):

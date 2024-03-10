@@ -90,6 +90,6 @@ def preprocess_lmd_full(input_dir, output_dir):
                 preprocess_midi_file(midi_file_path, file_output_dir)
 
 
-input_dir = 'lmd_full'
-output_dir = 'pretty_midi/lmd_output'
+input_dir = 'data/lmd_full'
+output_dir = 'pretty_midi/preprocess/lmd_output'
 preprocess_lmd_full(input_dir, output_dir)

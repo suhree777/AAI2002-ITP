@@ -3,6 +3,7 @@ import sys
 import glob
 import numpy as np
 import torch
+
 from collections import Counter, OrderedDict
 from utils.vocabulary import Vocab
 
@@ -145,9 +146,7 @@ class LMShuffledIterator(object):
 
 class LMMultiFileIterator(LMShuffledIterator):
     def __init__(self, paths, vocab, bsz, bptt, device='cpu', ext_len=None,
-                 shuffle=False, augment_transpose=False, augment_stretch=False, augment_switchp1p2=False, augment_selectens=False,
-                 skip_short=False,
-                 trim_padding=False):
+                 shuffle=False):
 
         self.paths = paths
         self.vocab = vocab
@@ -159,21 +158,8 @@ class LMMultiFileIterator(LMShuffledIterator):
         self.device = device
         self.shuffle = shuffle
 
-        self.augment_transpose = augment_transpose
-        self.augment_stretch = augment_stretch
-        self.augment_switchp1p2 = augment_switchp1p2
-        self.augment_selectens = augment_selectens
-
-        self.skip_short = skip_short
-        self.trim_padding = trim_padding
-
     def get_sent_stream(self, path):
-        sents = self.vocab.encode_file(path, add_double_eos=True,
-                                       augment_transpose=self.augment_transpose,
-                                       augment_stretch=self.augment_stretch,
-                                       augment_switchp1p2=self.augment_switchp1p2,
-                                       augment_selectens=self.augment_selectens,
-                                       trim_padding=self.trim_padding)
+        sents = self.vocab.encode_file(path, add_double_eos=True)
         if self.shuffle:
             np.random.shuffle(sents)
         sent_stream = iter(sents)
@@ -184,24 +170,11 @@ class LMMultiFileIterator(LMShuffledIterator):
         if self.shuffle:
             np.random.shuffle(self.paths)
 
-        sents = []
         for path in self.paths:
-            sents.extend(self.vocab.encode_file(path, add_double_eos=True,
-                                                augment_transpose=self.augment_transpose,
-                                                augment_stretch=self.augment_stretch,
-                                                augment_switchp1p2=self.augment_switchp1p2,
-                                                augment_selectens=self.augment_selectens,
-                                                trim_padding=self.trim_padding))
-
-        if self.skip_short:
-            sents = [s for s in sents if len(s) >= 10]
-
-        if self.shuffle:
-            np.random.shuffle(sents)
-
-        sent_stream = iter(sents)
-        for batch in self.stream_iterator(sent_stream):
-            yield batch
+            # sent_stream is an iterator
+            sent_stream = self.get_sent_stream(path)
+            for batch in self.stream_iterator(sent_stream):
+                yield batch
 
 
 class Corpus(object):
@@ -221,10 +194,6 @@ class Corpus(object):
                 'training-monolingual.tokenized.shuffled', 'news.en-*')
             train_paths = glob.glob(train_path_pattern)
             # the vocab will load from file when build_vocab() is called
-        elif self.dataset == 'nesmdb':
-            train_paths = glob.glob(os.path.join(path, 'train', '*.txt'))
-            valid_paths = glob.glob(os.path.join(path, 'valid', '*.txt'))
-            test_paths = glob.glob(os.path.join(path, 'test', '*.txt'))
 
         self.vocab.build_vocab()
 
@@ -248,16 +217,12 @@ class Corpus(object):
                 os.path.join(path, 'valid.txt'), ordered=False, add_double_eos=True)
             self.test = self.vocab.encode_file(
                 os.path.join(path, 'test.txt'), ordered=False, add_double_eos=True)
-        elif self.dataset == 'nesmdb':
-            self.train = train_paths
-            self.valid = valid_paths
-            self.test = test_paths
 
     def get_iterator(self, split, *args, **kwargs):
         if split == 'train':
             if self.dataset in ['ptb', 'wt2', 'wt103', 'enwik8', 'text8']:
                 data_iter = LMOrderedIterator(self.train, *args, **kwargs)
-            elif self.dataset in ['lm1b', 'nesmdb']:
+            elif self.dataset == 'lm1b':
                 kwargs['shuffle'] = True
                 data_iter = LMMultiFileIterator(
                     self.train, self.vocab, *args, **kwargs)
@@ -267,13 +232,6 @@ class Corpus(object):
                 data_iter = LMOrderedIterator(data, *args, **kwargs)
             elif self.dataset == 'lm1b':
                 data_iter = LMShuffledIterator(data, *args, **kwargs)
-            elif self.dataset == 'nesmdb':
-                kwargs['shuffle'] = False
-                # I've decided to let these both always be true for evaluation
-                kwargs['skip_short'] = True
-                kwargs['trim_padding'] = True
-                data_iter = LMMultiFileIterator(
-                    data, self.vocab, *args, **kwargs)
 
         return data_iter
 
@@ -298,10 +256,6 @@ def get_lm_corpus(datadir, dataset):
             kwargs['vocab_file'] = os.path.join(datadir, '1b_word_vocab.txt')
         elif dataset in ['enwik8', 'text8']:
             pass
-        elif dataset == 'nesmdb':
-            kwargs['special'] = []
-            kwargs['lower_case'] = False
-            kwargs['vocab_file'] = os.path.join(datadir, 'vocab.txt')
 
         corpus = Corpus(datadir, dataset, **kwargs)
         torch.save(corpus, fn)
@@ -311,25 +265,14 @@ def get_lm_corpus(datadir, dataset):
 
 if __name__ == '__main__':
     import argparse
-    
     parser = argparse.ArgumentParser(description='unit test')
-    parser.add_argument('--datadir', type=str, default='../data/text8',
+    parser.add_argument('--datadir', type=str, default='.//pretty_midi//data//text8',
                         help='location of the data corpus')
     parser.add_argument('--dataset', type=str, default='text8',
-                        choices=['ptb', 'wt2', 'wt103', 'lm1b',
-                                 'enwik8', 'text8', 'nesmdb'],
+                        choices=['ptb', 'wt2', 'wt103',
+                                 'lm1b', 'enwik8', 'text8'],
                         help='dataset name')
     args = parser.parse_args()
 
     corpus = get_lm_corpus(args.datadir, args.dataset)
     print('Vocab size : {}'.format(len(corpus.vocab.idx2sym)))
-
-    print('-' * 10)
-    print('Train iterator')
-    for batch in corpus.get_iterator('train', bsz=9, bptt=100, augment_transpose=True, augment_stretch=True):
-        print(batch)
-        break
-
-    for batch in corpus.get_iterator('valid', bsz=3, bptt=10):
-        print(batch)
-        break

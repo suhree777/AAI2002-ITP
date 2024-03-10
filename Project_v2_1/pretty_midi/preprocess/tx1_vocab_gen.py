@@ -35,5 +35,5 @@ for ins in ['P1', 'P2', 'TR', 'NO']:
         vocab.append('{}_NOTEON_{}'.format(ins, n))
 
 # Create vocab.txt file if it does not exist
-with open('pretty_midi/data/vocab.txt', 'w') as f:
+with open('pretty_midi/preprocess/vocab.txt', 'w') as f:
     f.write('\n'.join(vocab))
