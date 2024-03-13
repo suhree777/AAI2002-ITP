@@ -5,23 +5,21 @@ import math
 import os
 import sys
 import itertools
-
 import numpy as np
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
 from data_utils import get_lm_corpus
 from mem_transformer import MemTransformerLM
 from utils.exp_utils import create_exp_dir
+from utils.data_parallel import BalancedDataParallel
 
 parser = argparse.ArgumentParser(
     description='PyTorch Transformer Language Model')
-parser.add_argument('--data', type=str, default="C:/Users/Xuanting/Desktop/AAI2002 - ITP (Cross Domain Prototyping)/Project_v2_1/pretty_midi/model/wikitext-103",
+parser.add_argument('--data', type=str, default='./data/wikitext-103',
                     help='location of the data corpus')
 parser.add_argument('--dataset', type=str, default='wt103',
-                    choices=['wt103', 'lm1b', 'enwik8', 'text8', 'nesmdb'],
+                    choices=['wt103', 'lm1b', 'enwik8', 'text8'],
                     help='dataset name')
 parser.add_argument('--n_layer', type=int, default=12,
                     help='number of total layers')
@@ -77,18 +75,6 @@ parser.add_argument('--batch_size', type=int, default=60,
                     help='batch size')
 parser.add_argument('--batch_chunk', type=int, default=1,
                     help='split batch into chunks to save memory')
-parser.add_argument('--augment_transpose', action='store_true',
-                    help='transpose NESMDB randomly by -6 to +6 semitones')
-parser.add_argument('--augment_stretch', action='store_true',
-                    help='timestretch NESMDB randomly by 95% to 105%')
-parser.add_argument('--augment_switchp1p2', action='store_true',
-                    help='half of the time, switch P1 and P2')
-parser.add_argument('--augment_selectens', action='store_true',
-                    help='half of the time, select random subset of instruments')
-parser.add_argument('--skip_short', action='store_true',
-                    help='skip short sequences (len < 10)')
-parser.add_argument('--trim_padding', action='store_true',
-                    help='trim beginning and end waits')
 parser.add_argument('--tgt_len', type=int, default=70,
                     help='number of tokens to predict')
 parser.add_argument('--eval_tgt_len', type=int, default=50,
@@ -101,6 +87,18 @@ parser.add_argument('--not_tied', action='store_true',
                     help='do not tie the word embedding and softmax weights')
 parser.add_argument('--seed', type=int, default=1111,
                     help='random seed')
+parser.add_argument('--cuda', action='store_true',
+                    help='use CUDA')
+parser.add_argument('--adaptive', action='store_true',
+                    help='use adaptive softmax')
+parser.add_argument('--div_val', type=int, default=1,
+                    help='divident value for adapative input and softmax')
+parser.add_argument('--pre_lnorm', action='store_true',
+                    help='apply LayerNorm to the input instead of the output')
+parser.add_argument('--varlen', action='store_true',
+                    help='use variable length')
+parser.add_argument('--multi_gpu', action='store_true',
+                    help='use multiple GPU')
 parser.add_argument('--log-interval', type=int, default=200,
                     help='report interval')
 parser.add_argument('--eval-interval', type=int, default=4000,
@@ -122,6 +120,8 @@ parser.add_argument('--clamp_len', type=int, default=-1,
                     help='use the same pos embeddings after clamp_len')
 parser.add_argument('--eta_min', type=float, default=0.0,
                     help='min learning rate for cosine scheduler')
+parser.add_argument('--gpu0_bsz', type=int, default=-1,
+                    help='batch size on gpu 0')
 parser.add_argument('--max_eval_steps', type=int, default=-1,
                     help='max eval steps')
 parser.add_argument('--sample_softmax', type=int, default=-1,
@@ -132,6 +132,14 @@ parser.add_argument('--finetune_v2', action='store_true',
                     help='finetune v2')
 parser.add_argument('--finetune_v3', action='store_true',
                     help='finetune v3')
+parser.add_argument('--fp16', action='store_true',
+                    help='Run in pseudo-fp16 mode (fp16 storage fp32 math).')
+parser.add_argument('--static-loss-scale', type=float, default=1,
+                    help='Static loss scale, positive power of 2 values can '
+                    'improve fp16 convergence.')
+parser.add_argument('--dynamic-loss-scale', action='store_true',
+                    help='Use dynamic loss scaling.  If supplied, this argument'
+                    ' supersedes --static-loss-scale.')
 args = parser.parse_args()
 args.tied = not args.not_tied
 
@@ -149,8 +157,26 @@ logging = create_exp_dir(args.work_dir,
 # Set the random seed manually for reproducibility.
 np.random.seed(args.seed)
 torch.manual_seed(args.seed)
+if torch.cuda.is_available():
+    if not args.cuda:
+        print('WARNING: You have a CUDA device, so you should probably run with --cuda')
+    else:
+        torch.cuda.manual_seed_all(args.seed)
 
-device = torch.device('cpu')
+# Validate `--fp16` option
+if args.fp16:
+    if not args.cuda:
+        print('WARNING: --fp16 requires --cuda, ignoring --fp16 option')
+        args.fp16 = False
+    else:
+        try:
+            from apex.fp16_utils import FP16_Optimizer
+        except:
+            print('WARNING: apex not installed, ignoring --fp16 option')
+            args.fp16 = False
+
+device = torch.device('cuda' if args.cuda else 'cpu')
+
 
 ###############################################################################
 # Load data
@@ -161,7 +187,7 @@ args.n_token = ntokens
 
 eval_batch_size = 10
 tr_iter = corpus.get_iterator('train', args.batch_size, args.tgt_len,
-                              device=device, ext_len=args.ext_len, augment_transpose=args.augment_transpose, augment_stretch=args.augment_stretch, augment_switchp1p2=args.augment_switchp1p2, augment_selectens=args.augment_selectens, skip_short=args.skip_short, trim_padding=args.trim_padding)
+                              device=device, ext_len=args.ext_len)
 va_iter = corpus.get_iterator('valid', eval_batch_size, args.eval_tgt_len,
                               device=device, ext_len=args.ext_len)
 te_iter = corpus.get_iterator('test', eval_batch_size, args.eval_tgt_len,
@@ -178,11 +204,10 @@ if args.adaptive:
         cutoffs = [60000, 100000, 640000]
         tie_projs += [False] * len(cutoffs)
 
+
 ###############################################################################
 # Build the model
 ###############################################################################
-
-
 def init_weight(weight):
     if args.init == 'uniform':
         nn.init.uniform_(weight, -args.init_range, args.init_range)
@@ -249,7 +274,8 @@ def update_dropatt(m):
 if args.restart:
     with open(os.path.join(args.restart_dir, 'model.pt'), 'rb') as f:
         model = torch.load(f)
-    model = model.float()
+    if not args.fp16:
+        model = model.float()
     model.apply(update_dropout)
     model.apply(update_dropatt)
 else:
@@ -266,7 +292,18 @@ else:
 args.n_all_param = sum([p.nelement() for p in model.parameters()])
 args.n_nonemb_param = sum([p.nelement() for p in model.layers.parameters()])
 
-model = model.to(device)
+if args.fp16:
+    model = model.half()
+
+if args.multi_gpu:
+    model = model.to(device)
+    if args.gpu0_bsz >= 0:
+        para_model = BalancedDataParallel(args.gpu0_bsz // args.batch_chunk,
+                                          model, dim=1).to(device)
+    else:
+        para_model = nn.DataParallel(model, dim=1).to(device)
+else:
+    para_model = model.to(device)
 
 # optimizer
 if args.optim.lower() == 'sgd':
@@ -326,6 +363,14 @@ elif args.scheduler == 'dev_perf':
 elif args.scheduler == 'constant':
     pass
 
+if args.cuda and args.fp16:
+    # If args.dynamic_loss_scale is False, static_loss_scale will be used.
+    # If args.dynamic_loss_scale is True, it will take precedence over static_loss_scale.
+    optimizer = FP16_Optimizer(optimizer,
+                               static_loss_scale=args.static_loss_scale,
+                               dynamic_loss_scale=args.dynamic_loss_scale,
+                               dynamic_loss_args={'init_scale': 2 ** 16})
+
 if args.restart:
     if os.path.exists(os.path.join(args.restart_dir, 'optimizer.pt')):
         with open(os.path.join(args.restart_dir, 'optimizer.pt'), 'rb') as f:
@@ -341,11 +386,10 @@ logging('=' * 100)
 logging('#params = {}'.format(args.n_all_param))
 logging('#non emb params = {}'.format(args.n_nonemb_param))
 
+
 ###############################################################################
 # Training code
 ###############################################################################
-
-
 def evaluate(eval_iter):
     # Turn on evaluation mode which disables dropout.
     model.eval()
@@ -396,19 +440,28 @@ def train():
             for i in range(args.batch_chunk):
                 data_i = data_chunks[i].contiguous()
                 target_i = target_chunks[i].contiguous()
-                ret = model(data_i, target_i, *mems[i])
+                ret = para_model(data_i, target_i, *mems[i])
                 loss, mems[i] = ret[0], ret[1:]
                 loss = loss.float().mean().type_as(loss) / args.batch_chunk
-                loss.backward()
+                if args.fp16:
+                    optimizer.backward(loss)
+                else:
+                    loss.backward()
                 train_loss += loss.float().item()
         else:
-            ret = model(data, target, *mems)
+            ret = para_model(data, target, *mems)
             loss, mems = ret[0], ret[1:]
             loss = loss.float().mean().type_as(loss)
-            loss.backward()
+            if args.fp16:
+                optimizer.backward(loss)
+            else:
+                loss.backward()
             train_loss += loss.float().item()
 
-        torch.nn.utils.clip_grad_norm_(model.parameters(), args.clip)
+        if args.fp16:
+            optimizer.clip_master_grads(args.clip)
+        else:
+            torch.nn.utils.clip_grad_norm_(model.parameters(), args.clip)
 
         optimizer.step()
         if args.sample_softmax > 0:
@@ -447,7 +500,7 @@ def train():
             train_loss = 0
             log_start_time = time.time()
 
-        if train_step == 1 or train_step % args.eval_interval == 0:
+        if train_step % args.eval_interval == 0:
             val_loss = evaluate(va_iter)
             logging('-' * 100)
             log_str = '| Eval {:3d} at step {:>8d} | time: {:5.2f}s ' \
@@ -504,7 +557,7 @@ except KeyboardInterrupt:
 # Load the best saved model.
 with open(os.path.join(args.work_dir, 'model.pt'), 'rb') as f:
     model = torch.load(f)
-model = model.to(device)
+para_model = model.to(device)
 
 # Run on test data.
 test_loss = evaluate(te_iter)
