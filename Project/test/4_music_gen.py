@@ -4,16 +4,19 @@ from tensorflow import keras
 from keras.models import load_model
 import random
 
-
-def generate_sequence(model, seed_sequence, sequence_length, vocab_size):
+def generate_sequence(model, seed_sequence, target_duration, vocab_size, inv_vocab):
     generated_sequence = seed_sequence.copy()
-    for _ in range(sequence_length):
+    current_duration = 0
+    while current_duration < target_duration:
         input_sequence = np.array([generated_sequence[-50:]])
         predicted_event = model.predict(input_sequence)[0]
         predicted_event_index = np.argmax(predicted_event)
         generated_sequence.append(predicted_event_index)
+        event = inv_vocab[predicted_event_index]
+        if event.startswith('WT_'):
+            wait_time = int(event.split('_')[1]) / 100
+            current_duration += wait_time
     return generated_sequence
-
 
 def sequence_to_midi(sequence, inv_vocab, output_file_path):
     midi = pretty_midi.PrettyMIDI()
@@ -38,7 +41,6 @@ def sequence_to_midi(sequence, inv_vocab, output_file_path):
     midi.instruments.append(instrument)
     midi.write(output_file_path)
 
-
 if __name__ == '__main__':
     model = load_model('model/lstm_model.h5')
 
@@ -52,5 +54,6 @@ if __name__ == '__main__':
     seed_start_index = random.randint(0, len(encoded_events) - 51)
     seed_sequence = encoded_events[seed_start_index:seed_start_index + 50]
 
-    generated_sequence = generate_sequence(model, seed_sequence, 100, len(vocab))
-    sequence_to_midi(generated_sequence, inv_vocab, 'test/generated_music.mid')
+    target_duration = 5 # in seconds
+    generated_sequence = generate_sequence(model, seed_sequence, target_duration, len(vocab), inv_vocab)
+    sequence_to_midi(generated_sequence, inv_vocab, 'test/generated_music2.mid')
