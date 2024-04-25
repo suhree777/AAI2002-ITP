@@ -1,16 +1,25 @@
 import os
 import pretty_midi
+import pandas as pd
 
 
-def extract_events(midi_file_path):
+def load_emotion_labels(labels_csv_path):
+    """Load emotion labels from a CSV file."""
+    df = pd.read_csv(labels_csv_path)
+    df['fname'] = df['fname'].str.replace('.wav', '.mid')  # Adjust extension
+    return df.set_index('fname')['toptag_eng_verified'].to_dict()
+
+
+def extract_events(midi_file_path, emotion_label):
     """
-    Extract musical events from a MIDI file for NES instrument channels and wait times.
+    Extract musical events from a MIDI file for NES instrument channels and wait times, along with the emotion label.
 
     Args:
         midi_file_path (str): Path to the MIDI file.
+        emotion_label (str): Emotion label associated with the MIDI file.
 
     Returns:
-        list: A list of musical event strings.
+        list: A list of musical event strings appended with the emotion label.
     """
     midi_data = pretty_midi.PrettyMIDI(midi_file_path)
     events = []
@@ -42,29 +51,33 @@ def extract_events(midi_file_path):
             last_time = note[0]
 
     events.sort(key=lambda x: x[0])  # Sort all events by time
-    return [event[1] for event in events]  # Return only the event descriptions
+    # Append the emotion label to each event
+    return [(event[1], emotion_label) for event in events]
 
 
-def process_midi_dataset(midi_dataset_dir):
+def process_midi_dataset(midi_dataset_dir, labels_csv_path):
     """
-    Process all MIDI files from each sub-folder in a dataset directory to extract musical events.
+    Process all MIDI files from a dataset directory to extract musical events with emotion labels.
 
     Args:
         midi_dataset_dir (str): Path to the dataset directory containing MIDI files.
+        labels_csv_path (str): Path to the CSV file containing emotion labels.
 
     Returns:
-        list: A list of encoded musical events.
+        list: A list of encoded musical events with labels.
     """
+    emotion_labels = load_emotion_labels(labels_csv_path)
     all_events = []
     for root, dirs, files in os.walk(midi_dataset_dir):
         print(f"Processing folder: {root}")
-        midi_files = [f for f in files if f.endswith(('.mid', '.midi'))]  # Process all MIDI files
-        for midi_file in midi_files:
-            midi_file_path = os.path.join(root, midi_file)
-            events = extract_events(midi_file_path)
-            all_events.extend(events)
+        for midi_file in files:
+            if midi_file.endswith(('.mid', '.midi')):
+                midi_file_path = os.path.join(root, midi_file)
+                emotion_label = emotion_labels.get(midi_file, 'unknown')  # Default label if not found
+                events = extract_events(midi_file_path, emotion_label)
+                all_events.extend(events)
 
-    # Create a vocabulary to encode events
+    # Create a vocabulary to encode events with labels
     unique_events = set(all_events)
     vocab = {event: idx for idx, event in enumerate(unique_events)}
 
@@ -98,11 +111,10 @@ def save_encoded_events(encoded_events, file_path):
         for event in encoded_events:
             f.write(f"{event}\n")
 
-
 if __name__ == '__main__':
     midi_dataset_dir = 'ym2413_project/output'
-    encoded_events, vocab = process_midi_dataset(midi_dataset_dir)
-    print(f"Vocabulary size: {len(vocab)}")  # Print the size of the vocabulary
+    labels_csv_path = 'music_dataset/YM2413-MDB-v1.0.2/emotion_annotation/verified_annotation.csv'
+    encoded_events, vocab = process_midi_dataset(midi_dataset_dir, labels_csv_path)
 
     vocab_file_path = 'ym2413_project/vocabulary.txt'
     save_vocabulary(vocab, vocab_file_path)
