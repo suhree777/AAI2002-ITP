@@ -42,7 +42,7 @@ X_train, X_val, y_train, y_val = train_test_split(X, Y, test_size=0.2, random_st
 
 # Define the LSTM model
 model = Sequential([
-    Embedding(input_dim=len(vocab), output_dim=100, input_length=sequence_length),
+    Embedding(input_dim=len(vocab), output_dim=100),
     LSTM(128, return_sequences=True),
     Dropout(0.3),
     LSTM(128),
@@ -56,10 +56,10 @@ optimizer = Adam(learning_rate=0.01)
 model.compile(optimizer=optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Training
-checkpoint = ModelCheckpoint('ym2413_project/best_model.h5', monitor='val_loss', save_best_only=True, mode='min')
+checkpoint = ModelCheckpoint('ym2413_project/best_model.keras', monitor='val_loss', save_best_only=True, mode='min')
 early_stopping = EarlyStopping(monitor='val_loss', patience=5)
 
 model.fit(X_train, y_train, epochs=10, batch_size=128, validation_data=(X_val, y_val), callbacks=[checkpoint, early_stopping])
 
 # Save the final model
-model.save('ym2413_project/final_chiptune_music_model.h5')
+model.save('ym2413_project/final_chiptune_music_model.keras')
