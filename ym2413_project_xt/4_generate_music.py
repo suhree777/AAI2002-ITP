@@ -1,6 +1,7 @@
 import pretty_midi
 import numpy as np
 import os
+import time
 from keras.models import load_model
 import random
 
@@ -15,34 +16,29 @@ def load_vocab(vocab_path):
             vocab[event] = int(idx)
     return vocab
 
-def choose_seed_sequence(vocab, sequence_length, categories=None):
-    """
-    Randomly choose a seed sequence from the vocabulary, ensuring diversity by selecting from different categories.
-    """
-    if categories is None:
-        # Simple categorisation based on the instrument in the event name
-        categories = {
-            'P1': [event for event in vocab.keys() if 'P1_' in event],
-            'P2': [event for event in vocab.keys() if 'P2_' in event],
-            'TR': [event for event in vocab.keys() if 'TR_' in event],
-            'NO': [event for event in vocab.keys() if 'NO_' in event]
-        }
+def choose_seed_sequence(vocab, sequence_length):
+    events = list(vocab.keys())
+    categories = {
+        'P1': [e for e in events if 'P1_' in e],
+        'P2': [e for e in events if 'P2_' in e],
+        'TR': [e for e in events if 'TR_' in e],
+        'NO': [e for e in events if 'NO_' in e]
+    }
 
+    # Shuffle events within each category
+    for category in categories:
+        random.shuffle(categories[category])
+
+    # Distribute the selection evenly across categories
     selected_events = []
-    remaining_length = sequence_length
-    
-    # Ensure at least one event from each category if possible
-    for category, events in categories.items():
-        if events:  # Ensure there are events in this category
-            selected_event = random.choice(events)
-            selected_events.append(selected_event)
-            remaining_length -= 1
-    
-    # Fill the rest of the sequence with random choices
-    all_events = sum(categories.values(), [])
-    selected_events.extend(random.choices(all_events, k=remaining_length))
+    while len(selected_events) < sequence_length:
+        for category in categories:
+            if categories[category] and len(selected_events) < sequence_length:
+                # Add one event from each category in a round-robin fashion
+                selected_events.append(categories[category].pop(0))
 
-    # Map selected event names to their indices
+    # Ensure the sequence is exactly the required length
+    selected_events = selected_events[:sequence_length]
     return [vocab[event] for event in selected_events]
 
 def generate_music(model, vocab, seed_sequence, num_events_to_generate):
@@ -52,32 +48,25 @@ def generate_music(model, vocab, seed_sequence, num_events_to_generate):
     for _ in range(num_events_to_generate):
         input_sequence = np.array(generated_sequence[-len(seed_sequence):]).reshape(1, -1)
         probabilities = model.predict(input_sequence)[0]
-        next_event_index = np.random.choice(len(probabilities), p=probabilities)
+        # Sample from the distribution rather than taking the max
+        next_event_index = np.random.choice(np.arange(len(probabilities)), p=probabilities)
         generated_sequence.append(next_event_index)
 
     return [index_to_event[idx] for idx in generated_sequence[len(seed_sequence):]]
 
-def create_midi(generated_events, output_path):
-    # Create a PrettyMIDI object
+def create_midi(generated_events, output_path, total_seconds=15):
     midi = pretty_midi.PrettyMIDI()
     instrument = pretty_midi.Instrument(program=pretty_midi.instrument_name_to_program('Acoustic Grand Piano'))
-
     current_time = 0
+    note_duration = total_seconds / len(generated_events)  # Adjust duration based on number of events
     for event in generated_events:
         if 'NOTEON' in event:
             pitch = int(event.split('_')[2])
-            note = pretty_midi.Note(velocity=100, pitch=pitch, start=current_time, end=current_time + 0.5)
+            note = pretty_midi.Note(
+                velocity=100, pitch=pitch, start=current_time,
+                end=current_time + note_duration)
             instrument.notes.append(note)
-        elif 'NOTEOFF' in event:
-            pitch = int(event.split('_')[2])
-            for note in instrument.notes:
-                if note.pitch == pitch and note.end == current_time:
-                    note.end = current_time
-                    break
-        elif 'WT' in event:
-            wait_time = int(event.split('_')[1])
-            current_time += wait_time
-
+        current_time += note_duration
     midi.instruments.append(instrument)
     midi.write(output_path)
 
@@ -99,15 +88,16 @@ if __name__ == '__main__':
     
     model = load_trained_model(model_path)
     vocab = load_vocab(vocab_path)
-    
+
     sequence_length = 50
     seed_sequence = choose_seed_sequence(vocab, sequence_length)
 
-    num_events_to_generate = 200
+    num_events_to_generate = 100
     generated_music = generate_music(model, vocab, seed_sequence, num_events_to_generate)
     print("Generated Music Events:", generated_music)
 
-    # Convert generated music to MIDI
-    midi_output_path = os.path.join(music_dir, f'generated_music_{selected_emotion}.mid')
-    create_midi(generated_music, midi_output_path)
+    # Generating unique filename
+    timestamp = time.strftime("%Y%m%d-%H%M%S")
+    midi_output_path = os.path.join(music_dir, f'generated_music_{selected_emotion}_{timestamp}.mid')
+    create_midi(generated_music, midi_output_path, total_seconds=15)
     print(f"MIDI file created at {midi_output_path}")
