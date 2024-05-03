@@ -108,5 +108,5 @@ def preprocess_dataset(input_dir, output_dir):
 
 if __name__ == '__main__':
     input_dir = 'music_dataset/YM2413-MDB-v1.0.2/midi/adjust_tempo_remove_delayed_inst'
-    output_dir = 'ym2413_project/output'
+    output_dir = 'ym2413_project_xt/output'
     preprocess_dataset(input_dir, output_dir)

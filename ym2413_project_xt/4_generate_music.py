@@ -15,11 +15,35 @@ def load_vocab(vocab_path):
             vocab[event] = int(idx)
     return vocab
 
-def choose_seed_sequence(vocab, sequence_length):
-    events = list(vocab.keys())
-    if len(events) < sequence_length:
-        raise ValueError("Not enough unique events in vocabulary to form a seed sequence.")
-    return [vocab[random.choice(events)] for _ in range(sequence_length)]
+def choose_seed_sequence(vocab, sequence_length, categories=None):
+    """
+    Randomly choose a seed sequence from the vocabulary, ensuring diversity by selecting from different categories.
+    """
+    if categories is None:
+        # Simple categorisation based on the instrument in the event name
+        categories = {
+            'P1': [event for event in vocab.keys() if 'P1_' in event],
+            'P2': [event for event in vocab.keys() if 'P2_' in event],
+            'TR': [event for event in vocab.keys() if 'TR_' in event],
+            'NO': [event for event in vocab.keys() if 'NO_' in event]
+        }
+
+    selected_events = []
+    remaining_length = sequence_length
+    
+    # Ensure at least one event from each category if possible
+    for category, events in categories.items():
+        if events:  # Ensure there are events in this category
+            selected_event = random.choice(events)
+            selected_events.append(selected_event)
+            remaining_length -= 1
+    
+    # Fill the rest of the sequence with random choices
+    all_events = sum(categories.values(), [])
+    selected_events.extend(random.choices(all_events, k=remaining_length))
+
+    # Map selected event names to their indices
+    return [vocab[event] for event in selected_events]
 
 def generate_music(model, vocab, seed_sequence, num_events_to_generate):
     index_to_event = {index: event for event, index in vocab.items()}
@@ -58,9 +82,9 @@ def create_midi(generated_events, output_path):
     midi.write(output_path)
 
 if __name__ == '__main__':
-    model_dir = 'ym2413_project/trained_models'
-    base_dir = 'ym2413_project/emotion_data'
-    music_dir = 'ym2413_project/generated_pcs'
+    model_dir = 'ym2413_project_xt/trained_models'
+    base_dir = 'ym2413_project_xt/emotion_data'
+    music_dir = 'ym2413_project_xt/generated_pcs'
     os.makedirs(music_dir, exist_ok=True)
 
     emotions = ['Q1_happy', 'Q2_angry', 'Q3_sad', 'Q4_relaxed']

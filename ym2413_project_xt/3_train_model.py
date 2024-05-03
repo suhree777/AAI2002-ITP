@@ -74,8 +74,8 @@ def train_model_for_emotion(X, y, emotion, output_dir, model_dir):
     return history
 
 if __name__ == '__main__':
-    base_dir = 'ym2413_project/emotion_data'
-    model_dir = 'ym2413_project/trained_models'
+    base_dir = 'ym2413_project_xt/emotion_data'
+    model_dir = 'ym2413_project_xt/trained_models'
 
     emotions = ['Q1_happy', 'Q2_angry', 'Q3_sad', 'Q4_relaxed']
     histories = {}  # Dictionary to store history objects for each emotion

@@ -89,8 +89,8 @@ def save_encoded_events(encoded_events_by_emotion, output_dir):
                 f.write(f"{index}\n")
 
 if __name__ == '__main__':
-    midi_dataset_dir = 'ym2413_project/output'
-    output_dir = 'ym2413_project/emotion_data'
+    midi_dataset_dir = 'ym2413_project_xt/output'
+    output_dir = 'ym2413_project_xt/emotion_data'
 
     vocab_by_emotion, encoded_events_by_emotion = process_midi_dataset(midi_dataset_dir)
 
