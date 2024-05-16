@@ -1,6 +1,6 @@
 import numpy as np
 from keras.models import Sequential
-from keras.layers import LSTM, Dense, Embedding, Dropout, Bidirectional
+from keras.layers import LSTM, Dense, Embedding, Dropout
 from keras.utils import to_categorical
 from keras.optimizers import Adam
 from keras.callbacks import ModelCheckpoint, EarlyStopping, LearningRateScheduler
@@ -51,13 +51,13 @@ X_train, X_val, y_train, y_val = train_test_split(X, Y, test_size=0.2, random_st
 # Define the LSTM model
 model = Sequential([
     Embedding(input_dim=len(vocab), output_dim=100),
-    Bidirectional(LSTM(64, return_sequences=True)),
+    LSTM(64, return_sequences=True),
     Dropout(0.4),
-    Bidirectional(LSTM(128, return_sequences=True)),
+    LSTM(128, return_sequences=True),
     Dropout(0.4),
-    Bidirectional(LSTM(64, return_sequences=True)),
+    LSTM(64, return_sequences=True),
     Dropout(0.3),
-    Bidirectional(LSTM(64, return_sequences=False)), # Output Layer return_sequences set to False
+    LSTM(64, return_sequences=False), # Output Layer return_sequences set to False
     Dropout(0.2),
     Dense(len(vocab), activation='softmax')
 ])
