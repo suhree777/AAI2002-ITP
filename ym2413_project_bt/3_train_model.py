@@ -52,10 +52,8 @@ X_train, X_val, y_train, y_val = train_test_split(X, Y, test_size=0.2, random_st
 model = Sequential([
     Embedding(input_dim=len(vocab), output_dim=100),
     LSTM(64, return_sequences=True),
-    Dropout(0.4),
+    Dropout(0.3),
     LSTM(128, return_sequences=True),
-    Dropout(0.4),
-    LSTM(64, return_sequences=True),
     Dropout(0.3),
     LSTM(64, return_sequences=False), # Output Layer return_sequences set to False
     Dropout(0.2),
