@@ -60,7 +60,7 @@ def preprocess_midi_file(midi_fp, output_dir, quarter_label):
                             break
 
         # Limit the length of the ensemble to a maximum duration
-        max_length = 180
+        max_length = 240
         if ensemble_length > max_length:
             for instrument in processed_instruments:
                 instrument.notes = [note for note in instrument.notes if note.end <= max_length]

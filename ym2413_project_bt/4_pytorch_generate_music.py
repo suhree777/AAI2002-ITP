@@ -80,7 +80,6 @@ def generate_input_features_from_json(json_folder, mood_label, sequence_length):
     
     return torch.tensor(combined_features, dtype=torch.float32).unsqueeze(0).to(device)
 
-
 # Generate music
 def generate_music(json_folder, mood_label, output_midi_path, sequence_length):
     input_features = generate_input_features_from_json(json_folder, mood_label, sequence_length)
@@ -118,9 +117,9 @@ def generate_music(json_folder, mood_label, output_midi_path, sequence_length):
 json_folder = 'ym2413_project_bt/feature_output'
 mood_label = 'sad'  # Example mood label
 output_midi_path = 'ym2413_project_bt/generated_music.mid'
-output_audio_path = 'ym2413_project_bt/generated_music.wav'
+output_audio_path = 'ym2413_project_bt/generated_chiptune_music.wav'
 soundfont_path = 'ym2413_project_bt/chiptune_soundfont_4.0.sf2'  # Update with the path to your Soundfont
-sequence_length = 30  # Length of the generated sequence
+sequence_length = 50  # Length of the generated sequence
 
 # Generate music based on the trained model
 generate_music(json_folder, mood_label, output_midi_path, sequence_length)

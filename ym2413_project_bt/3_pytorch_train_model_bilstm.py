@@ -40,10 +40,12 @@ def load_features(json_folder):
 # Load features
 json_folder = 'ym2413_project_bt/feature_output'
 X, y = load_features(json_folder)
-
+print(X)
 # Pad sequences to ensure uniform length
 X = [torch.tensor(x, dtype=torch.float32) for x in X]
+print(X)
 X = pad_sequence(X, batch_first=True, padding_value=0.0)
+print(X)
 
 # Encode labels
 label_encoder = LabelEncoder()
