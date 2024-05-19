@@ -1,0 +1,55 @@
+{
+    "mood": "happy",
+    "instruments": {
+        "Lead 2 (sawtooth)": [
+            {
+                "start_time": 0.1863636,
+                "end_time": 0.55,
+                "pitch": 67,
+                "velocity": 64,
+                "duration": 0.3636364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.5840909,
+                "end_time": 0.9545455,
+                "pitch": 65,
+                "velocity": 64,
+                "duration": 0.3704545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.9886364,
+                "end_time": 1.3613636,
+                "pitch": 64,
+                "velocity": 64,
+                "duration": 0.3727273,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.8,
+                "end_time": 2.1704545,
+                "pitch": 62,
+                "velocity": 64,
+                "duration": 0.3704545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.2045455,
+                "end_time": 2.575,
+                "pitch": 60,
+                "velocity": 64,
+                "duration": 0.3704545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.4181818,
+                "end_time": 5.0045455,
+                "pitch": 72,
+                "velocity": 64,
+                "duration": 1.5863636,
+                "tempo": 120.0
+            }
+        ]
+    }
+}

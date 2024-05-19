@@ -1,0 +1,137 @@
+{
+    "mood": "happy",
+    "instruments": {
+        "Electric Piano 1": [
+            {
+                "start_time": 0.0,
+                "end_time": 0.2022727,
+                "pitch": 62,
+                "velocity": 101,
+                "duration": 0.2022727,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.2022727,
+                "end_time": 0.3022727,
+                "pitch": 62,
+                "velocity": 101,
+                "duration": 0.1,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.3022727,
+                "end_time": 0.4068182,
+                "pitch": 66,
+                "velocity": 101,
+                "duration": 0.1045455,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.4068182,
+                "end_time": 0.5386364,
+                "pitch": 64,
+                "velocity": 101,
+                "duration": 0.1318182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.3022727,
+                "end_time": 0.6704545,
+                "pitch": 62,
+                "velocity": 101,
+                "duration": 0.3681818,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.5386364,
+                "end_time": 0.6704545,
+                "pitch": 62,
+                "velocity": 101,
+                "duration": 0.1318182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.4068182,
+                "end_time": 0.8,
+                "pitch": 66,
+                "velocity": 101,
+                "duration": 0.3931818,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.6704545,
+                "end_time": 0.8,
+                "pitch": 66,
+                "velocity": 101,
+                "duration": 0.1295455,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.8,
+                "end_time": 0.9318182,
+                "pitch": 71,
+                "velocity": 101,
+                "duration": 0.1318182,
+                "tempo": 120.0
+            }
+        ],
+        "Vibraphone": [
+            {
+                "start_time": 0.0,
+                "end_time": 0.2022727,
+                "pitch": 71,
+                "velocity": 64,
+                "duration": 0.2022727,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.2022727,
+                "end_time": 0.3022727,
+                "pitch": 71,
+                "velocity": 64,
+                "duration": 0.1,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.3022727,
+                "end_time": 0.4068182,
+                "pitch": 71,
+                "velocity": 64,
+                "duration": 0.1045455,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.4068182,
+                "end_time": 0.5386364,
+                "pitch": 71,
+                "velocity": 64,
+                "duration": 0.1318182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.5386364,
+                "end_time": 0.6704545,
+                "pitch": 72,
+                "velocity": 64,
+                "duration": 0.1318182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.6704545,
+                "end_time": 0.8,
+                "pitch": 72,
+                "velocity": 64,
+                "duration": 0.1295455,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.8,
+                "end_time": 0.9318182,
+                "pitch": 74,
+                "velocity": 64,
+                "duration": 0.1318182,
+                "tempo": 120.0
+            }
+        ]
+    }
+}

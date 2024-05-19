@@ -1,0 +1,73 @@
+{
+    "mood": "relaxed",
+    "instruments": {
+        "Acoustic Grand Piano": [
+            {
+                "start_time": 0.0022727,
+                "end_time": 0.9022727,
+                "pitch": 35,
+                "velocity": 80,
+                "duration": 0.9,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.9022727,
+                "end_time": 1.9022727,
+                "pitch": 33,
+                "velocity": 80,
+                "duration": 1.0,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.9045455,
+                "end_time": 2.9045455,
+                "pitch": 31,
+                "velocity": 80,
+                "duration": 1.0,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.9045455,
+                "end_time": 3.9204545,
+                "pitch": 35,
+                "velocity": 80,
+                "duration": 1.0159091,
+                "tempo": 120.0
+            }
+        ],
+        "Acoustic Guitar (nylon)": [
+            {
+                "start_time": 0.0022727,
+                "end_time": 0.9022727,
+                "pitch": 71,
+                "velocity": 101,
+                "duration": 0.9,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.9022727,
+                "end_time": 1.9045455,
+                "pitch": 69,
+                "velocity": 101,
+                "duration": 1.0022727,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.9045455,
+                "end_time": 2.9045455,
+                "pitch": 67,
+                "velocity": 101,
+                "duration": 1.0,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.9045455,
+                "end_time": 3.9204545,
+                "pitch": 62,
+                "velocity": 101,
+                "duration": 1.0159091,
+                "tempo": 120.0
+            }
+        ]
+    }
+}

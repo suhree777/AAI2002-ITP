@@ -1,0 +1,123 @@
+{
+    "mood": "sad",
+    "instruments": {
+        "Acoustic Grand Piano": [
+            {
+                "start_time": 0.0113636,
+                "end_time": 0.0318182,
+                "pitch": 77,
+                "velocity": 32,
+                "duration": 0.0204545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.0409091,
+                "end_time": 0.0636364,
+                "pitch": 75,
+                "velocity": 32,
+                "duration": 0.0227273,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.0727273,
+                "end_time": 0.0931818,
+                "pitch": 73,
+                "velocity": 32,
+                "duration": 0.0204545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.1045455,
+                "end_time": 0.125,
+                "pitch": 72,
+                "velocity": 32,
+                "duration": 0.0204545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.1363636,
+                "end_time": 0.1568182,
+                "pitch": 70,
+                "velocity": 32,
+                "duration": 0.0204545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.1659091,
+                "end_time": 0.1886364,
+                "pitch": 68,
+                "velocity": 32,
+                "duration": 0.0227273,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.1977273,
+                "end_time": 0.2272727,
+                "pitch": 66,
+                "velocity": 32,
+                "duration": 0.0295455,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.2431818,
+                "end_time": 0.8818182,
+                "pitch": 65,
+                "velocity": 32,
+                "duration": 0.6386364,
+                "tempo": 120.0
+            }
+        ],
+        "Acoustic Bass": [
+            {
+                "start_time": 0.0113636,
+                "end_time": 0.1136364,
+                "pitch": 65,
+                "velocity": 51,
+                "duration": 0.1022727,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.125,
+                "end_time": 0.2590909,
+                "pitch": 61,
+                "velocity": 51,
+                "duration": 0.1340909,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.2772727,
+                "end_time": 0.6795455,
+                "pitch": 53,
+                "velocity": 51,
+                "duration": 0.4022727,
+                "tempo": 120.0
+            }
+        ],
+        "Flute": [
+            {
+                "start_time": 0.0113636,
+                "end_time": 0.125,
+                "pitch": 65,
+                "velocity": 25,
+                "duration": 0.1136364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.1363636,
+                "end_time": 0.2772727,
+                "pitch": 61,
+                "velocity": 25,
+                "duration": 0.1409091,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.2931818,
+                "end_time": 0.6977273,
+                "pitch": 53,
+                "velocity": 25,
+                "duration": 0.4045455,
+                "tempo": 120.0
+            }
+        ]
+    }
+}

@@ -10,7 +10,7 @@ import joblib
 
 # Load the trained model and scaler
 model_path = 'ym2413_project_bt/bilstm_model.pth'
-scaler_path = 'scaler.pkl'  # Ensure the scaler path is correct
+scaler_path = 'ym2413_project_bt/scaler.pkl'  # Ensure the scaler path is correct
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Define the AttentionBiLSTM model

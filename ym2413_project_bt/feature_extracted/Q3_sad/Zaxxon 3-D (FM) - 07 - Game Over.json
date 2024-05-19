@@ -1,0 +1,333 @@
+{
+    "mood": "sad",
+    "instruments": {
+        "Church Organ": [
+            {
+                "start_time": 0.0,
+                "end_time": 0.1772727,
+                "pitch": 80,
+                "velocity": 64,
+                "duration": 0.1772727,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.1886364,
+                "end_time": 0.3772727,
+                "pitch": 82,
+                "velocity": 64,
+                "duration": 0.1886364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.3909091,
+                "end_time": 0.6659091,
+                "pitch": 85,
+                "velocity": 64,
+                "duration": 0.275,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.6818182,
+                "end_time": 0.9568182,
+                "pitch": 84,
+                "velocity": 64,
+                "duration": 0.275,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.9727273,
+                "end_time": 1.2568182,
+                "pitch": 82,
+                "velocity": 64,
+                "duration": 0.2840909,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.2727273,
+                "end_time": 2.1613636,
+                "pitch": 87,
+                "velocity": 64,
+                "duration": 0.8886364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.1795455,
+                "end_time": 2.4613636,
+                "pitch": 90,
+                "velocity": 64,
+                "duration": 0.2818182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.4795455,
+                "end_time": 2.7613636,
+                "pitch": 89,
+                "velocity": 64,
+                "duration": 0.2818182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.7795455,
+                "end_time": 3.0659091,
+                "pitch": 87,
+                "velocity": 64,
+                "duration": 0.2863636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.0818182,
+                "end_time": 4.5727273,
+                "pitch": 85,
+                "velocity": 64,
+                "duration": 1.4909091,
+                "tempo": 120.0
+            }
+        ],
+        "Acoustic Bass": [
+            {
+                "start_time": 0.0,
+                "end_time": 0.1772727,
+                "pitch": 44,
+                "velocity": 51,
+                "duration": 0.1772727,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.1886364,
+                "end_time": 0.3772727,
+                "pitch": 46,
+                "velocity": 51,
+                "duration": 0.1886364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.3909091,
+                "end_time": 0.6659091,
+                "pitch": 49,
+                "velocity": 51,
+                "duration": 0.275,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.6818182,
+                "end_time": 0.9568182,
+                "pitch": 48,
+                "velocity": 51,
+                "duration": 0.275,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.9727273,
+                "end_time": 1.2568182,
+                "pitch": 46,
+                "velocity": 51,
+                "duration": 0.2840909,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.2727273,
+                "end_time": 2.1613636,
+                "pitch": 51,
+                "velocity": 51,
+                "duration": 0.8886364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.1795455,
+                "end_time": 2.4613636,
+                "pitch": 54,
+                "velocity": 51,
+                "duration": 0.2818182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.4795455,
+                "end_time": 2.7613636,
+                "pitch": 53,
+                "velocity": 51,
+                "duration": 0.2818182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.7795455,
+                "end_time": 3.0659091,
+                "pitch": 51,
+                "velocity": 51,
+                "duration": 0.2863636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.0818182,
+                "end_time": 4.5727273,
+                "pitch": 49,
+                "velocity": 51,
+                "duration": 1.4909091,
+                "tempo": 120.0
+            }
+        ],
+        "Harpsichord": [
+            {
+                "start_time": 0.0545455,
+                "end_time": 0.2454545,
+                "pitch": 80,
+                "velocity": 20,
+                "duration": 0.1909091,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.2545455,
+                "end_time": 0.4704545,
+                "pitch": 82,
+                "velocity": 20,
+                "duration": 0.2159091,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.4863636,
+                "end_time": 0.7613636,
+                "pitch": 85,
+                "velocity": 20,
+                "duration": 0.275,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.7772727,
+                "end_time": 1.0568182,
+                "pitch": 84,
+                "velocity": 20,
+                "duration": 0.2795455,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.0727273,
+                "end_time": 1.3568182,
+                "pitch": 82,
+                "velocity": 20,
+                "duration": 0.2840909,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.3727273,
+                "end_time": 2.2613636,
+                "pitch": 87,
+                "velocity": 20,
+                "duration": 0.8886364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.2795455,
+                "end_time": 2.5613636,
+                "pitch": 90,
+                "velocity": 20,
+                "duration": 0.2818182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.5795455,
+                "end_time": 2.8636364,
+                "pitch": 89,
+                "velocity": 20,
+                "duration": 0.2840909,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.8795455,
+                "end_time": 3.1659091,
+                "pitch": 87,
+                "velocity": 20,
+                "duration": 0.2863636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.1818182,
+                "end_time": 4.6704545,
+                "pitch": 85,
+                "velocity": 20,
+                "duration": 1.4886364,
+                "tempo": 120.0
+            }
+        ],
+        "Lead 2 (sawtooth)": [
+            {
+                "start_time": 0.0886364,
+                "end_time": 0.2772727,
+                "pitch": 80,
+                "velocity": 25,
+                "duration": 0.1886364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.2886364,
+                "end_time": 0.5204545,
+                "pitch": 82,
+                "velocity": 25,
+                "duration": 0.2318182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.5363636,
+                "end_time": 0.8113636,
+                "pitch": 85,
+                "velocity": 25,
+                "duration": 0.275,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.8272727,
+                "end_time": 1.1068182,
+                "pitch": 84,
+                "velocity": 25,
+                "duration": 0.2795455,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.1227273,
+                "end_time": 1.4068182,
+                "pitch": 82,
+                "velocity": 25,
+                "duration": 0.2840909,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.4227273,
+                "end_time": 2.3113636,
+                "pitch": 87,
+                "velocity": 25,
+                "duration": 0.8886364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.3295455,
+                "end_time": 2.6113636,
+                "pitch": 90,
+                "velocity": 25,
+                "duration": 0.2818182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.6295455,
+                "end_time": 2.9136364,
+                "pitch": 89,
+                "velocity": 25,
+                "duration": 0.2840909,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.9295455,
+                "end_time": 3.2159091,
+                "pitch": 87,
+                "velocity": 25,
+                "duration": 0.2863636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.2340909,
+                "end_time": 4.7318182,
+                "pitch": 85,
+                "velocity": 25,
+                "duration": 1.4977273,
+                "tempo": 120.0
+            }
+        ]
+    }
+}

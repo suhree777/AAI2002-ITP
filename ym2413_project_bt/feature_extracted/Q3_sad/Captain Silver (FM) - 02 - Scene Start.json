@@ -1,0 +1,173 @@
+{
+    "mood": "sad",
+    "instruments": {
+        "Clarinet": [
+            {
+                "start_time": 0.0,
+                "end_time": 0.0590909,
+                "pitch": 79,
+                "velocity": 101,
+                "duration": 0.0590909,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.1772727,
+                "end_time": 0.3681818,
+                "pitch": 78,
+                "velocity": 101,
+                "duration": 0.1909091,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.3840909,
+                "end_time": 0.4704545,
+                "pitch": 79,
+                "velocity": 101,
+                "duration": 0.0863636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.5886364,
+                "end_time": 0.7840909,
+                "pitch": 75,
+                "velocity": 101,
+                "duration": 0.1954545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.8159091,
+                "end_time": 2.6045455,
+                "pitch": 74,
+                "velocity": 101,
+                "duration": 1.7886364,
+                "tempo": 120.0
+            }
+        ],
+        "French Horn": [
+            {
+                "start_time": 0.0,
+                "end_time": 0.0590909,
+                "pitch": 51,
+                "velocity": 51,
+                "duration": 0.0590909,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.1772727,
+                "end_time": 0.3681818,
+                "pitch": 50,
+                "velocity": 51,
+                "duration": 0.1909091,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.3840909,
+                "end_time": 0.4704545,
+                "pitch": 51,
+                "velocity": 51,
+                "duration": 0.0863636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.5886364,
+                "end_time": 0.7840909,
+                "pitch": 48,
+                "velocity": 51,
+                "duration": 0.1954545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.8159091,
+                "end_time": 2.6045455,
+                "pitch": 46,
+                "velocity": 51,
+                "duration": 1.7886364,
+                "tempo": 120.0
+            }
+        ],
+        "Church Organ": [
+            {
+                "start_time": 0.0,
+                "end_time": 0.0590909,
+                "pitch": 70,
+                "velocity": 51,
+                "duration": 0.0590909,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.1772727,
+                "end_time": 0.3681818,
+                "pitch": 69,
+                "velocity": 51,
+                "duration": 0.1909091,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.3840909,
+                "end_time": 0.4704545,
+                "pitch": 70,
+                "velocity": 51,
+                "duration": 0.0863636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.5886364,
+                "end_time": 0.7840909,
+                "pitch": 67,
+                "velocity": 51,
+                "duration": 0.1954545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.8159091,
+                "end_time": 2.6045455,
+                "pitch": 65,
+                "velocity": 51,
+                "duration": 1.7886364,
+                "tempo": 120.0
+            }
+        ],
+        "Acoustic Grand Piano": [
+            {
+                "start_time": 0.0,
+                "end_time": 0.0727273,
+                "pitch": 63,
+                "velocity": 25,
+                "duration": 0.0727273,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.2068182,
+                "end_time": 0.3840909,
+                "pitch": 62,
+                "velocity": 25,
+                "duration": 0.1772727,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.4113636,
+                "end_time": 0.4863636,
+                "pitch": 63,
+                "velocity": 25,
+                "duration": 0.075,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.6181818,
+                "end_time": 0.85,
+                "pitch": 60,
+                "velocity": 25,
+                "duration": 0.2318182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.8818182,
+                "end_time": 2.6386364,
+                "pitch": 58,
+                "velocity": 25,
+                "duration": 1.7568182,
+                "tempo": 120.0
+            }
+        ]
+    }
+}

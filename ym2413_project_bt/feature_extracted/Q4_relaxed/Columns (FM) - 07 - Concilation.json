@@ -1,0 +1,39 @@
+{
+    "mood": "relaxed",
+    "instruments": {
+        "French Horn": [
+            {
+                "start_time": 0.0363636,
+                "end_time": 1.2795455,
+                "pitch": 61,
+                "velocity": 80,
+                "duration": 1.2431818,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.2795455,
+                "end_time": 2.4863636,
+                "pitch": 69,
+                "velocity": 80,
+                "duration": 1.2068182,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.4863636,
+                "end_time": 3.0977273,
+                "pitch": 65,
+                "velocity": 80,
+                "duration": 0.6113636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.0977273,
+                "end_time": 3.6931818,
+                "pitch": 71,
+                "velocity": 80,
+                "duration": 0.5954545,
+                "tempo": 120.0
+            }
+        ]
+    }
+}

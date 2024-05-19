@@ -1,0 +1,195 @@
+{
+    "mood": "happy",
+    "instruments": {
+        "Trumpet": [
+            {
+                "start_time": 0.0045455,
+                "end_time": 0.2590909,
+                "pitch": 66,
+                "velocity": 101,
+                "duration": 0.2545455,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.2590909,
+                "end_time": 0.3886364,
+                "pitch": 64,
+                "velocity": 101,
+                "duration": 0.1295455,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.3909091,
+                "end_time": 2.9022727,
+                "pitch": 66,
+                "velocity": 101,
+                "duration": 2.5113636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.9045455,
+                "end_time": 3.2045455,
+                "pitch": 71,
+                "velocity": 101,
+                "duration": 0.3,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.2045455,
+                "end_time": 3.4727273,
+                "pitch": 71,
+                "velocity": 101,
+                "duration": 0.2681818,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.4727273,
+                "end_time": 3.7409091,
+                "pitch": 71,
+                "velocity": 101,
+                "duration": 0.2681818,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.7409091,
+                "end_time": 5.1681818,
+                "pitch": 78,
+                "velocity": 101,
+                "duration": 1.4272727,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 5.1681818,
+                "end_time": 5.4409091,
+                "pitch": 79,
+                "velocity": 101,
+                "duration": 0.2727273,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 5.4409091,
+                "end_time": 6.2772727,
+                "pitch": 81,
+                "velocity": 101,
+                "duration": 0.8363636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 6.2795455,
+                "end_time": 6.8477273,
+                "pitch": 79,
+                "velocity": 101,
+                "duration": 0.5681818,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 6.8477273,
+                "end_time": 7.1159091,
+                "pitch": 81,
+                "velocity": 101,
+                "duration": 0.2681818,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 7.1159091,
+                "end_time": 12.9840909,
+                "pitch": 83,
+                "velocity": 101,
+                "duration": 5.8681818,
+                "tempo": 120.0
+            }
+        ],
+        "French Horn": [
+            {
+                "start_time": 7.9977273,
+                "end_time": 8.5431818,
+                "pitch": 71,
+                "velocity": 127,
+                "duration": 0.5454545,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 8.5431818,
+                "end_time": 8.8159091,
+                "pitch": 69,
+                "velocity": 127,
+                "duration": 0.2727273,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 8.8159091,
+                "end_time": 12.9840909,
+                "pitch": 71,
+                "velocity": 127,
+                "duration": 4.1681818,
+                "tempo": 120.0
+            }
+        ],
+        "Oboe": [
+            {
+                "start_time": 0.0022727,
+                "end_time": 0.4204545,
+                "pitch": 39,
+                "velocity": 64,
+                "duration": 0.4181818,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 0.4227273,
+                "end_time": 1.2590909,
+                "pitch": 42,
+                "velocity": 64,
+                "duration": 0.8363636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 1.2590909,
+                "end_time": 2.0977273,
+                "pitch": 47,
+                "velocity": 64,
+                "duration": 0.8386364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.0977273,
+                "end_time": 2.9340909,
+                "pitch": 52,
+                "velocity": 64,
+                "duration": 0.8363636,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.9340909,
+                "end_time": 3.7727273,
+                "pitch": 51,
+                "velocity": 64,
+                "duration": 0.8386364,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.775,
+                "end_time": 5.4727273,
+                "pitch": 43,
+                "velocity": 64,
+                "duration": 1.6977273,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 5.4727273,
+                "end_time": 7.1477273,
+                "pitch": 45,
+                "velocity": 64,
+                "duration": 1.675,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 7.15,
+                "end_time": 12.9840909,
+                "pitch": 47,
+                "velocity": 64,
+                "duration": 5.8340909,
+                "tempo": 120.0
+            }
+        ]
+    }
+}
