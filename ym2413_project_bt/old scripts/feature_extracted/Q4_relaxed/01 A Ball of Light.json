@@ -1,0 +1,42 @@
+{
+    "track_id": "01 A Ball of Light",
+    "mood": "relaxed",
+    "instruments": {
+        "Electric Piano 1": [
+            {
+                "start_time": 1.5454545454545454,
+                "end_time": 2.7181818181818183,
+                "pitch": 12,
+                "velocity": 8,
+                "duration": 1.1727272727272728,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 2.7204545454545452,
+                "end_time": 3.8659090909090907,
+                "pitch": 12,
+                "velocity": 8,
+                "duration": 1.1454545454545455,
+                "tempo": 120.0
+            },
+            {
+                "start_time": 3.8659090909090907,
+                "end_time": 4.9840909090909085,
+                "pitch": 12,
+                "velocity": 8,
+                "duration": 1.1181818181818177,
+                "tempo": 120.0
+            }
+        ],
+        "Flute": [
+            {
+                "start_time": 0.006818181818181818,
+                "end_time": 3.7977272727272724,
+                "pitch": 105,
+                "velocity": 40,
+                "duration": 3.7909090909090906,
+                "tempo": 120.0
+            }
+        ]
+    }
+}

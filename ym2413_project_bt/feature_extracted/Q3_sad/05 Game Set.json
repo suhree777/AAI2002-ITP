@@ -1,54 +1,22 @@
 {
+    "track_id": "05 Game Set",
     "mood": "sad",
     "instruments": {
         "Trumpet": [
             {
-                "start_time": 0.0090909,
-                "end_time": 0.1136364,
-                "pitch": 67,
-                "velocity": 127,
-                "duration": 0.1045455,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 1.76
             },
             {
-                "start_time": 0.1136364,
-                "end_time": 0.2181818,
-                "pitch": 68,
-                "velocity": 127,
-                "duration": 0.1045455,
-                "tempo": 120.0
+                "highest_pitch": 68,
+                "highest_velocity": 127,
+                "duration": 1.72
             },
             {
-                "start_time": 0.2181818,
-                "end_time": 1.2272727,
-                "pitch": 68,
-                "velocity": 127,
-                "duration": 1.0090909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.2272727,
-                "end_time": 1.4704545,
-                "pitch": 66,
-                "velocity": 127,
-                "duration": 0.2431818,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.4704545,
-                "end_time": 1.7340909,
-                "pitch": 66,
-                "velocity": 127,
-                "duration": 0.2636364,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 3.4909091,
-                "end_time": 4.2795455,
-                "pitch": 65,
-                "velocity": 127,
-                "duration": 0.7886364,
-                "tempo": 120.0
+                "highest_pitch": 65,
+                "highest_velocity": 127,
+                "duration": 0.79
             }
         ]
     }

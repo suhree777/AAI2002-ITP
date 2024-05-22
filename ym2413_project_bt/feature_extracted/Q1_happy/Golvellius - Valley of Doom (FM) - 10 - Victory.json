@@ -1,248 +1,29 @@
 {
+    "track_id": "Golvellius - Valley of Doom (FM) - 10 - Victory",
     "mood": "happy",
     "instruments": {
         "Acoustic Guitar (nylon)": [
             {
-                "start_time": 0.025,
-                "end_time": 0.1931818,
-                "pitch": 38,
-                "velocity": 101,
-                "duration": 0.1681818,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.1931818,
-                "end_time": 0.3772727,
-                "pitch": 38,
-                "velocity": 101,
-                "duration": 0.1840909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.3772727,
-                "end_time": 0.5272727,
-                "pitch": 45,
-                "velocity": 101,
-                "duration": 0.15,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.5272727,
-                "end_time": 0.7136364,
-                "pitch": 42,
-                "velocity": 101,
-                "duration": 0.1863636,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.7136364,
-                "end_time": 0.8681818,
-                "pitch": 33,
-                "velocity": 101,
-                "duration": 0.1545455,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.8681818,
-                "end_time": 1.0431818,
-                "pitch": 33,
-                "velocity": 101,
-                "duration": 0.175,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.0431818,
-                "end_time": 1.2159091,
-                "pitch": 40,
-                "velocity": 101,
-                "duration": 0.1727273,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.2159091,
-                "end_time": 1.4068182,
-                "pitch": 37,
-                "velocity": 101,
-                "duration": 0.1909091,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.4068182,
-                "end_time": 1.5568182,
-                "pitch": 37,
-                "velocity": 101,
-                "duration": 0.15,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.5568182,
-                "end_time": 1.7386364,
-                "pitch": 36,
-                "velocity": 101,
-                "duration": 0.1818182,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.7386364,
-                "end_time": 1.8863636,
-                "pitch": 43,
-                "velocity": 101,
-                "duration": 0.1477273,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.8863636,
-                "end_time": 2.0704545,
-                "pitch": 40,
-                "velocity": 101,
-                "duration": 0.1840909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.0704545,
-                "end_time": 2.2386364,
-                "pitch": 38,
-                "velocity": 101,
-                "duration": 0.1681818,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.2386364,
-                "end_time": 2.3886364,
-                "pitch": 38,
-                "velocity": 101,
-                "duration": 0.15,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.3886364,
-                "end_time": 2.5568182,
-                "pitch": 45,
-                "velocity": 101,
-                "duration": 0.1681818,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.5568182,
-                "end_time": 2.7409091,
-                "pitch": 42,
-                "velocity": 101,
-                "duration": 0.1840909,
-                "tempo": 120.0
+                "highest_pitch": 45,
+                "highest_velocity": 101,
+                "duration": 2.72
             }
         ],
         "Harpsichord": [
             {
-                "start_time": 0.0090909,
-                "end_time": 0.3772727,
-                "pitch": 62,
-                "velocity": 40,
-                "duration": 0.3681818,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.02
             },
             {
-                "start_time": 0.3772727,
-                "end_time": 0.4613636,
-                "pitch": 66,
-                "velocity": 40,
-                "duration": 0.0840909,
-                "tempo": 120.0
+                "highest_pitch": 72,
+                "highest_velocity": 40,
+                "duration": 1.71
             },
             {
-                "start_time": 0.4613636,
-                "end_time": 0.5795455,
-                "pitch": 64,
-                "velocity": 40,
-                "duration": 0.1181818,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.5795455,
-                "end_time": 0.7136364,
-                "pitch": 62,
-                "velocity": 40,
-                "duration": 0.1340909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.7136364,
-                "end_time": 1.4068182,
-                "pitch": 69,
-                "velocity": 40,
-                "duration": 0.6931818,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.4068182,
-                "end_time": 1.7227273,
-                "pitch": 72,
-                "velocity": 40,
-                "duration": 0.3159091,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.7386364,
-                "end_time": 2.0704545,
-                "pitch": 72,
-                "velocity": 40,
-                "duration": 0.3318182,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.0704545,
-                "end_time": 2.2204545,
-                "pitch": 69,
-                "velocity": 40,
-                "duration": 0.15,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.2204545,
-                "end_time": 2.2386364,
-                "pitch": 29,
-                "velocity": 40,
-                "duration": 0.0181818,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.2386364,
-                "end_time": 2.2886364,
-                "pitch": 67,
-                "velocity": 40,
-                "duration": 0.05,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.2886364,
-                "end_time": 2.4227273,
-                "pitch": 67,
-                "velocity": 40,
-                "duration": 0.1340909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.4227273,
-                "end_time": 2.5568182,
-                "pitch": 67,
-                "velocity": 40,
-                "duration": 0.1340909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.5568182,
-                "end_time": 2.6909091,
-                "pitch": 67,
-                "velocity": 40,
-                "duration": 0.1340909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.6909091,
-                "end_time": 2.725,
-                "pitch": 67,
-                "velocity": 40,
-                "duration": 0.0340909,
-                "tempo": 120.0
+                "highest_pitch": 72,
+                "highest_velocity": 40,
+                "duration": 0.99
             }
         ]
     }

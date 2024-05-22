@@ -1,62 +1,12 @@
 {
+    "track_id": "01 Compile",
     "mood": "relaxed",
     "instruments": {
         "Harpsichord": [
             {
-                "start_time": 0.0159091,
-                "end_time": 0.2818182,
-                "pitch": 71,
-                "velocity": 64,
-                "duration": 0.2659091,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.2818182,
-                "end_time": 0.4159091,
-                "pitch": 71,
-                "velocity": 64,
-                "duration": 0.1340909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.4159091,
-                "end_time": 0.5477273,
-                "pitch": 71,
-                "velocity": 64,
-                "duration": 0.1318182,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.5477273,
-                "end_time": 0.6818182,
-                "pitch": 71,
-                "velocity": 64,
-                "duration": 0.1340909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.6818182,
-                "end_time": 0.8159091,
-                "pitch": 72,
-                "velocity": 64,
-                "duration": 0.1340909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.8159091,
-                "end_time": 0.9477273,
-                "pitch": 72,
-                "velocity": 64,
-                "duration": 0.1318182,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.9477273,
-                "end_time": 1.0818182,
-                "pitch": 74,
-                "velocity": 64,
-                "duration": 0.1340909,
-                "tempo": 120.0
+                "highest_pitch": 74,
+                "highest_velocity": 64,
+                "duration": 1.07
             }
         ]
     }

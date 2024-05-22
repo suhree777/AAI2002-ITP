@@ -1,14 +1,12 @@
 {
+    "track_id": "26 Shock",
     "mood": "angry",
     "instruments": {
         "Electric Piano 1": [
             {
-                "start_time": 0.1977273,
-                "end_time": 6.8590909,
-                "pitch": 41,
-                "velocity": 101,
-                "duration": 6.6613636,
-                "tempo": 120.0
+                "highest_pitch": 41,
+                "highest_velocity": 101,
+                "duration": 6.66
             }
         ]
     }

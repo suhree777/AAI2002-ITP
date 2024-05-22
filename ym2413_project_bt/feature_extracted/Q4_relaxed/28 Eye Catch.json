@@ -1,56 +1,59 @@
 {
+    "track_id": "28 Eye Catch",
     "mood": "relaxed",
     "instruments": {
         "Electric Piano 1": [
             {
-                "start_time": 4.025,
-                "end_time": 5.6227273,
-                "pitch": 76,
-                "velocity": 64,
-                "duration": 1.5977273,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.0
             },
             {
-                "start_time": 5.625,
-                "end_time": 6.7568182,
-                "pitch": 76,
-                "velocity": 64,
-                "duration": 1.1318182,
-                "tempo": 120.0
+                "highest_pitch": 76,
+                "highest_velocity": 64,
+                "duration": 1.6
             },
             {
-                "start_time": 6.7590909,
-                "end_time": 9.8318182,
-                "pitch": 78,
-                "velocity": 64,
-                "duration": 3.0727273,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.0
+            },
+            {
+                "highest_pitch": 76,
+                "highest_velocity": 64,
+                "duration": 1.13
+            },
+            {
+                "highest_pitch": 78,
+                "highest_velocity": 64,
+                "duration": 3.07
             }
         ],
         "Acoustic Bass": [
             {
-                "start_time": 3.2386364,
-                "end_time": 4.825,
-                "pitch": 33,
-                "velocity": 80,
-                "duration": 1.5863636,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.0
             },
             {
-                "start_time": 4.8272727,
-                "end_time": 6.4272727,
-                "pitch": 32,
-                "velocity": 80,
-                "duration": 1.6,
-                "tempo": 120.0
+                "highest_pitch": 33,
+                "highest_velocity": 80,
+                "duration": 1.59
             },
             {
-                "start_time": 6.4295455,
-                "end_time": 9.8318182,
-                "pitch": 30,
-                "velocity": 80,
-                "duration": 3.4022727,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.0
+            },
+            {
+                "highest_pitch": 32,
+                "highest_velocity": 80,
+                "duration": 1.6
+            },
+            {
+                "highest_pitch": 30,
+                "highest_velocity": 80,
+                "duration": 3.4
             }
         ]
     }

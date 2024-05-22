@@ -1,46 +1,52 @@
 {
+    "track_id": "California Games (FM) - 03 - Event Intro",
     "mood": "relaxed",
     "instruments": {
         "Harpsichord": [
             {
-                "start_time": 0.0159091,
-                "end_time": 0.0340909,
-                "pitch": 76,
-                "velocity": 51,
-                "duration": 0.0181818,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.03
             },
             {
-                "start_time": 0.0659091,
-                "end_time": 0.3340909,
-                "pitch": 62,
-                "velocity": 51,
-                "duration": 0.2681818,
-                "tempo": 120.0
+                "highest_pitch": 76,
+                "highest_velocity": 51,
+                "duration": 0.02
             },
             {
-                "start_time": 0.3659091,
-                "end_time": 0.4840909,
-                "pitch": 62,
-                "velocity": 51,
-                "duration": 0.1181818,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.03
             },
             {
-                "start_time": 0.5159091,
-                "end_time": 0.6340909,
-                "pitch": 62,
-                "velocity": 51,
-                "duration": 0.1181818,
-                "tempo": 120.0
+                "highest_pitch": 62,
+                "highest_velocity": 51,
+                "duration": 0.27
             },
             {
-                "start_time": 0.6659091,
-                "end_time": 1.2340909,
-                "pitch": 69,
-                "velocity": 51,
-                "duration": 0.5681818,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.03
+            },
+            {
+                "highest_pitch": 62,
+                "highest_velocity": 51,
+                "duration": 0.12
+            },
+            {
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.03
+            },
+            {
+                "highest_pitch": 62,
+                "highest_velocity": 51,
+                "duration": 0.12
+            },
+            {
+                "highest_pitch": 69,
+                "highest_velocity": 51,
+                "duration": 0.57
             }
         ]
     }

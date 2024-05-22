@@ -1,84 +1,83 @@
 {
+    "track_id": "California Games (FM) - 11 - Shark",
     "mood": "angry",
     "instruments": {
         "Clarinet": [
             {
-                "start_time": 0.0,
-                "end_time": 0.0340909,
-                "pitch": 37,
-                "velocity": 51,
-                "duration": 0.0340909,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.03
             },
             {
-                "start_time": 0.0681818,
-                "end_time": 0.4431818,
-                "pitch": 36,
-                "velocity": 51,
-                "duration": 0.375,
-                "tempo": 120.0
+                "highest_pitch": 37,
+                "highest_velocity": 51,
+                "duration": 0.03
             },
             {
-                "start_time": 0.4772727,
-                "end_time": 0.8113636,
-                "pitch": 37,
-                "velocity": 51,
-                "duration": 0.3340909,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.03
+            },
+            {
+                "highest_pitch": 36,
+                "highest_velocity": 51,
+                "duration": 0.38
+            },
+            {
+                "highest_pitch": 37,
+                "highest_velocity": 51,
+                "duration": 0.33
             }
         ],
         "Acoustic Bass": [
             {
-                "start_time": 0.0,
-                "end_time": 0.3772727,
-                "pitch": 36,
-                "velocity": 64,
-                "duration": 0.3772727,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.03
             },
             {
-                "start_time": 0.4113636,
-                "end_time": 0.7772727,
-                "pitch": 37,
-                "velocity": 64,
-                "duration": 0.3659091,
-                "tempo": 120.0
+                "highest_pitch": 36,
+                "highest_velocity": 64,
+                "duration": 0.38
+            },
+            {
+                "highest_pitch": 37,
+                "highest_velocity": 64,
+                "duration": 0.37
             }
         ],
         "Acoustic Grand Piano": [
             {
-                "start_time": 0.0,
-                "end_time": 0.3772727,
-                "pitch": 52,
-                "velocity": 51,
-                "duration": 0.3772727,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.03
             },
             {
-                "start_time": 0.4113636,
-                "end_time": 0.7772727,
-                "pitch": 53,
-                "velocity": 51,
-                "duration": 0.3659091,
-                "tempo": 120.0
+                "highest_pitch": 52,
+                "highest_velocity": 51,
+                "duration": 0.38
+            },
+            {
+                "highest_pitch": 53,
+                "highest_velocity": 51,
+                "duration": 0.37
             }
         ],
         "Harpsichord": [
             {
-                "start_time": 0.0340909,
-                "end_time": 0.4113636,
-                "pitch": 36,
-                "velocity": 51,
-                "duration": 0.3772727,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.03
             },
             {
-                "start_time": 0.4431818,
-                "end_time": 0.8113636,
-                "pitch": 37,
-                "velocity": 51,
-                "duration": 0.3681818,
-                "tempo": 120.0
+                "highest_pitch": 36,
+                "highest_velocity": 51,
+                "duration": 0.38
+            },
+            {
+                "highest_pitch": 37,
+                "highest_velocity": 51,
+                "duration": 0.37
             }
         ]
     }

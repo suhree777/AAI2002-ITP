@@ -1,192 +1,129 @@
 {
+    "track_id": "Ys (FM) - 03 - Tears of Sylph",
     "mood": "sad",
     "instruments": {
         "Vibraphone": [
             {
-                "start_time": 0.0136364,
-                "end_time": 0.3727273,
-                "pitch": 54,
-                "velocity": 64,
-                "duration": 0.3590909,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.02
             },
             {
-                "start_time": 0.3727273,
-                "end_time": 1.8659091,
-                "pitch": 54,
-                "velocity": 64,
-                "duration": 1.4931818,
-                "tempo": 120.0
+                "highest_pitch": 54,
+                "highest_velocity": 64,
+                "duration": 1.85
             },
             {
-                "start_time": 1.8818182,
-                "end_time": 2.8568182,
-                "pitch": 56,
-                "velocity": 64,
-                "duration": 0.975,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.02
             },
             {
-                "start_time": 2.875,
-                "end_time": 3.8568182,
-                "pitch": 57,
-                "velocity": 64,
-                "duration": 0.9818182,
-                "tempo": 120.0
+                "highest_pitch": 56,
+                "highest_velocity": 64,
+                "duration": 0.97
             },
             {
-                "start_time": 3.875,
-                "end_time": 5.875,
-                "pitch": 52,
-                "velocity": 64,
-                "duration": 2.0,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.02
             },
             {
-                "start_time": 5.8909091,
-                "end_time": 6.8659091,
-                "pitch": 54,
-                "velocity": 64,
-                "duration": 0.975,
-                "tempo": 120.0
+                "highest_pitch": 57,
+                "highest_velocity": 64,
+                "duration": 0.98
             },
             {
-                "start_time": 6.8840909,
-                "end_time": 7.8704545,
-                "pitch": 56,
-                "velocity": 64,
-                "duration": 0.9863636,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.02
             },
             {
-                "start_time": 7.8863636,
-                "end_time": 9.875,
-                "pitch": 50,
-                "velocity": 64,
-                "duration": 1.9886364,
-                "tempo": 120.0
+                "highest_pitch": 52,
+                "highest_velocity": 64,
+                "duration": 2.0
             },
             {
-                "start_time": 9.8909091,
-                "end_time": 10.8795455,
-                "pitch": 52,
-                "velocity": 64,
-                "duration": 0.9886364,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.02
             },
             {
-                "start_time": 10.8954545,
-                "end_time": 11.8840909,
-                "pitch": 47,
-                "velocity": 64,
-                "duration": 0.9886364,
-                "tempo": 120.0
+                "highest_pitch": 54,
+                "highest_velocity": 64,
+                "duration": 0.97
             },
             {
-                "start_time": 11.9,
-                "end_time": 15.8931818,
-                "pitch": 49,
-                "velocity": 64,
-                "duration": 3.9931818,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.02
             },
             {
-                "start_time": 19.9136364,
-                "end_time": 20.3977273,
-                "pitch": 54,
-                "velocity": 64,
-                "duration": 0.4840909,
-                "tempo": 120.0
+                "highest_pitch": 56,
+                "highest_velocity": 64,
+                "duration": 0.99
+            },
+            {
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.02
+            },
+            {
+                "highest_pitch": 50,
+                "highest_velocity": 64,
+                "duration": 1.99
+            },
+            {
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.02
+            },
+            {
+                "highest_pitch": 52,
+                "highest_velocity": 64,
+                "duration": 0.99
+            },
+            {
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.02
+            },
+            {
+                "highest_pitch": 47,
+                "highest_velocity": 64,
+                "duration": 0.99
+            },
+            {
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 4.02
+            },
+            {
+                "highest_pitch": 49,
+                "highest_velocity": 64,
+                "duration": 3.99
+            },
+            {
+                "highest_pitch": 54,
+                "highest_velocity": 64,
+                "duration": 0.48
             }
         ],
         "Church Organ": [
             {
-                "start_time": 0.0136364,
-                "end_time": 0.0272727,
-                "pitch": 66,
-                "velocity": 64,
-                "duration": 0.0136364,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 4.0
             },
             {
-                "start_time": 0.0272727,
-                "end_time": 0.3727273,
-                "pitch": 69,
-                "velocity": 64,
-                "duration": 0.3454545,
-                "tempo": 120.0
+                "highest_pitch": 73,
+                "highest_velocity": 64,
+                "duration": 15.95
             },
             {
-                "start_time": 0.3727273,
-                "end_time": 2.925,
-                "pitch": 69,
-                "velocity": 25,
-                "duration": 2.5522727,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.925,
-                "end_time": 3.925,
-                "pitch": 73,
-                "velocity": 25,
-                "duration": 1.0,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 3.925,
-                "end_time": 6.9340909,
-                "pitch": 68,
-                "velocity": 25,
-                "duration": 3.0090909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 6.9340909,
-                "end_time": 7.9386364,
-                "pitch": 71,
-                "velocity": 25,
-                "duration": 1.0045455,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 7.9386364,
-                "end_time": 9.9431818,
-                "pitch": 66,
-                "velocity": 25,
-                "duration": 2.0045455,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 9.9431818,
-                "end_time": 10.9477273,
-                "pitch": 68,
-                "velocity": 25,
-                "duration": 1.0045455,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 10.9477273,
-                "end_time": 11.9522727,
-                "pitch": 64,
-                "velocity": 25,
-                "duration": 1.0045455,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 11.9522727,
-                "end_time": 15.9590909,
-                "pitch": 66,
-                "velocity": 25,
-                "duration": 4.0068182,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 19.9636364,
-                "end_time": 20.3977273,
-                "pitch": 69,
-                "velocity": 64,
-                "duration": 0.4340909,
-                "tempo": 120.0
+                "highest_pitch": 69,
+                "highest_velocity": 64,
+                "duration": 0.43
             }
         ]
     }

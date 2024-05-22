@@ -1,260 +1,43 @@
 {
+    "track_id": "12 Game Over (Namco Logo, The Tower of Druaga)",
     "mood": "sad",
     "instruments": {
         "Harpsichord": [
             {
-                "start_time": 0.3204545,
-                "end_time": 1.2227273,
-                "pitch": 72,
-                "velocity": 101,
-                "duration": 0.9022727,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.2227273,
-                "end_time": 1.3772727,
-                "pitch": 71,
-                "velocity": 101,
-                "duration": 0.1545455,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.3772727,
-                "end_time": 1.5340909,
-                "pitch": 71,
-                "velocity": 101,
-                "duration": 0.1568182,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.5340909,
-                "end_time": 1.55,
-                "pitch": 71,
-                "velocity": 101,
-                "duration": 0.0159091,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.55,
-                "end_time": 2.1272727,
-                "pitch": 69,
-                "velocity": 101,
-                "duration": 0.5772727,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.1272727,
-                "end_time": 2.4386364,
-                "pitch": 74,
-                "velocity": 101,
-                "duration": 0.3113636,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.4386364,
-                "end_time": 2.7386364,
-                "pitch": 74,
-                "velocity": 101,
-                "duration": 0.3,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.7386364,
-                "end_time": 2.8886364,
-                "pitch": 71,
-                "velocity": 101,
-                "duration": 0.15,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.8886364,
-                "end_time": 3.0409091,
-                "pitch": 71,
-                "velocity": 101,
-                "duration": 0.1522727,
-                "tempo": 120.0
+                "highest_pitch": 74,
+                "highest_velocity": 101,
+                "duration": 2.72
             }
         ],
         "Electric Guitar (clean)": [
             {
-                "start_time": 0.0,
-                "end_time": 0.9204545,
-                "pitch": 48,
-                "velocity": 80,
-                "duration": 0.9204545,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.9204545,
-                "end_time": 1.2227273,
-                "pitch": 47,
-                "velocity": 80,
-                "duration": 0.3022727,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.2227273,
-                "end_time": 1.8363636,
-                "pitch": 50,
-                "velocity": 80,
-                "duration": 0.6136364,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.8363636,
-                "end_time": 2.1272727,
-                "pitch": 50,
-                "velocity": 80,
-                "duration": 0.2909091,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.1272727,
-                "end_time": 2.4386364,
-                "pitch": 52,
-                "velocity": 80,
-                "duration": 0.3113636,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.4386364,
-                "end_time": 2.7386364,
-                "pitch": 54,
-                "velocity": 80,
-                "duration": 0.3,
-                "tempo": 120.0
+                "highest_pitch": 54,
+                "highest_velocity": 80,
+                "duration": 2.74
             }
         ],
         "Vibraphone": [
             {
-                "start_time": 0.0,
-                "end_time": 0.9204545,
-                "pitch": 66,
-                "velocity": 101,
-                "duration": 0.9204545,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.9204545,
-                "end_time": 1.0727273,
-                "pitch": 66,
-                "velocity": 101,
-                "duration": 0.1522727,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.0727273,
-                "end_time": 1.2227273,
-                "pitch": 66,
-                "velocity": 101,
-                "duration": 0.15,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.2227273,
-                "end_time": 1.8363636,
-                "pitch": 66,
-                "velocity": 101,
-                "duration": 0.6136364,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.8363636,
-                "end_time": 2.1272727,
-                "pitch": 69,
-                "velocity": 101,
-                "duration": 0.2909091,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.1272727,
-                "end_time": 2.4386364,
-                "pitch": 69,
-                "velocity": 101,
-                "duration": 0.3113636,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.4386364,
-                "end_time": 2.5886364,
-                "pitch": 66,
-                "velocity": 101,
-                "duration": 0.15,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.5886364,
-                "end_time": 2.7409091,
-                "pitch": 66,
-                "velocity": 101,
-                "duration": 0.1522727,
-                "tempo": 120.0
+                "highest_pitch": 69,
+                "highest_velocity": 101,
+                "duration": 2.74
             }
         ],
         "Trumpet": [
             {
-                "start_time": 0.0,
-                "end_time": 0.9227273,
-                "pitch": 71,
-                "velocity": 127,
-                "duration": 0.9227273,
-                "tempo": 120.0
+                "highest_pitch": 0,
+                "highest_velocity": 0,
+                "duration": 0.0
             },
             {
-                "start_time": 0.9227273,
-                "end_time": 1.0727273,
-                "pitch": 71,
-                "velocity": 127,
-                "duration": 0.15,
-                "tempo": 120.0
+                "highest_pitch": 74,
+                "highest_velocity": 127,
+                "duration": 2.44
             },
             {
-                "start_time": 1.0727273,
-                "end_time": 1.2227273,
-                "pitch": 71,
-                "velocity": 127,
-                "duration": 0.15,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.2227273,
-                "end_time": 1.8363636,
-                "pitch": 71,
-                "velocity": 127,
-                "duration": 0.6136364,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.8363636,
-                "end_time": 2.1295455,
-                "pitch": 74,
-                "velocity": 127,
-                "duration": 0.2931818,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.1295455,
-                "end_time": 2.4386364,
-                "pitch": 74,
-                "velocity": 127,
-                "duration": 0.3090909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.4409091,
-                "end_time": 2.5886364,
-                "pitch": 71,
-                "velocity": 127,
-                "duration": 0.1477273,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.5886364,
-                "end_time": 2.7409091,
-                "pitch": 71,
-                "velocity": 127,
-                "duration": 0.1522727,
-                "tempo": 120.0
+                "highest_pitch": 71,
+                "highest_velocity": 127,
+                "duration": 0.3
             }
         ]
     }

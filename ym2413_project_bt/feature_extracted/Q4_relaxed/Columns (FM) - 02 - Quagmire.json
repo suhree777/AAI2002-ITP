@@ -1,120 +1,19 @@
 {
+    "track_id": "Columns (FM) - 02 - Quagmire",
     "mood": "relaxed",
     "instruments": {
         "Trumpet": [
             {
-                "start_time": 0.0,
-                "end_time": 0.1977273,
-                "pitch": 45,
-                "velocity": 64,
-                "duration": 0.1977273,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.1977273,
-                "end_time": 0.3977273,
-                "pitch": 45,
-                "velocity": 64,
-                "duration": 0.2,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.3977273,
-                "end_time": 0.5818182,
-                "pitch": 45,
-                "velocity": 64,
-                "duration": 0.1840909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.5818182,
-                "end_time": 1.7590909,
-                "pitch": 45,
-                "velocity": 64,
-                "duration": 1.1772727,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.7590909,
-                "end_time": 2.3545455,
-                "pitch": 45,
-                "velocity": 64,
-                "duration": 0.5954545,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.3545455,
-                "end_time": 2.9431818,
-                "pitch": 38,
-                "velocity": 64,
-                "duration": 0.5886364,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.9431818,
-                "end_time": 3.5295455,
-                "pitch": 38,
-                "velocity": 64,
-                "duration": 0.5863636,
-                "tempo": 120.0
+                "highest_pitch": 45,
+                "highest_velocity": 64,
+                "duration": 3.53
             }
         ],
         "Harpsichord": [
             {
-                "start_time": 0.0,
-                "end_time": 0.1977273,
-                "pitch": 57,
-                "velocity": 16,
-                "duration": 0.1977273,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.1977273,
-                "end_time": 0.3977273,
-                "pitch": 57,
-                "velocity": 16,
-                "duration": 0.2,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.3977273,
-                "end_time": 0.5818182,
-                "pitch": 57,
-                "velocity": 16,
-                "duration": 0.1840909,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 0.5818182,
-                "end_time": 1.7590909,
-                "pitch": 57,
-                "velocity": 16,
-                "duration": 1.1772727,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 1.7590909,
-                "end_time": 2.3545455,
-                "pitch": 57,
-                "velocity": 16,
-                "duration": 0.5954545,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.3545455,
-                "end_time": 2.9431818,
-                "pitch": 50,
-                "velocity": 16,
-                "duration": 0.5886364,
-                "tempo": 120.0
-            },
-            {
-                "start_time": 2.9431818,
-                "end_time": 3.5295455,
-                "pitch": 50,
-                "velocity": 16,
-                "duration": 0.5863636,
-                "tempo": 120.0
+                "highest_pitch": 57,
+                "highest_velocity": 16,
+                "duration": 3.53
             }
         ]
     }
