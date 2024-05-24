@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 
-def resample_midi_instruments(midi_path, sample_rate_hz=500):
+def resample_midi_instruments(midi_path, sample_rate_hz=220500):
     midi_data = pretty_midi.PrettyMIDI(midi_path)
     
     # Define the end time based on the last event in the MIDI file
@@ -46,23 +46,27 @@ def resample_midi_instruments(midi_path, sample_rate_hz=500):
     return times, instrument_data
 
 def plot_instrument_data(times, instrument_data):
-    for instrument_name, (pitches, velocities) in instrument_data.items():
-        plt.figure(figsize=(12, 6))
+    for idx, (instrument_name, (pitches, velocities)) in enumerate(instrument_data.items()):
+        plt.figure(figsize=(10, 5))
         
         plt.subplot(2, 1, 1)
         plt.plot(times, pitches, label='Pitch')
-        plt.title(f'{instrument_name} - Pitches')
-        plt.ylabel('Pitch')
-        
+        plt.title(f'{instrument_name} - Pitches', fontsize=10)
+        plt.ylabel('Pitch', fontsize=10)
+        plt.xticks(np.arange(0, times[-1], step=5), fontsize=10)
+        plt.yticks(fontsize=10)
+
         plt.subplot(2, 1, 2)
         plt.plot(times, velocities, label='Velocity', color='r')
-        plt.title(f'{instrument_name} - Velocities')
-        plt.xlabel('Time (s)')
-        plt.ylabel('Velocity')
+        plt.title(f'{instrument_name} - Velocities', fontsize=10)
+        plt.xlabel('Time (s)', fontsize=10)
+        plt.ylabel('Velocity', fontsize=10)
+        plt.xticks(np.arange(0, times[-1], step=5), fontsize=10)
+        plt.yticks(fontsize=10)
         
         plt.tight_layout()
-        plt.show(block=False)
-
+        # Set block=True for the last plot
+        plt.show(block=(idx == len(instrument_data) - 1))
 
 midi_directory = 'ym2413_project_bt\output\Q1_happy'
 
@@ -70,10 +74,10 @@ midi_directory = 'ym2413_project_bt\output\Q1_happy'
 midi_files = [f for f in os.listdir(midi_directory) if f.endswith('.mid')]
 selected_midi = random.choice(midi_files)
 midi_path = os.path.join(midi_directory, selected_midi)
+print(f"Selected MIDI file for sampling: {selected_midi}")
 
 # Resample MIDI data for each instrument at 50Hz
 times, instrument_data = resample_midi_instruments(midi_path)
 
 # Plot the resampled MIDI data for each instrument
 plot_instrument_data(times, instrument_data)
-user_input = input("Please enter something: ")
