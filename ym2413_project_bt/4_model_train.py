@@ -1,108 +1,138 @@
 import os
 import json
-import time
-import torch
-import torch.nn as nn
-from torch.utils.data import Dataset, DataLoader
+import numpy as np
 from sklearn.model_selection import train_test_split
+from torch.utils.data import DataLoader, TensorDataset
+import torch
+from torch import nn
+from torch.optim import Adam
+from transformers import TransfoXLModel, TransfoXLConfig
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(f'Using device: {device}')
+def mood_to_onehot(mood):
+    # This function converts a mood string to a one-hot encoded vector
+    moods = ['happy', 'angry', 'sad', 'relaxed']  # Adjust as per your moods
+    one_hot = np.zeros(len(moods))
+    index = moods.index(mood)
+    one_hot[index] = 1
+    return one_hot
 
-class MusicDataset(Dataset):
-    def __init__(self, directory):
-        self.data = []
-        for mood_dir in os.listdir(directory):
-            mood_path = os.path.join(directory, mood_dir)
-            if os.path.isdir(mood_path):
-                for file in os.listdir(mood_path):
-                    if file.endswith('.json'):
-                        file_path = os.path.join(mood_path, file)
-                        with open(file_path, 'r') as json_file:
-                            data = json.load(json_file)
-                            for instrument, sequence in data['instruments'].items():
-                                self.data.append(torch.tensor(sequence, dtype=torch.long))
-                                print(f"data print out{data}")
+def load_and_normalize_data(filepath, instrument_name, sequence_length=50):
+    with open(filepath, 'r') as file:
+        data = json.load(file)
+    
+    if instrument_name not in data['instruments']:
+        return None  # Skip files where the instrument is not present
 
-    def __len__(self):
-        return len(self.data)
+    # Extract mood and instrument_vector
+    mood_vector = mood_to_onehot(data['mood'])
+    instrument_vector = data['instrument_vector']
+    feature_vector = np.concatenate([mood_vector, instrument_vector])
+    
+    # Extract instrument data
+    instrument_data = np.array(data['instruments'][instrument_name])
+    if len(instrument_data) > sequence_length:
+        instrument_data = instrument_data[:sequence_length]  # Truncate
+    elif len(instrument_data) < sequence_length:
+        instrument_data = np.pad(instrument_data, (0, sequence_length - len(instrument_data)), 'constant')
+    
+    final_input = np.concatenate([feature_vector, instrument_data])
+    # print(f"Processed data for {instrument_name}: {instrument_data}")
+    return final_input
 
-    def __getitem__(self, idx):
-        return self.data[idx][:-1], self.data[idx][1:]  # X and Y sequences
+def process_instrument_data(root_dir, instrument_name, sequence_length=50):
+    all_data = []
+    for subdir, dirs, files in os.walk(root_dir):
+        for file in files:
+            if file.endswith('.json'):
+                filepath = os.path.join(subdir, file)
+                try:
+                    processed_data = load_and_normalize_data(filepath, instrument_name, sequence_length)
+                    all_data.append(processed_data)
+                except Exception as e:
+                    print(f"Failed to process {filepath}: {str(e)}")
+    return all_data
 
-def split_data(dataset):
-    train_data, test_data = train_test_split(dataset, test_size=0.2, random_state=42)
-    return DataLoader(train_data, batch_size=1, shuffle=True), DataLoader(test_data, batch_size=1, shuffle=False)
+for i in range(20):
+    print("\n")
 
-# Example usage
-dataset_path = 'ym2413_project_bt/processed_feature'
-dataset = MusicDataset(dataset_path)
-train_loader, test_loader = split_data(dataset)
+instrument_list = ["Acoustic Bass","Acoustic Grand Piano","Acoustic Guitar (nylon)","Church Organ",
+                   "Clarinet","Electric Guitar (clean)","Electric Piano 1","Flute","French Horn",
+                   "Harpsichord","Lead 2 (sawtooth)","Oboe","Synth Bass 1","Trumpet","Vibraphone",
+                   "Violin"]
 
-class MusicLSTM(nn.Module):
-    def __init__(self, vocab_size, hidden_size, num_layers, output_size, embed_dim):
-        super(MusicLSTM, self).__init__()
-        self.embedding = nn.Embedding(vocab_size, embed_dim)  # Embedding layer
-        self.lstm = nn.LSTM(embed_dim, hidden_size, num_layers, batch_first=True)
-        self.fc = nn.Linear(hidden_size, output_size)
+directory_path = 'ym2413_project_bt/3_processed_feature_limited/data/'
+instrument_name = 'Acoustic Bass'  # Specified the instrument
 
-    def forward(self, x):
-        x = self.embedding(x)  # Pass input through embedding layer
-        out, _ = self.lstm(x)
-        out = self.fc(out[:, -1, :])  # Decode the hidden state of the last time step
-        return out
+instrument_datasets = process_instrument_data(directory_path, instrument_name)
+# print(f"instrument_datasets data for {instrument_datasets}")
+print(f"instrument_datasets data: {len(instrument_datasets)} samples")
 
-# Load the event vocabulary
-with open('ym2413_project_bt/processed_feature/instrument_vocab.json', 'r') as file:
-    event_vocab = json.load(file)
-vocab_size = len(event_vocab)  # Set vocab size based on your vocabulary
+def clean_data(data):
+    return [x for x in data if x is not None]
 
-# Model parameters
-hidden_size = 64
-num_layers = 2
+instrument_datasets = clean_data(instrument_datasets)
+print(f"Cleaned instrument_datasets data: {len(instrument_datasets)} samples")
 
-# Instantiate the model
-model = MusicLSTM(vocab_size, hidden_size, num_layers, vocab_size, embed_dim=50).to(device)
+instrument_datasets = np.array(instrument_datasets)
+np.random.shuffle(instrument_datasets)
 
-# Define loss function and optimizer
-loss_function = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+train_data, test_data = train_test_split(instrument_datasets, test_size=0.2, random_state=42)
+train_data, val_data = train_test_split(train_data, test_size=0.125, random_state=42)
 
-def train_model(model, epochs, train_loader, loss_function, optimizer, device):
+train_inputs, train_labels = torch.Tensor(train_data[:, :-1]), torch.Tensor(train_data[:, 1:])
+val_inputs, val_labels = torch.Tensor(val_data[:, :-1]), torch.Tensor(val_data[:, 1:])
+test_inputs, test_labels = torch.Tensor(test_data[:, :-1]), torch.Tensor(test_data[:, 1:])
+
+train_dataset = TensorDataset(train_inputs, train_labels)
+val_dataset = TensorDataset(val_inputs, val_labels)
+test_dataset = TensorDataset(test_inputs, test_labels)
+
+batch_size = 32
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+print("Data loaders created!")
+vocab_file_path = os.path.join('ym2413_project_bt/3_processed_feature_limited/instrument_vocabs/', f"{instrument_name}_vocab.json")
+
+with open(vocab_file_path, 'r') as f:
+    vocab = json.load(f)
+vocab_size = len(vocab)  # The total number of unique tokens
+
+print(f"Loaded vocabulary for {instrument_name} with size: {vocab_size}")
+
+# Model configuration
+config = TransfoXLConfig(
+    vocab_size=vocab_size,
+    d_model=512,       # Dimension of the model's embeddings
+    n_head=8,          # Number of attention heads
+    num_layers=6,      # Number of transformer layers
+    dropout=0.1,       # Dropout rate
+    adaptive=True,
+    cutoffs=[2000, 6000],
+    div_val=4
+)
+
+model = TransfoXLModel(config)
+device = torch.device("cpu")
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = model.to(device)
+print(f"Model configured with vocab size: {vocab_size}")
+optimizer = Adam(model.parameters(), lr=0.001)
+loss_fn = nn.CrossEntropyLoss()
+
+def train(model, data_loader, optimizer, loss_fn, epochs):
     model.train()
     for epoch in range(epochs):
-        start_time = time.time()  # Start timing the epoch
-        total_loss = 0
-        for x_batch, y_batch in train_loader:
-            x_batch, y_batch = x_batch.to(device), y_batch.to(device)
+        for inputs, labels in data_loader:
+            inputs, labels = inputs.to(device, dtype=torch.long), labels.to(device, dtype=torch.long)
             optimizer.zero_grad()
-            output = model(x_batch)
-            loss = loss_function(output.transpose(1, 2), y_batch)  # Adjust for expected dimensions
+            outputs = model(inputs)
+            loss = loss_fn(outputs.view(-1, outputs.size(-1)), labels.view(-1))
             loss.backward()
             optimizer.step()
-            total_loss += loss.item()
-        duration = time.time() - start_time  # Calculate the duration of the epoch
-        print(f'Epoch {epoch+1}, Loss: {total_loss / len(train_loader)}, Duration: {duration:.2f} seconds')
+        print(f"Epoch {epoch+1}, Loss: {loss.item()}")
 
-def validate_model(model, test_loader, loss_function, device):
-    model.eval()
-    total_loss = 0
-    with torch.no_grad():
-        for x_batch, y_batch in test_loader:
-            x_batch, y_batch = x_batch.to(device), y_batch.to(device)
-            output = model(x_batch)
-            loss = loss_function(output.transpose(1, 2), y_batch)
-            total_loss += loss.item()
-    print(f'Validation Loss: {total_loss / len(test_loader)}')
+# Assuming `train_loader` is defined as above
+train(model, train_loader, optimizer, loss_fn, epochs=10)
 
-def save_model(model, model_path):
-    if not os.path.exists('models'):
-        os.makedirs('models')
-    torch.save(model.state_dict(), model_path)
-    print(f'Model saved to {model_path}')
-
-train_model(model, 50, train_loader, loss_function, optimizer, device)
-validate_model(model, test_loader, loss_function, device)
-
-# Save the trained model
-save_model(model, 'ym2413_project_bt/processed_feature/music_lstm.pth')
