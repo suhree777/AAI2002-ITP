@@ -2,7 +2,7 @@
     "track_id": "Cyborg Hunter (FM) - 01 - Title Screen_10",
     "mood": "angry",
     "instruments": {
-        "Lead 1 (square)": [
+        "Lead 2 (sawtooth)": [
             {
                 "pitch": 0,
                 "velocity": 0,
@@ -823,26 +823,6 @@
                 "pitch": 60,
                 "velocity": 15,
                 "duration": 0.1659,
-                "tempo": 120.0
-            }
-        ],
-        "Lead 2 (sawtooth)": [
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 12.9045,
-                "tempo": 0
-            },
-            {
-                "pitch": 91,
-                "velocity": 3,
-                "duration": 4.7295,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 94,
-                "velocity": 5,
-                "duration": 1.0,
                 "tempo": 120.0
             }
         ],

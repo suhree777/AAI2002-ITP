@@ -4,6 +4,98 @@
     "instruments": {
         "Lead 1 (square)": [
             {
+                "pitch": 75,
+                "velocity": 2,
+                "duration": 2.6364,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 73,
+                "velocity": 2,
+                "duration": 2.6091,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 75,
+                "velocity": 2,
+                "duration": 2.6273,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 73,
+                "velocity": 2,
+                "duration": 2.6682,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 75,
+                "velocity": 2,
+                "duration": 2.6682,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 73,
+                "velocity": 2,
+                "duration": 2.6114,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 75,
+                "velocity": 2,
+                "duration": 2.6045,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 73,
+                "velocity": 2,
+                "duration": 2.6159,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 75,
+                "velocity": 2,
+                "duration": 2.75,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 73,
+                "velocity": 2,
+                "duration": 5.2591,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 2.7932,
+                "tempo": 0
+            },
+            {
+                "pitch": 51,
+                "velocity": 2,
+                "duration": 2.5909,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 49,
+                "velocity": 2,
+                "duration": 5.3818,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 4.0455,
+                "tempo": 0
+            },
+            {
+                "pitch": 75,
+                "velocity": 2,
+                "duration": 0.6159,
+                "tempo": 120.0
+            }
+        ],
+        "Lead 2 (sawtooth)": [
+            {
                 "pitch": 69,
                 "velocity": 2,
                 "duration": 2.6364,
@@ -1861,98 +1953,6 @@
                 "pitch": 69,
                 "velocity": 2,
                 "duration": 0.6136,
-                "tempo": 120.0
-            }
-        ],
-        "Lead 2 (sawtooth)": [
-            {
-                "pitch": 75,
-                "velocity": 2,
-                "duration": 2.6364,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 73,
-                "velocity": 2,
-                "duration": 2.6091,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 75,
-                "velocity": 2,
-                "duration": 2.6273,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 73,
-                "velocity": 2,
-                "duration": 2.6682,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 75,
-                "velocity": 2,
-                "duration": 2.6682,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 73,
-                "velocity": 2,
-                "duration": 2.6114,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 75,
-                "velocity": 2,
-                "duration": 2.6045,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 73,
-                "velocity": 2,
-                "duration": 2.6159,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 75,
-                "velocity": 2,
-                "duration": 2.75,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 73,
-                "velocity": 2,
-                "duration": 5.2591,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 2.7932,
-                "tempo": 0
-            },
-            {
-                "pitch": 51,
-                "velocity": 2,
-                "duration": 2.5909,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 49,
-                "velocity": 2,
-                "duration": 5.3818,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 4.0455,
-                "tempo": 0
-            },
-            {
-                "pitch": 75,
-                "velocity": 2,
-                "duration": 0.6159,
                 "tempo": 120.0
             }
         ],

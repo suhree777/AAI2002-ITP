@@ -6,44 +6,6 @@
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 3.9977,
-                "tempo": 0
-            },
-            {
-                "pitch": 76,
-                "velocity": 8,
-                "duration": 1.5977,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0023,
-                "tempo": 0
-            },
-            {
-                "pitch": 76,
-                "velocity": 8,
-                "duration": 1.1318,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0023,
-                "tempo": 0
-            },
-            {
-                "pitch": 78,
-                "velocity": 8,
-                "duration": 3.0727,
-                "tempo": 120.0
-            }
-        ],
-        "Lead 2 (sawtooth)": [
-            {
-                "pitch": 0,
-                "velocity": 0,
                 "duration": 3.5955,
                 "tempo": 0
             },
@@ -96,17 +58,17 @@
                 "tempo": 120.0
             }
         ],
-        "Synth Bass 1": [
+        "Lead 2 (sawtooth)": [
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 3.2114,
+                "duration": 3.1977,
                 "tempo": 0
             },
             {
-                "pitch": 33,
-                "velocity": 1,
-                "duration": 1.5864,
+                "pitch": 69,
+                "velocity": 8,
+                "duration": 1.5955,
                 "tempo": 120.0
             },
             {
@@ -116,8 +78,8 @@
                 "tempo": 0
             },
             {
-                "pitch": 32,
-                "velocity": 1,
+                "pitch": 68,
+                "velocity": 8,
                 "duration": 1.6,
                 "tempo": 120.0
             },
@@ -128,9 +90,47 @@
                 "tempo": 0
             },
             {
-                "pitch": 30,
-                "velocity": 1,
+                "pitch": 66,
+                "velocity": 8,
                 "duration": 3.4045,
+                "tempo": 120.0
+            }
+        ],
+        "Synth Bass 1": [
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 3.9977,
+                "tempo": 0
+            },
+            {
+                "pitch": 76,
+                "velocity": 1,
+                "duration": 1.5977,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0023,
+                "tempo": 0
+            },
+            {
+                "pitch": 76,
+                "velocity": 1,
+                "duration": 1.1318,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0023,
+                "tempo": 0
+            },
+            {
+                "pitch": 78,
+                "velocity": 1,
+                "duration": 3.0727,
                 "tempo": 120.0
             }
         ],
@@ -138,7 +138,7 @@
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 9.8068,
+                "duration": 9.8045,
                 "tempo": 0
             },
             {

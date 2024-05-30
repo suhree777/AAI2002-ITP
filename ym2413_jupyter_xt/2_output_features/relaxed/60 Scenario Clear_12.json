@@ -4,20 +4,6 @@
     "instruments": {
         "Lead 1 (square)": [
             {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 3.7705,
-                "tempo": 0
-            },
-            {
-                "pitch": 67,
-                "velocity": 2,
-                "duration": 3.7636,
-                "tempo": 120.0
-            }
-        ],
-        "Lead 2 (sawtooth)": [
-            {
                 "pitch": 41,
                 "velocity": 15,
                 "duration": 1.8841,
@@ -36,6 +22,26 @@
                 "tempo": 120.0
             }
         ],
+        "Lead 2 (sawtooth)": [
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0023,
+                "tempo": 0
+            },
+            {
+                "pitch": 63,
+                "velocity": 10,
+                "duration": 1.8841,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 65,
+                "velocity": 8,
+                "duration": 1.8864,
+                "tempo": 120.0
+            }
+        ],
         "Synth Bass 1": [
             {
                 "pitch": 0,
@@ -46,8 +52,14 @@
             {
                 "pitch": 67,
                 "velocity": 1,
-                "duration": 0.4659,
+                "duration": 0.4636,
                 "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0023,
+                "tempo": 0
             },
             {
                 "pitch": 58,
@@ -64,20 +76,20 @@
             {
                 "pitch": 67,
                 "velocity": 1,
-                "duration": 1.4182,
+                "duration": 0.475,
                 "tempo": 120.0
             },
             {
                 "pitch": 67,
                 "velocity": 1,
-                "duration": 0.4773,
+                "duration": 0.4659,
                 "tempo": 120.0
             },
             {
-                "pitch": 69,
-                "velocity": 1,
-                "duration": 0.4659,
-                "tempo": 120.0
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0023,
+                "tempo": 0
             },
             {
                 "pitch": 60,
@@ -92,15 +104,9 @@
                 "tempo": 120.0
             },
             {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0023,
-                "tempo": 0
-            },
-            {
                 "pitch": 69,
                 "velocity": 1,
-                "duration": 0.475,
+                "duration": 0.4773,
                 "tempo": 120.0
             },
             {

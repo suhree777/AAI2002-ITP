@@ -64,7 +64,7 @@ directory_path = 'ym2413_project_bt/3_processed_feature_limited/data/'
 instrument_name = 'Acoustic Bass'  # Specified the instrument
 
 instrument_datasets = process_instrument_data(directory_path, instrument_name)
-# print(f"instrument_datasets data for {instrument_datasets}")
+print(f"instrument_datasets data for {instrument_datasets}")
 print(f"instrument_datasets data: {len(instrument_datasets)} samples")
 
 def clean_data(data):
