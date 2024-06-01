@@ -4,6 +4,12 @@
     "instruments": {
         "Lead 1 (square)": [
             {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0023,
+                "tempo": 0
+            },
+            {
                 "pitch": 63,
                 "velocity": 12,
                 "duration": 1.8841,
@@ -20,99 +26,33 @@
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 0.0023,
+                "duration": 3.7727,
                 "tempo": 0
-            },
-            {
-                "pitch": 67,
-                "velocity": 15,
-                "duration": 0.4659,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 58,
-                "velocity": 12,
-                "duration": 0.4705,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 63,
-                "velocity": 10,
-                "duration": 0.4705,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 67,
-                "velocity": 10,
-                "duration": 0.475,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0023,
-                "tempo": 0
-            },
-            {
-                "pitch": 67,
-                "velocity": 8,
-                "duration": 0.4636,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0023,
-                "tempo": 0
-            },
-            {
-                "pitch": 60,
-                "velocity": 8,
-                "duration": 0.4705,
-                "tempo": 120.0
             },
             {
                 "pitch": 65,
-                "velocity": 8,
-                "duration": 0.4705,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0023,
-                "tempo": 0
-            },
-            {
-                "pitch": 69,
-                "velocity": 8,
-                "duration": 0.475,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.2273,
-                "tempo": 0
-            },
-            {
-                "pitch": 72,
-                "velocity": 8,
-                "duration": 3.7523,
+                "velocity": 2,
+                "duration": 3.7614,
                 "tempo": 120.0
             }
         ],
         "Synth Bass 1": [
             {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 3.7705,
-                "tempo": 0
+                "pitch": 41,
+                "velocity": 1,
+                "duration": 1.8841,
+                "tempo": 120.0
             },
             {
-                "pitch": 67,
+                "pitch": 43,
                 "velocity": 1,
-                "duration": 3.7614,
+                "duration": 1.8841,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 43,
+                "velocity": 1,
+                "duration": 3.7659,
                 "tempo": 120.0
             }
         ],
@@ -120,7 +60,7 @@
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 7.75,
+                "duration": 7.5341,
                 "tempo": 0
             },
             {

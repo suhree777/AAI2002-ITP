@@ -76,6 +76,9 @@ def transform_dataset(dataset_path, vocabs, instrument_vocab, output_folder):
                     instrument_vector = [0] * num_instruments
                     for instrument, events in data['instruments'].items():
                         if instrument in vocabs:  # Check if there's a vocab for this instrument
+                            if instrument in instrument_vocab:
+                                instrument_index = instrument_vocab[instrument]
+                                instrument_vector[instrument_index] = 1
                             vocab = vocabs[instrument]
                             transformed_events = [vocab.get(tuple(sorted(event.items())), -1) for event in events]  # Get event ID or -1 if not found
                             transformed_instruments[instrument] = transformed_events
@@ -92,7 +95,7 @@ def transform_dataset(dataset_path, vocabs, instrument_vocab, output_folder):
 """dataset_path = 'ym2413_project_bt/2_feature_output/data'
 vocab_output_folder = 'ym2413_project_bt/3_processed_feature/instrument_vocabs'
 processed_folder = 'ym2413_project_bt/3_processed_feature/data'
-instrument_vocab_path = 'ym2413_project_bt/3_processed_feature/instrument_vocab.json'"""
+instrument_vocab_path = 'ym2413_project_bt/3_processed_feature/instrument_list.json'"""
 
 dataset_path = 'ym2413_project_bt/2_feature_output_limited/data'
 vocab_output_folder = 'ym2413_project_bt/3_processed_feature_limited/instrument_vocabs'

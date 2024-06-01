@@ -4,6 +4,14 @@
     "instruments": {
         "Lead 1 (square)": [
             {
+                "pitch": 45,
+                "velocity": 15,
+                "duration": 3.95,
+                "tempo": 120.0
+            }
+        ],
+        "Lead 2 (sawtooth)": [
+            {
                 "pitch": 0,
                 "velocity": 0,
                 "duration": 0.6727,
@@ -40,7 +48,7 @@
                 "tempo": 120.0
             }
         ],
-        "Lead 2 (sawtooth)": [
+        "Synth Bass 1": [
             {
                 "pitch": 0,
                 "velocity": 0,
@@ -49,7 +57,7 @@
             },
             {
                 "pitch": 39,
-                "velocity": 15,
+                "velocity": 1,
                 "duration": 0.4682,
                 "tempo": 120.0
             },
@@ -61,7 +69,7 @@
             },
             {
                 "pitch": 42,
-                "velocity": 15,
+                "velocity": 1,
                 "duration": 0.4659,
                 "tempo": 120.0
             },
@@ -73,16 +81,8 @@
             },
             {
                 "pitch": 45,
-                "velocity": 15,
-                "duration": 2.5182,
-                "tempo": 120.0
-            }
-        ],
-        "Synth Bass 1": [
-            {
-                "pitch": 45,
                 "velocity": 1,
-                "duration": 3.95,
+                "duration": 2.5182,
                 "tempo": 120.0
             }
         ],

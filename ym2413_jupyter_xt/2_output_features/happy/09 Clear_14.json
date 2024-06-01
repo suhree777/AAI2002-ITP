@@ -86,18 +86,80 @@
             {
                 "pitch": 0,
                 "velocity": 0,
+                "duration": 0.0023,
+                "tempo": 0
+            },
+            {
+                "pitch": 39,
+                "velocity": 8,
+                "duration": 0.4182,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 42,
+                "velocity": 8,
+                "duration": 0.8364,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0023,
+                "tempo": 0
+            },
+            {
+                "pitch": 47,
+                "velocity": 8,
+                "duration": 0.8364,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 52,
+                "velocity": 8,
+                "duration": 0.8386,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 51,
+                "velocity": 8,
+                "duration": 0.8386,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 43,
+                "velocity": 8,
+                "duration": 1.6977,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 45,
+                "velocity": 8,
+                "duration": 1.6773,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 47,
+                "velocity": 8,
+                "duration": 5.8341,
+                "tempo": 120.0
+            }
+        ],
+        "Synth Bass 1": [
+            {
+                "pitch": 0,
+                "velocity": 0,
                 "duration": 7.9977,
                 "tempo": 0
             },
             {
                 "pitch": 75,
-                "velocity": 15,
+                "velocity": 1,
                 "duration": 0.5455,
                 "tempo": 120.0
             },
             {
                 "pitch": 73,
-                "velocity": 15,
+                "velocity": 1,
                 "duration": 0.2705,
                 "tempo": 120.0
             },
@@ -109,70 +171,8 @@
             },
             {
                 "pitch": 75,
-                "velocity": 15,
+                "velocity": 1,
                 "duration": 4.1659,
-                "tempo": 120.0
-            }
-        ],
-        "Synth Bass 1": [
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0023,
-                "tempo": 0
-            },
-            {
-                "pitch": 39,
-                "velocity": 1,
-                "duration": 0.4182,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 42,
-                "velocity": 1,
-                "duration": 0.8364,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0023,
-                "tempo": 0
-            },
-            {
-                "pitch": 47,
-                "velocity": 1,
-                "duration": 0.8364,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 52,
-                "velocity": 1,
-                "duration": 0.8386,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 51,
-                "velocity": 1,
-                "duration": 0.8386,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 43,
-                "velocity": 1,
-                "duration": 1.6977,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 45,
-                "velocity": 1,
-                "duration": 1.6773,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 47,
-                "velocity": 1,
-                "duration": 5.8341,
                 "tempo": 120.0
             }
         ],

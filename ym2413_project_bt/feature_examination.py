@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 
-def resample_midi_instruments(midi_path, sample_rate_hz=220500):
+def resample_midi_instruments(midi_path, sample_rate_hz=44500):
     midi_data = pretty_midi.PrettyMIDI(midi_path)
     
     # Define the end time based on the last event in the MIDI file
@@ -68,7 +68,7 @@ def plot_instrument_data(times, instrument_data):
         # Set block=True for the last plot
         plt.show(block=(idx == len(instrument_data) - 1))
 
-midi_directory = 'ym2413_project_bt\output\Q1_happy'
+midi_directory = 'ym2413_project_bt/1_output_limited/Q1_happy'
 
 # Select a random MIDI file from the directory
 midi_files = [f for f in os.listdir(midi_directory) if f.endswith('.mid')]
