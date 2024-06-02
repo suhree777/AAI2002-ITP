@@ -1,0 +1,56 @@
+{
+    "track_id": "46 Shock_2",
+    "mood": "angry",
+    "instruments": {
+        "Lead 1 (square)": [
+            {
+                "pitch": 35,
+                "velocity": 12,
+                "duration": 6.6432,
+                "tempo": 120.0
+            }
+        ],
+        "Lead 2 (sawtooth)": [
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0023,
+                "tempo": 0
+            },
+            {
+                "pitch": 36,
+                "velocity": 12,
+                "duration": 6.6409,
+                "tempo": 120.0
+            }
+        ],
+        "Synth Bass 1": [
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0045,
+                "tempo": 0
+            },
+            {
+                "pitch": 39,
+                "velocity": 1,
+                "duration": 6.6409,
+                "tempo": 120.0
+            }
+        ],
+        "Acoustic Grand Piano": [
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 6.6455,
+                "tempo": 0
+            },
+            {
+                "pitch": 108,
+                "velocity": 15,
+                "duration": 0.1,
+                "tempo": 120.0
+            }
+        ]
+    }
+}
