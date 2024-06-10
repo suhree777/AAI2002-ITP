@@ -8,7 +8,7 @@ def load_instrument_vocab(vocab_path):
         return json.load(file)
 
 def load_instrument_specific_vocab(dataset_path):
-    instrument_event_vocab = defaultdict(lambda: {"<PAD>": 0})  # Nested dictionary for each instrument
+    instrument_event_vocab = defaultdict(dict)  # Nested dictionary for each instrument
     instrument_event_id = defaultdict(lambda: 1)  # Separate ID counters for each instrument
     if os.path.isdir(dataset_path):
         print(f'Processing folder: {dataset_path}')
