@@ -32,14 +32,12 @@ def evaluate_temporal_structure(midi_stream):
     offset_variance = pd.Series(offset_changes).diff().abs().mean()
     return duration_consistency, offset_variance
 
-
 def evaluate_melodic_contour(midi_stream):
     # Evaluate melodic contour by the direction of melodic intervals
     notes = []
     for element in midi_stream.recurse().notes:
         if isinstance(element, note.Note):
             notes.append(element)
-        
         elif isinstance(element, chord.Chord):
             # If it's a chord, take the top note (could also take the bass or any other strategy)
             notes.append(element.sortAscending().notes[-1])  # Taking the highest note
@@ -75,11 +73,23 @@ def main():
             file_path = os.path.join(input_folder, filename)
             evaluation_result = evaluate_music(file_path)
             results.append(evaluation_result)
-    
-    # Save the results to a DataFrame and then to a CSV
+
     results_df = pd.DataFrame(results)
-    results_df.to_csv(os.path.join(output_folder, 'midi_evaluation_results.csv'), index=False)
-    print(f"Results saved in {output_folder}/midi_evaluation_results.csv")
+    
+    # Check if the results file already exists
+    results_file_path = os.path.join(output_folder, 'midi_evaluation_results.csv')
+    if os.path.exists(results_file_path):
+        # Load existing results and append new results
+        existing_df = pd.read_csv(results_file_path)
+        combined_df = pd.concat([existing_df, results_df])
+        # Remove duplicates based on the "File" column
+        combined_df = combined_df.drop_duplicates(subset=["File"], keep='last')
+        combined_df.to_csv(results_file_path, index=False)
+        print(f"Results updated in {results_file_path}")
+    else:
+        # Save new results
+        results_df.to_csv(results_file_path, index=False)
+        print(f"Results saved in {results_file_path}")
 
 if __name__ == "__main__":
     main()

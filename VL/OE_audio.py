@@ -54,6 +54,7 @@ def evaluate_music(file_path):
     }
 
 def main():
+    print("Current Working Directory:", os.getcwd())
     input_folder = 'VL/1_output'
     output_folder = 'VL/4_evaluation_results'
     results = []
@@ -65,10 +66,22 @@ def main():
             evaluation_result = evaluate_music(file_path)
             results.append(evaluation_result)
     
-    # Save the results to a DataFrame and then to a CSV
     results_df = pd.DataFrame(results)
-    results_df.to_csv(os.path.join(output_folder, 'audio_evaluation_results.csv'), index=False)
-    print(f"Results saved in {output_folder}/audio_evaluation_results.csv")
+    
+    # Check if the results file already exists
+    results_file_path = os.path.join(output_folder, 'audio_evaluation_results.csv')
+    if os.path.exists(results_file_path):
+        # Load existing results and append new results
+        existing_df = pd.read_csv(results_file_path)
+        combined_df = pd.concat([existing_df, results_df])
+        # Remove duplicates based on the "File" column
+        combined_df = combined_df.drop_duplicates(subset=["File"], keep='last')
+        combined_df.to_csv(results_file_path, index=False)
+        print(f"Results updated in {results_file_path}")
+    else:
+        # Save new results
+        results_df.to_csv(results_file_path, index=False)
+        print(f"Results saved in {results_file_path}")
 
 if __name__ == "__main__":
     main()
