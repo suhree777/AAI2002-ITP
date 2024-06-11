@@ -27,7 +27,7 @@ def evaluate_temporal_structure(tempo, beats):
 
 def evaluate_harmonicity(harmonic):
     # Harmonicity could be evaluated by the smoothness of the harmonic component
-    return librosa.feature.spectral_flatness(y=harmonic)
+    return librosa.feature.spectral_flatness(y=harmonic).mean()
 
 def evaluate_melodic_contour(melody):
     # Melodic contour can be analyzed by the variability in melodic progression
@@ -41,7 +41,7 @@ def evaluate_music(file_path):
     # Calculate evaluation metrics
     pitch_consistency = evaluate_pitch_consistency(chroma)
     tempo, beat_variability = evaluate_temporal_structure(tempo, beats)
-    harmonicity = evaluate_harmonicity(harmonic).mean()
+    harmonicity = evaluate_harmonicity(harmonic)
     melodic_contour = evaluate_melodic_contour(melody)
 
     return {
@@ -54,8 +54,8 @@ def evaluate_music(file_path):
     }
 
 def main():
-    input_folder = '1_output'
-    output_folder = '3_evaluation_results'
+    input_folder = 'VL/1_output'
+    output_folder = 'VL/4_evaluation_results'
     results = []
 
     # Evaluate all files in the folder
@@ -67,8 +67,8 @@ def main():
     
     # Save the results to a DataFrame and then to a CSV
     results_df = pd.DataFrame(results)
-    results_df.to_csv(os.path.join(output_folder, 'evaluation_results.csv'), index=False)
-    print(f"Results saved in {output_folder}/evaluation_results.csv")
+    results_df.to_csv(os.path.join(output_folder, 'audio_evaluation_results.csv'), index=False)
+    print(f"Results saved in {output_folder}/audio_evaluation_results.csv")
 
 if __name__ == "__main__":
     main()

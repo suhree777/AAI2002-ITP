@@ -1,4 +1,4 @@
-from music21 import converter, note, stream, chord, tempo
+from music21 import converter, note, chord, interval
 import os
 import pandas as pd
 
@@ -8,8 +8,19 @@ def load_midi(file_path):
     return midi_data
 
 def evaluate_pitch_consistency(midi_stream):
-    # Evaluate pitch consistency by analyzing note pitches
-    pitches = [n.pitch.midi for n in midi_stream.recurse().notes]
+    # Initialize an empty list to collect pitches
+    pitches = []
+
+    # Loop through all notes and chords in the MIDI stream
+    for element in midi_stream.recurse():
+        if isinstance(element, note.Note):
+            # If it's a single note, append its MIDI pitch
+            pitches.append(element.pitch.midi)
+        elif isinstance(element, chord.Chord):
+            # If it's a chord, append the MIDI pitches of all notes in the chord
+            pitches.extend(n.midi for n in element.pitches)
+
+    # Calculate the standard deviation of pitch occurrences to evaluate consistency
     pitch_variance = pd.Series(pitches).value_counts().std()
     return pitch_variance
 
@@ -21,10 +32,20 @@ def evaluate_temporal_structure(midi_stream):
     offset_variance = pd.Series(offset_changes).diff().abs().mean()
     return duration_consistency, offset_variance
 
+
 def evaluate_melodic_contour(midi_stream):
     # Evaluate melodic contour by the direction of melodic intervals
-    notes = [n for n in midi_stream.recurse().notes]
-    intervals = [note.Interval(n1, n2).semitones for n1, n2 in zip(notes[:-1], notes[1:])]
+    notes = []
+    for element in midi_stream.recurse().notes:
+        if isinstance(element, note.Note):
+            notes.append(element)
+        
+        elif isinstance(element, chord.Chord):
+            # If it's a chord, take the top note (could also take the bass or any other strategy)
+            notes.append(element.sortAscending().notes[-1])  # Taking the highest note
+
+    # Calculate intervals between consecutive notes
+    intervals = [interval.Interval(n1, n2).semitones for n1, n2 in zip(notes[:-1], notes[1:])]
     contour_changes = pd.Series(intervals).diff().abs().mean()
     return contour_changes
 
@@ -43,8 +64,9 @@ def evaluate_music(file_path):
     }
 
 def main():
-    input_folder = '1_output'
-    output_folder = '4_evaluation_results'
+    print("Current Working Directory:", os.getcwd())
+    input_folder = 'VL/1_output'
+    output_folder = 'VL/4_evaluation_results'
     results = []
 
     # Evaluate all MIDI files in the folder
