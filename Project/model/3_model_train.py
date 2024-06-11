@@ -1,61 +1,115 @@
+import json
+import os
 import numpy as np
-import tensorflow as tf
-from tensorflow import keras
-from keras.models import Sequential
-from keras.layers import LSTM, Dense, Embedding
-from keras.optimizers import Adam
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Embedding, Dense, Dropout
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
+from sklearn.utils import class_weight
 
+def load_data(data_path):
+    sequences = []
+    labels = []
+    mood_labels = {'angry': 0, 'happy': 1, 'relaxed': 2, 'sad': 3}
 
-def train_lstm_model(encoded_events_file, vocabulary_file, model_save_path):
-    # Load the encoded events and vocabulary
-    print("Loading encoded events and vocabulary...")
-    with open(encoded_events_file, 'r') as f:
-        encoded_events = [int(line.strip()) for line in f.readlines()]
+    for mood in os.listdir(data_path):
+        mood_path = os.path.join(data_path, mood)
+        for file in os.listdir(mood_path):
+            file_path = os.path.join(mood_path, file)
+            with open(file_path, 'r') as json_file:
+                data = json.load(json_file)
+                for instrument, events in data['instruments'].items():
+                    if events:  # ensure there are events
+                        sequences.append(events)
+                        labels.append(mood_labels[mood])
 
-    with open(vocabulary_file, 'r') as f:
-        vocab = {line.split('\t')[0].strip(): int(line.split('\t')[1]) for line in f.readlines()}
+    # Convert lists to numpy arrays
+    sequences = pad_sequences(sequences, padding='post')
+    labels = np.array(labels)
+    return sequences, labels
 
-    # Prepare the data
-    print("Preparing data...")
-    sequence_length = 50
-    input_sequences = []
-    output_sequences = []
-    for i in range(len(encoded_events) - sequence_length):
-        input_sequences.append(encoded_events[i:i + sequence_length])
-        output_sequences.append(encoded_events[i + sequence_length])
+def get_max_vocab_size(vocab_directory):
+    max_vocab_id = 0
 
-    input_sequences = np.array(input_sequences)
-    output_sequences = np.array(output_sequences)
+    for filename in os.listdir(vocab_directory):
+        filepath = os.path.join(vocab_directory, filename)
+        with open(filepath, 'r') as file:
+            vocab = json.load(file)
+            max_id = max(map(int, vocab.values()))  # Convert values to integers and find the max
+            max_vocab_id = max(max_vocab_id, max_id)
 
-    # Define the LSTM model
-    print("Defining LSTM model...")
-    vocab_size = len(vocab)
-    lstm_units = 128
+    # Since vocab indices are typically 0-based, add 1 to get the correct size
+    return max_vocab_id + 1
 
-    model = Sequential()
-    model.add(Embedding(vocab_size, lstm_units, input_length=sequence_length))
-    model.add(LSTM(lstm_units, return_sequences=True))
-    model.add(LSTM(lstm_units))
-    model.add(Dense(vocab_size, activation='softmax'))
+def build_model(vocab_size, embedding_dim, lstm_units, num_classes, dropout_rate):
+    model = Sequential([
+        Embedding(input_dim=vocab_size, output_dim=embedding_dim, mask_zero=True),
+        LSTM(lstm_units, return_sequences=True),
+        Dropout(dropout_rate),
+        LSTM(lstm_units),
+        Dropout(dropout_rate),
+        Dense(num_classes, activation='softmax')
+    ])
 
-    model.compile(loss='sparse_categorical_crossentropy', optimizer=Adam(), metrics=['accuracy'])
+    optimizer = Adam(learning_rate=0.001)
 
-    # Train the model
-    print("Training model...")
-    model.fit(input_sequences, output_sequences, epochs=10, batch_size=64, validation_split=0.2)
-
-    # Save the trained model
-    print("Saving trained model...")
-    model.save(model_save_path)
-    print(f"Model saved as {model_save_path}")
-
+    model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    return model
 
 if __name__ == '__main__':
-    # Set a random seed for reproducibility (Not tested)
-    # np.random.seed(42)
-    # tf.random.set_seed(42)
+    data_path = 'ym2413_project_xt/2.1_processed_features/data'
+    sequences, labels = load_data(data_path)
+    print("Loaded sequences:", sequences.shape)
+    print("Loaded labels:", labels.shape)
 
-    encoded_events_file = 'preprocess/encoded_events.txt'
-    vocabulary_file = 'preprocess/vocabulary.txt'
-    model_save_path = 'model/lstm_model.h5'
-    train_lstm_model(encoded_events_file, vocabulary_file, model_save_path)
+    vocab_directory = 'ym2413_project_xt/2.1_processed_features/instrument_vocabs'
+    max_vocab_size = get_max_vocab_size(vocab_directory)
+    print("The maximum vocabulary size is:", max_vocab_size)
+
+    # Hyperparameters
+    embedding_dim = 64
+    lstm_units = 128
+    num_classes = 4  # Number of mood categories
+    dropout_rate = 0.4
+
+    model = build_model(max_vocab_size, embedding_dim, lstm_units, num_classes, dropout_rate)
+    model.summary()
+
+    model_dir = 'ym2413_project_xt/3_trained_models_1'
+    os.makedirs(model_dir, exist_ok=True)
+
+    # Callbacks for monitoring and improving training
+    checkpoint = ModelCheckpoint(
+        os.path.join(model_dir, 'best_model.keras'),
+        save_best_only=True,  # Saves only the best model
+        monitor='val_loss',
+        mode='min',
+        verbose=1
+    )
+
+    early_stopping = EarlyStopping(
+        monitor='val_loss',
+        patience=5,
+        verbose=1,
+        restore_best_weights=True  # Restores the best weights found during training upon early stopping
+    )
+
+    class_weights = class_weight.compute_class_weight('balanced', classes=np.unique(labels), y=labels)
+    class_weights = dict(enumerate(class_weights))
+    print("Class weights:", class_weights)
+
+    # Train the model
+    history = model.fit(
+        sequences, labels,
+        epochs=10,
+        batch_size=128,
+        validation_split=0.2,  # Use 20% of the data for validation
+        callbacks=[checkpoint, early_stopping],
+        class_weight=class_weights
+    )
+
+    # Save the final model to a specified path
+    final_model_path = os.path.join(model_dir, 'final_model.keras')
+    model.save(final_model_path)
+    print(f"Final model saved at {final_model_path}")
