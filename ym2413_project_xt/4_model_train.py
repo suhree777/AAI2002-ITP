@@ -58,12 +58,12 @@ def build_model(vocab_size, embedding_dim, lstm_units, num_classes, dropout_rate
     return model
 
 if __name__ == '__main__':
-    data_path = 'ym2413_project_xt/2.1_processed_features/data'
+    data_path = 'ym2413_project_xt/3_processed_features/data'
     sequences, labels = load_data(data_path)
     print("Loaded sequences:", sequences.shape)
     print("Loaded labels:", labels.shape)
 
-    vocab_directory = 'ym2413_project_xt/2.1_processed_features/instrument_vocabs'
+    vocab_directory = 'ym2413_project_xt/3_processed_features/instrument_vocabs'
     max_vocab_size = get_max_vocab_size(vocab_directory)
     print("The maximum vocabulary size is:", max_vocab_size)
 

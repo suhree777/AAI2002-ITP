@@ -79,9 +79,14 @@ def transform_dataset(dataset_path, vocabs, instrument_vocab, output_folder):
                     with open(json_path, 'r') as file:
                         data = json.load(file)
                         transformed_instruments = {}
-                        instrument_vector = [0] * num_instruments
+                        instrument_vector = [0] * num_instruments  # Initialize vector with zeros
                         for instrument, events in data['instruments'].items():
                             if instrument in vocabs:  # Check if there's a vocab for this instrument
+                                try:
+                                    instrument_index = instrument_vocab.index(instrument)  # Get index of instrument in the list
+                                    instrument_vector[instrument_index] = 1  # Set the appropriate index to 1
+                                except ValueError:
+                                    print(f"Warning: {instrument} not found in instrument vocabulary.")
                                 vocab = vocabs[instrument]
                                 transformed_events = [vocab.get(tuple(sorted(event.items())), -1) for event in events]  # Get event ID or -1 if not found
                                 transformed_instruments[instrument] = transformed_events
@@ -96,9 +101,9 @@ def transform_dataset(dataset_path, vocabs, instrument_vocab, output_folder):
 
 if __name__ == '__main__':
     dataset_path = 'ym2413_project_xt/2_output_features'
-    vocab_output_folder = 'ym2413_project_xt/2.1_processed_features/instrument_vocabs'
-    processed_folder = 'ym2413_project_xt/2.1_processed_features/data'
-    instrument_vocab_path = 'ym2413_project_xt/2.1_processed_features/instrument_vocab.json'
+    vocab_output_folder = 'ym2413_project_xt/3_processed_features/instrument_vocabs'
+    processed_folder = 'ym2413_project_xt/3_processed_features/data'
+    instrument_vocab_path = 'ym2413_project_xt/3_processed_features/instrument_list.json'
 
     # Load the data and build the vocabulary
     instrument_vocab = load_instrument_specific_vocab(dataset_path)
@@ -108,4 +113,3 @@ if __name__ == '__main__':
     
     # Transform the dataset using the loaded vocabularies
     transform_dataset(dataset_path, vocabs, instru_vocab, processed_folder)
-    

@@ -108,6 +108,6 @@ def process_midi_dataset(dataset_path, output_path, process_path, precision=4):
 if __name__ == '__main__':
     dataset_path = 'ym2413_project_xt/1_output'
     output_path = 'ym2413_project_xt/2_output_features'
-    process_path = 'ym2413_project_xt/2.1_processed_features'
+    process_path = 'ym2413_project_xt/3_processed_features'
     
     process_midi_dataset(dataset_path, output_path, process_path)
