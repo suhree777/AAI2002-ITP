@@ -4,6 +4,38 @@
     "instruments": {
         "Lead 1 (square)": [
             {
+                "pitch": 39,
+                "velocity": 15,
+                "duration": 0.4682,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0523,
+                "tempo": 0
+            },
+            {
+                "pitch": 42,
+                "velocity": 15,
+                "duration": 0.4659,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0318,
+                "tempo": 0
+            },
+            {
+                "pitch": 45,
+                "velocity": 15,
+                "duration": 2.5182,
+                "tempo": 120.0
+            }
+        ],
+        "Lead 2 (sawtooth)": [
+            {
                 "pitch": 0,
                 "velocity": 0,
                 "duration": 1.5182,
@@ -76,18 +108,6 @@
                 "tempo": 120.0
             },
             {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0159,
-                "tempo": 0
-            },
-            {
-                "pitch": 60,
-                "velocity": 15,
-                "duration": 0.0023,
-                "tempo": 120.0
-            },
-            {
                 "pitch": 63,
                 "velocity": 15,
                 "duration": 0.4932,
@@ -124,10 +144,10 @@
                 "tempo": 120.0
             },
             {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0159,
-                "tempo": 0
+                "pitch": 60,
+                "velocity": 15,
+                "duration": 0.4864,
+                "tempo": 120.0
             },
             {
                 "pitch": 60,
@@ -162,14 +182,8 @@
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 0.0159,
+                "duration": 0.0182,
                 "tempo": 0
-            },
-            {
-                "pitch": 66,
-                "velocity": 15,
-                "duration": 0.0023,
-                "tempo": 120.0
             },
             {
                 "pitch": 57,
@@ -202,47 +216,15 @@
                 "tempo": 120.0
             },
             {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0182,
-                "tempo": 0
+                "pitch": 66,
+                "velocity": 15,
+                "duration": 0.4795,
+                "tempo": 120.0
             },
             {
                 "pitch": 66,
                 "velocity": 12,
                 "duration": 0.0977,
-                "tempo": 120.0
-            }
-        ],
-        "Lead 2 (sawtooth)": [
-            {
-                "pitch": 39,
-                "velocity": 15,
-                "duration": 0.4682,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0523,
-                "tempo": 0
-            },
-            {
-                "pitch": 42,
-                "velocity": 15,
-                "duration": 0.4659,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0318,
-                "tempo": 0
-            },
-            {
-                "pitch": 45,
-                "velocity": 15,
-                "duration": 2.5182,
                 "tempo": 120.0
             }
         ],

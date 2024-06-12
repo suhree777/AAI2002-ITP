@@ -2,11 +2,11 @@
     "track_id": "01 Prologue_0",
     "mood": "angry",
     "instruments": {
-        "Lead 1 (square)": [
+        "Lead 2 (sawtooth)": [
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 0.35,
+                "duration": 0.3523,
                 "tempo": 0
             },
             {
@@ -54,43 +54,37 @@
             {
                 "pitch": 48,
                 "velocity": 5,
-                "duration": 0.0932,
+                "duration": 0.0955,
                 "tempo": 120.0
             },
             {
                 "pitch": 50,
                 "velocity": 5,
-                "duration": 0.0955,
+                "duration": 0.0932,
                 "tempo": 120.0
             },
             {
                 "pitch": 52,
                 "velocity": 5,
-                "duration": 0.4864,
+                "duration": 0.4886,
                 "tempo": 120.0
             },
             {
                 "pitch": 52,
                 "velocity": 5,
-                "duration": 0.2977,
+                "duration": 0.3,
                 "tempo": 120.0
             },
             {
                 "pitch": 55,
                 "velocity": 5,
-                "duration": 0.1523,
+                "duration": 0.15,
                 "tempo": 120.0
             },
             {
                 "pitch": 58,
                 "velocity": 5,
-                "duration": 0.1841,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 64,
-                "velocity": 5,
-                "duration": 0.0023,
+                "duration": 0.1864,
                 "tempo": 120.0
             },
             {
@@ -103,6 +97,12 @@
                 "pitch": 62,
                 "velocity": 5,
                 "duration": 0.0795,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 64,
+                "velocity": 5,
+                "duration": 0.5,
                 "tempo": 120.0
             },
             {
@@ -168,75 +168,39 @@
         ],
         "Synth Bass 1": [
             {
-                "pitch": 52,
+                "pitch": 25,
                 "velocity": 1,
-                "duration": 0.0932,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 50,
-                "velocity": 1,
-                "duration": 0.1432,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 32,
-                "velocity": 1,
-                "duration": 0.0023,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 47,
-                "velocity": 1,
-                "duration": 0.3045,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 44,
-                "velocity": 1,
-                "duration": 0.0955,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 42,
-                "velocity": 1,
-                "duration": 0.225,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 39,
-                "velocity": 1,
-                "duration": 0.0955,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 37,
-                "velocity": 1,
-                "duration": 0.0932,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 35,
-                "velocity": 1,
-                "duration": 0.1727,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 32,
-                "velocity": 1,
-                "duration": 0.2273,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 30,
-                "velocity": 1,
-                "duration": 0.2864,
+                "duration": 1.0864,
                 "tempo": 120.0
             },
             {
                 "pitch": 27,
                 "velocity": 1,
-                "duration": 0.4341,
+                "duration": 1.5136,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 30,
+                "velocity": 1,
+                "duration": 0.4295,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 31,
+                "velocity": 1,
+                "duration": 0.7659,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 33,
+                "velocity": 1,
+                "duration": 0.7114,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 36,
+                "velocity": 1,
+                "duration": 0.3273,
                 "tempo": 120.0
             }
         ],
@@ -244,7 +208,7 @@
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 3.5773,
+                "duration": 4.8341,
                 "tempo": 0
             },
             {

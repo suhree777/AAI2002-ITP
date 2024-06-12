@@ -4,14 +4,6 @@
     "instruments": {
         "Lead 1 (square)": [
             {
-                "pitch": 36,
-                "velocity": 12,
-                "duration": 6.6409,
-                "tempo": 120.0
-            }
-        ],
-        "Lead 2 (sawtooth)": [
-            {
                 "pitch": 0,
                 "velocity": 0,
                 "duration": 0.0045,
@@ -21,6 +13,14 @@
                 "pitch": 40,
                 "velocity": 12,
                 "duration": 6.6386,
+                "tempo": 120.0
+            }
+        ],
+        "Lead 2 (sawtooth)": [
+            {
+                "pitch": 36,
+                "velocity": 12,
+                "duration": 6.6409,
                 "tempo": 120.0
             }
         ],

@@ -255,6 +255,8 @@ if __name__ == '__main__':
     midi_data_directory = 'music_dataset/YM2413-MDB-v1.0.2/midi/adjust_tempo_remove_delayed_inst'
     output_directory = 'ym2413_project_xt/1_output'
 
+    print("Converting files ...")
+
     for midi_filename in os.listdir(midi_data_directory):
         if midi_filename.endswith('.mid'):
             generate_nesmdb_midi_examples(

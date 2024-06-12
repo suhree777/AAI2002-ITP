@@ -4,32 +4,6 @@
     "instruments": {
         "Lead 1 (square)": [
             {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 5.5705,
-                "tempo": 0
-            },
-            {
-                "pitch": 35,
-                "velocity": 8,
-                "duration": 3.1545,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0659,
-                "tempo": 0
-            },
-            {
-                "pitch": 37,
-                "velocity": 8,
-                "duration": 3.1341,
-                "tempo": 120.0
-            }
-        ],
-        "Lead 2 (sawtooth)": [
-            {
                 "pitch": 63,
                 "velocity": 7,
                 "duration": 0.0659,
@@ -423,6 +397,32 @@
                 "pitch": 66,
                 "velocity": 7,
                 "duration": 0.5409,
+                "tempo": 120.0
+            }
+        ],
+        "Lead 2 (sawtooth)": [
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 5.5705,
+                "tempo": 0
+            },
+            {
+                "pitch": 35,
+                "velocity": 8,
+                "duration": 3.1545,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0659,
+                "tempo": 0
+            },
+            {
+                "pitch": 37,
+                "velocity": 8,
+                "duration": 3.1341,
                 "tempo": 120.0
             }
         ],

@@ -4,6 +4,44 @@
     "instruments": {
         "Lead 1 (square)": [
             {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.0023,
+                "tempo": 0
+            },
+            {
+                "pitch": 55,
+                "velocity": 10,
+                "duration": 3.0932,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.6341,
+                "tempo": 0
+            },
+            {
+                "pitch": 60,
+                "velocity": 10,
+                "duration": 3.0295,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.6136,
+                "tempo": 0
+            },
+            {
+                "pitch": 60,
+                "velocity": 10,
+                "duration": 5.225,
+                "tempo": 120.0
+            }
+        ],
+        "Lead 2 (sawtooth)": [
+            {
                 "pitch": 60,
                 "velocity": 12,
                 "duration": 3.0955,
@@ -43,44 +81,6 @@
                 "pitch": 64,
                 "velocity": 12,
                 "duration": 5.2273,
-                "tempo": 120.0
-            }
-        ],
-        "Lead 2 (sawtooth)": [
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.0023,
-                "tempo": 0
-            },
-            {
-                "pitch": 55,
-                "velocity": 10,
-                "duration": 3.0932,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.6341,
-                "tempo": 0
-            },
-            {
-                "pitch": 60,
-                "velocity": 10,
-                "duration": 3.0295,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.6136,
-                "tempo": 0
-            },
-            {
-                "pitch": 60,
-                "velocity": 10,
-                "duration": 5.225,
                 "tempo": 120.0
             }
         ],

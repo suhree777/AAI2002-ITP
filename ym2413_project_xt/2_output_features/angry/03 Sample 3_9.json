@@ -4,6 +4,12 @@
     "instruments": {
         "Lead 1 (square)": [
             {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.4727,
+                "tempo": 0
+            },
+            {
                 "pitch": 71,
                 "velocity": 15,
                 "duration": 0.2341,
@@ -12,13 +18,13 @@
             {
                 "pitch": 76,
                 "velocity": 15,
-                "duration": 0.2364,
+                "duration": 0.2341,
                 "tempo": 120.0
             },
             {
                 "pitch": 78,
                 "velocity": 15,
-                "duration": 0.2341,
+                "duration": 0.2364,
                 "tempo": 120.0
             },
             {
@@ -36,13 +42,13 @@
             {
                 "pitch": 78,
                 "velocity": 15,
-                "duration": 0.2432,
+                "duration": 0.2409,
                 "tempo": 120.0
             },
             {
                 "pitch": 81,
                 "velocity": 15,
-                "duration": 1.3841,
+                "duration": 1.3864,
                 "tempo": 120.0
             },
             {
@@ -60,13 +66,13 @@
             {
                 "pitch": 76,
                 "velocity": 15,
-                "duration": 0.2432,
+                "duration": 0.2409,
                 "tempo": 120.0
             },
             {
                 "pitch": 74,
                 "velocity": 15,
-                "duration": 0.4727,
+                "duration": 0.475,
                 "tempo": 120.0
             },
             {
@@ -78,13 +84,13 @@
             {
                 "pitch": 71,
                 "velocity": 15,
-                "duration": 0.925,
+                "duration": 0.9227,
                 "tempo": 120.0
             },
             {
                 "pitch": 72,
                 "velocity": 15,
-                "duration": 0.9318,
+                "duration": 0.9341,
                 "tempo": 120.0
             },
             {
@@ -108,13 +114,13 @@
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 0.4636,
+                "duration": 0.4614,
                 "tempo": 0
             },
             {
                 "pitch": 77,
                 "velocity": 15,
-                "duration": 0.2341,
+                "duration": 0.2364,
                 "tempo": 120.0
             },
             {
@@ -222,13 +228,13 @@
             {
                 "pitch": 79,
                 "velocity": 15,
-                "duration": 0.2318,
+                "duration": 0.2295,
                 "tempo": 120.0
             },
             {
                 "pitch": 78,
                 "velocity": 15,
-                "duration": 0.2295,
+                "duration": 0.2318,
                 "tempo": 120.0
             },
             {
@@ -276,25 +282,25 @@
             {
                 "pitch": 72,
                 "velocity": 15,
-                "duration": 0.925,
+                "duration": 0.9227,
                 "tempo": 120.0
             },
             {
                 "pitch": 77,
                 "velocity": 15,
-                "duration": 0.4614,
+                "duration": 0.4636,
                 "tempo": 120.0
             },
             {
                 "pitch": 76,
                 "velocity": 15,
-                "duration": 0.4795,
+                "duration": 0.4773,
                 "tempo": 120.0
             },
             {
                 "pitch": 75,
                 "velocity": 15,
-                "duration": 0.9227,
+                "duration": 0.925,
                 "tempo": 120.0
             },
             {
@@ -330,13 +336,13 @@
             {
                 "pitch": 86,
                 "velocity": 15,
-                "duration": 0.2318,
+                "duration": 0.2295,
                 "tempo": 120.0
             },
             {
                 "pitch": 84,
                 "velocity": 15,
-                "duration": 0.2409,
+                "duration": 0.2432,
                 "tempo": 120.0
             },
             {
@@ -348,13 +354,13 @@
             {
                 "pitch": 77,
                 "velocity": 15,
-                "duration": 0.2318,
+                "duration": 0.2295,
                 "tempo": 120.0
             },
             {
                 "pitch": 75,
                 "velocity": 15,
-                "duration": 0.2295,
+                "duration": 0.2318,
                 "tempo": 120.0
             },
             {
@@ -378,8 +384,376 @@
         ],
         "Lead 2 (sawtooth)": [
             {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 0.4727,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 64,
+                "velocity": 7,
+                "duration": 0.4682,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4636,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4705,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 1.85,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 64,
+                "velocity": 7,
+                "duration": 0.4705,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.475,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 1.8568,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 77,
+                "velocity": 7,
+                "duration": 0.4636,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 65,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4795,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 77,
+                "velocity": 7,
+                "duration": 1.8591,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 77,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 65,
+                "velocity": 7,
+                "duration": 0.4682,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4636,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4705,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 77,
+                "velocity": 7,
+                "duration": 1.8591,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 0.45,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 64,
+                "velocity": 7,
+                "duration": 0.4727,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4636,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4705,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 1.8591,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 64,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4727,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4636,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 1.8568,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 0.4727,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 64,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4727,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 1.8591,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 64,
+                "velocity": 7,
+                "duration": 0.4727,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4727,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 1.8568,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 0.4636,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 64,
+                "velocity": 7,
+                "duration": 0.4727,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 1.8591,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 0.4705,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 64,
+                "velocity": 7,
+                "duration": 0.4636,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4841,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 76,
+                "velocity": 7,
+                "duration": 1.8455,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 77,
+                "velocity": 7,
+                "duration": 0.4636,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 65,
+                "velocity": 7,
+                "duration": 0.4773,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4636,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 77,
+                "velocity": 7,
+                "duration": 1.8591,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 77,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 65,
+                "velocity": 7,
+                "duration": 0.4727,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 69,
+                "velocity": 7,
+                "duration": 0.4727,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 71,
+                "velocity": 7,
+                "duration": 0.4614,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 77,
+                "velocity": 7,
+                "duration": 1.8591,
+                "tempo": 120.0
+            }
+        ],
+        "Synth Bass 1": [
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.4727,
+                "tempo": 0
+            },
+            {
                 "pitch": 52,
-                "velocity": 8,
+                "velocity": 1,
                 "duration": 3.2523,
                 "tempo": 120.0
             },
@@ -391,7 +765,7 @@
             },
             {
                 "pitch": 52,
-                "velocity": 8,
+                "velocity": 1,
                 "duration": 3.2636,
                 "tempo": 120.0
             },
@@ -403,7 +777,7 @@
             },
             {
                 "pitch": 53,
-                "velocity": 8,
+                "velocity": 1,
                 "duration": 3.2614,
                 "tempo": 120.0
             },
@@ -415,108 +789,70 @@
             },
             {
                 "pitch": 53,
-                "velocity": 8,
+                "velocity": 1,
                 "duration": 3.2614,
                 "tempo": 120.0
             },
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 0.4523,
+                "duration": 0.45,
                 "tempo": 0
             },
             {
                 "pitch": 52,
-                "velocity": 8,
-                "duration": 3.2636,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.4614,
-                "tempo": 0
-            },
-            {
-                "pitch": 52,
-                "velocity": 8,
-                "duration": 3.2545,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.4727,
-                "tempo": 0
-            },
-            {
-                "pitch": 52,
-                "velocity": 8,
-                "duration": 3.2545,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.4614,
-                "tempo": 0
-            },
-            {
-                "pitch": 52,
-                "velocity": 8,
-                "duration": 3.2636,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.4636,
-                "tempo": 0
-            },
-            {
-                "pitch": 52,
-                "velocity": 8,
-                "duration": 3.2545,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.4727,
-                "tempo": 0
-            },
-            {
-                "pitch": 52,
-                "velocity": 8,
-                "duration": 3.2545,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.4614,
-                "tempo": 0
-            },
-            {
-                "pitch": 53,
-                "velocity": 8,
-                "duration": 3.2614,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.4614,
-                "tempo": 0
-            },
-            {
-                "pitch": 53,
-                "velocity": 8,
+                "velocity": 1,
                 "duration": 3.2659,
                 "tempo": 120.0
-            }
-        ],
-        "Synth Bass 1": [
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.4614,
+                "tempo": 0
+            },
+            {
+                "pitch": 52,
+                "velocity": 1,
+                "duration": 3.2545,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.4727,
+                "tempo": 0
+            },
+            {
+                "pitch": 52,
+                "velocity": 1,
+                "duration": 3.2545,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.4614,
+                "tempo": 0
+            },
+            {
+                "pitch": 52,
+                "velocity": 1,
+                "duration": 3.2636,
+                "tempo": 120.0
+            },
+            {
+                "pitch": 0,
+                "velocity": 0,
+                "duration": 0.4636,
+                "tempo": 0
+            },
+            {
+                "pitch": 52,
+                "velocity": 1,
+                "duration": 3.2545,
+                "tempo": 120.0
+            },
             {
                 "pitch": 0,
                 "velocity": 0,
@@ -524,141 +860,33 @@
                 "tempo": 0
             },
             {
-                "pitch": 57,
+                "pitch": 52,
                 "velocity": 1,
-                "duration": 2.7818,
+                "duration": 3.2545,
                 "tempo": 120.0
             },
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 0.9341,
+                "duration": 0.4636,
                 "tempo": 0
             },
             {
-                "pitch": 57,
+                "pitch": 53,
                 "velocity": 1,
-                "duration": 2.7909,
+                "duration": 3.2614,
                 "tempo": 120.0
             },
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 0.925,
+                "duration": 0.4614,
                 "tempo": 0
             },
             {
-                "pitch": 57,
+                "pitch": 53,
                 "velocity": 1,
-                "duration": 2.8,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.9295,
-                "tempo": 0
-            },
-            {
-                "pitch": 57,
-                "velocity": 1,
-                "duration": 2.7932,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.9227,
-                "tempo": 0
-            },
-            {
-                "pitch": 57,
-                "velocity": 1,
-                "duration": 2.7932,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.9227,
-                "tempo": 0
-            },
-            {
-                "pitch": 57,
-                "velocity": 1,
-                "duration": 2.7932,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.9341,
-                "tempo": 0
-            },
-            {
-                "pitch": 57,
-                "velocity": 1,
-                "duration": 2.7932,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.9341,
-                "tempo": 0
-            },
-            {
-                "pitch": 57,
-                "velocity": 1,
-                "duration": 2.7909,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.9364,
-                "tempo": 0
-            },
-            {
-                "pitch": 57,
-                "velocity": 1,
-                "duration": 2.7818,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.9341,
-                "tempo": 0
-            },
-            {
-                "pitch": 57,
-                "velocity": 1,
-                "duration": 2.7932,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.9409,
-                "tempo": 0
-            },
-            {
-                "pitch": 57,
-                "velocity": 1,
-                "duration": 2.7818,
-                "tempo": 120.0
-            },
-            {
-                "pitch": 0,
-                "velocity": 0,
-                "duration": 0.9341,
-                "tempo": 0
-            },
-            {
-                "pitch": 57,
-                "velocity": 1,
-                "duration": 2.7932,
+                "duration": 3.2659,
                 "tempo": 120.0
             }
         ],
@@ -666,7 +894,7 @@
             {
                 "pitch": 0,
                 "velocity": 0,
-                "duration": 44.2045,
+                "duration": 44.6773,
                 "tempo": 0
             },
             {
