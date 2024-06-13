@@ -1,14 +1,9 @@
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import pretty_midi
-import numpy as np
-import os
 import json
-import ast
+import os
+import torch.nn as nn
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+# Load the trained model
 class LSTMModel(nn.Module):
     def __init__(self, vocab_size, embedding_dim, lstm_units, num_classes, dropout_rate):
         super(LSTMModel, self).__init__()
@@ -16,68 +11,79 @@ class LSTMModel(nn.Module):
         self.lstm = nn.LSTM(embedding_dim, lstm_units, batch_first=True, num_layers=3, dropout=dropout_rate)
         self.batch_norm = nn.BatchNorm1d(lstm_units)
         self.dropout = nn.Dropout(dropout_rate)
-        self.fc = nn.Linear(lstm_units, num_classes)
+        self.fc = nn.Linear(lstm_units + 4, num_classes)  # Adjusted for mood vector
 
-    def forward(self, x):
-        x = self.embedding(x)
+    def forward(self, mood_vector, instrument_sequence):
+        x = self.embedding(instrument_sequence)
         x, _ = self.lstm(x)
         x = self.batch_norm(x[:, -1, :])
+        x = torch.cat((x, mood_vector), dim=1)  # Concatenate mood vector
         x = self.dropout(x)
         x = self.fc(x)
         return x
 
 def load_model(model_path, vocab_size, embedding_dim, lstm_units, num_classes, dropout_rate):
     model = LSTMModel(vocab_size, embedding_dim, lstm_units, num_classes, dropout_rate)
-    model.load_state_dict(torch.load(model_path, map_location=device))
-    model.to(device)
+    model.load_state_dict(torch.load(model_path))
+    model.eval()
     return model
 
-def load_vocab(file_path):
-    with open(file_path, 'r') as file:
-        vocab = json.load(file)
-    return {int(k): ast.literal_eval(v) for k, v in vocab.items() if k.isdigit()}
+def get_max_vocab_size(vocab_directory):
+    max_vocab_id = 0
+    for filename in os.listdir(vocab_directory):
+        filepath = os.path.join(vocab_directory, filename)
+        with open(filepath, 'r') as file:
+            vocab = json.load(file)
+            max_id = max(map(int, vocab.values()))
+            max_vocab_id = max(max_vocab_id, max_id)
+    return max_vocab_id + 1
 
-def main():
-    model_path = 'ym2413_project_xt/4_trained_model/trained_lstm_model.pth'
-    vocab_path = 'ym2413_project_xt/3_processed_features/instrument_vocabs/'
+# Map mood input to mood vector
+def get_mood_vector(mood):
+    mood_vectors_dict = {'angry': [1, 0, 0, 0], 'happy': [0, 1, 0, 0], 'relaxed': [0, 0, 1, 0], 'sad': [0, 0, 0, 1]}
+    return torch.tensor(mood_vectors_dict[mood], dtype=torch.float)
 
-    # List available instruments
-    instruments = [file.split('_')[0] for file in os.listdir(vocab_path) if file.endswith('_vocab.json')]
-    for idx, instr in enumerate(instruments):
-        print(f"{idx + 1}. {instr}")
+# Function to generate music
+def generate_music(model, mood_vector, max_sequence_length):
+    # Initialize with a sequence of zeros
+    current_sequence = torch.zeros(1, 1).long().to(device)
+    generated_sequence = []
 
-    # User selects the instrument
-    choice = int(input("Select an instrument by number: "))
-    instrument = instruments[choice - 1]
-    vocab_file = os.path.join(vocab_path, f'{instrument}_vocab.json')
-    
-    vocab = load_vocab(vocab_file)
-    vocab_size = len(vocab) + 1  # Plus one for padding index
-
-    embedding_dim = 64
-    lstm_units = 256  # Must match the original training configuration
-    dropout_rate = 0.4  # Must match the original training configuration
-    model = load_model(model_path, vocab_size, embedding_dim, lstm_units, vocab_size, dropout_rate)
-
-    # Example seed sequence (adjust as needed)
-    seed_length = 50
-    current_seq = torch.randint(0, vocab_size, (1, seed_length)).to(device)
-    
-    # Assume some generation length
-    generated_sequence = generate_music(model, current_seq, 300)  # Adjust the generation length and temperature if needed
-    print("Generated sequence:", generated_sequence)
-
-def generate_music(model, current_seq, generation_length, temperature=1.0):
-    model.eval()
-    generated_seq = current_seq.tolist()[0]
     with torch.no_grad():
-        for _ in range(generation_length):
-            output = model(current_seq)
-            probabilities = F.softmax(output / temperature, dim=-1).squeeze()
-            next_note = torch.multinomial(probabilities[-1], 1)
-            generated_seq.append(next_note.item())
-            current_seq = torch.cat((current_seq[:, 1:], next_note.unsqueeze(0)), dim=1)
-    return generated_seq
+        while len(generated_sequence) < max_sequence_length:
+            outputs = model(mood_vector, current_sequence)
+            predicted = torch.argmax(outputs, dim=1)
+            generated_sequence.append(predicted.item())
+            current_sequence = torch.cat([current_sequence, predicted.unsqueeze(0)], dim=1)
+
+    return generated_sequence
 
 if __name__ == '__main__':
-    main()
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # Paths and parameters
+    model_path = 'ym2413_project_xt/4_trained_model/lstm_model.pth'
+    vocab_size = get_max_vocab_size('ym2413_project_xt/3_processed_features/instrument_vocabs')
+    embedding_dim = 64
+    lstm_units = 256
+    num_classes = 4  # Assuming 4 mood classes
+    dropout_rate = 0.4
+
+    # Load the trained model
+    model = load_model(model_path, vocab_size, embedding_dim, lstm_units, num_classes, dropout_rate).to(device)
+
+    # Get user input for mood
+    user_mood = input("Enter the mood (angry, happy, sad, relaxed): ").lower()
+
+    if user_mood not in ['angry', 'happy', 'sad', 'relaxed']:
+        print("Invalid mood input. Please choose from: angry, happy, sad, relaxed.")
+    else:
+        # Convert mood to mood vector
+        mood_vector = get_mood_vector(user_mood).unsqueeze(0).to(device)
+
+        # Generate music based on the mood
+        max_sequence_length = 100  # Adjust as needed based on your maximum sequence length
+        generated_sequence = generate_music(model, mood_vector, max_sequence_length)
+
+        print(f"Generated sequence based on '{user_mood}' mood:")
+        print(generated_sequence)
