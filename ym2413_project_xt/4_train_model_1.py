@@ -9,6 +9,16 @@ from torch.utils.data import Dataset, DataLoader
 # Check for CUDA availability and set the device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+def get_max_vocab_size(vocab_directory):
+    max_vocab_id = 0
+    for filename in os.listdir(vocab_directory):
+        filepath = os.path.join(vocab_directory, filename)
+        with open(filepath, 'r') as file:
+            vocab = json.load(file)
+            max_id = max(map(int, vocab.values()))
+            max_vocab_id = max(max_vocab_id, max_id)
+    return max_vocab_id + 1
+
 # Define the dataset class
 class MusicDataset(Dataset):
     def __init__(self, directory, vocab_size):
@@ -28,8 +38,8 @@ class MusicDataset(Dataset):
     def __getitem__(self, idx):
         events, mood = self.data[idx]
         # One-hot encode the mood
-        mood_vector = np.zeros((4,))  # Assuming 4 moods: happy, sad, angry, relaxed
-        mood_index = {'happy': 0, 'sad': 1, 'angry': 2, 'relaxed': 3}[mood]
+        mood_vector = np.zeros((4,))  # For 4 moods: angry, ahppy, relaxed, sad
+        mood_index = {'angry': 0, 'happy': 1, 'relaxed': 2, 'sad': 3}[mood]
         mood_vector[mood_index] = 1
         # Pad sequences to a fixed length
         padded_events = np.pad(events, (0, 500-len(events)), mode='constant', constant_values=self.vocab_size)  # Assuming max length 500
@@ -50,17 +60,17 @@ class MusicLSTM(nn.Module):
         out = self.dense(lstm_out)
         return out
 
+# Load data and determine vocab size
+vocab_size = get_max_vocab_size('ym2413_project_xt/3_processed_features/instrument_vocabs')
+dataset = MusicDataset('ym2413_project_xt/3_processed_features/data', vocab_size)
+data_loader = DataLoader(dataset, batch_size=128, shuffle=True)
+
 # Training settings
-vocab_size = 50000  # Example, adjust based on your vocabulary
 embedding_dim = 128
 hidden_dim = 256
 mood_size = 4  # Number of moods
 batch_size = 128
-epochs = 10
-
-# Load data
-dataset = MusicDataset('ym2413_project_xt/3_processed_features/data', vocab_size)
-data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+epochs = 20
 
 # Initialize the model
 model = MusicLSTM(vocab_size, embedding_dim, hidden_dim, mood_size).to(device)
