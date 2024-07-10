@@ -64,13 +64,11 @@ for feature_set in converted_sequence:
     feature_dict = dict(feature_set)
     
     # Extract values directly from the dictionary
-    duration = feature_dict['duration']
     pitch = feature_dict['pitch']
-    tempo = feature_dict['tempo']
     velocity = feature_dict['velocity']
 
     # Append as a simple tuple
-    simple_feature = (duration, pitch, tempo, velocity)
+    simple_feature = (pitch, velocity)
     simple_features.append(simple_feature)
 
 # Display the simplified feature list
