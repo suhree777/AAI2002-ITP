@@ -4,7 +4,7 @@ import os
 
 # Set up the environment for music21
 env = environment.UserSettings()
-env['musicxmlPath'] = r'C:/Program Files/MuseScore 4/MuseScore4.exe'
+env['musicxmlPath'] = r'C:/Program Files/MuseScore 4/bin/MuseScore4.exe'
 env['musescoreDirectPNGPath'] = r'C:/Program Files/MuseScore 4/bin/MuseScore4.exe'
 
 def load_midi_with_mido(file_path):
