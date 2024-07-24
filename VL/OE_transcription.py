@@ -8,8 +8,7 @@ def load_midi(file_path):
 
 # Function to evaluate pitch consistency
 def evaluate_pitch_consistency(pitches):
-    pitch_variance = pd.Series(pitches).value_counts().std()
-    return pitch_variance
+    return pd.Series(pitches).value_counts().std()
 
 # Function to evaluate temporal structure
 def evaluate_temporal_structure(durations, offsets):
@@ -19,8 +18,7 @@ def evaluate_temporal_structure(durations, offsets):
 
 # Function to evaluate melodic contour
 def evaluate_melodic_contour(intervals):
-    contour_changes = pd.Series(intervals).diff().abs().mean()
-    return contour_changes
+    return pd.Series(intervals).diff().abs().mean()
 
 # Function to evaluate note density and dynamic range
 def evaluate_note_density_and_dynamic_range(notes, velocities, total_duration):
@@ -30,34 +28,44 @@ def evaluate_note_density_and_dynamic_range(notes, velocities, total_duration):
 
 # Function to evaluate melody
 def evaluate_melody(melodic_contour, pitch_consistency):
-    melody_score = (1 / melodic_contour if melodic_contour != 0 else 0) + (1 / pitch_consistency if pitch_consistency != 0 else 0)
-    return melody_score
+    return (1 / melodic_contour if melodic_contour != 0 else 0) + (1 / pitch_consistency if pitch_consistency != 0 else 0)
 
 # Function to evaluate harmony
 def evaluate_harmony(chords, total_tracks):
-    harmony_score = chords / total_tracks if total_tracks != 0 else 0
-    return harmony_score
+    return chords / total_tracks if total_tracks != 0 else 0
 
 # Function to evaluate rhythm
 def evaluate_rhythm(duration_consistency, offset_variance):
-    rhythm_score = (1 / duration_consistency if duration_consistency != 0 else 0) + (1 / offset_variance if offset_variance != 0 else 0)
-    return rhythm_score
+    return (1 / duration_consistency if duration_consistency != 0 else 0) + (1 / offset_variance if offset_variance != 0 else 0)
 
 # Function to evaluate overall structure
 def evaluate_overall_structure(note_density, dynamic_range):
-    structure_score = note_density + dynamic_range
-    return structure_score
+    return note_density + dynamic_range
 
-# Function to classify mood based on the evaluated features
+# Function to normalize feature values
+def normalize_feature(value, min_value, max_value):
+    return (value - min_value) / (max_value - min_value) if max_value != min_value else 0
+
+# Function to classify mood based on the evaluated features using Russell's Emotion Circumplex model
 def classify_mood(pitch_consistency, duration_consistency, offset_variance, melodic_contour, note_density, dynamic_range):
-    if pitch_consistency < 10 and duration_consistency < 0.5 and offset_variance < 0.1:
-        return "Relaxed"
-    elif pitch_consistency > 20 and duration_consistency > 0.7 and offset_variance > 0.2:
-        return "Angry"
-    elif note_density < 5 and dynamic_range < 30:
-        return "Sad"
-    elif note_density > 10 and dynamic_range > 40:
+    norm_pitch_consistency = normalize_feature(pitch_consistency, 0, 20)
+    norm_duration_consistency = normalize_feature(duration_consistency, 0, 30)
+    norm_offset_variance = normalize_feature(offset_variance, 0, 200)
+    norm_melodic_contour = normalize_feature(melodic_contour, 0, 20)
+    norm_note_density = normalize_feature(note_density, 1, 10)
+    norm_dynamic_range = normalize_feature(dynamic_range, 10, 100)
+    
+    arousal = (norm_pitch_consistency + norm_duration_consistency + norm_offset_variance + norm_note_density + norm_dynamic_range) / 5
+    valence = (1 - norm_pitch_consistency + 1 - norm_duration_consistency + 1 - norm_offset_variance + norm_note_density + norm_dynamic_range) / 5
+
+    if arousal > 0.5 and valence > 0.5:
         return "Happy"
+    elif arousal > 0.5 and valence <= 0.5:
+        return "Angry"
+    elif arousal <= 0.5 and valence > 0.5:
+        return "Relaxed"
+    elif arousal <= 0.5 and valence <= 0.5:
+        return "Sad"
     else:
         return "Neutral"
 
@@ -108,14 +116,8 @@ def evaluate_music_df(df):
 def evaluate_music(file_path, selected_features):
     midi_file = load_midi(file_path)
 
-    pitches = []
-    durations = []
-    offsets = []
-    notes = []
-    velocities = []
-    intervals = []
-    time = 0
-    chords = 0
+    pitches, durations, offsets, notes, velocities = [], [], [], [], []
+    intervals, time, chords = [], 0, 0
 
     for track in midi_file.tracks:
         for msg in track:
@@ -133,7 +135,6 @@ def evaluate_music(file_path, selected_features):
     total_duration = midi_file.length
 
     feature_values = []
-
     if 'pitch_consistency' in selected_features:
         pitch_consistency = evaluate_pitch_consistency(pitches)
         feature_values.append(pitch_consistency)
@@ -151,8 +152,6 @@ def evaluate_music(file_path, selected_features):
         feature_values.extend([note_density, dynamic_range])
 
     if 'melody' in selected_features:
-        melodic_contour = evaluate_melodic_contour(intervals)
-        pitch_consistency = evaluate_pitch_consistency(pitches)
         melody_score = evaluate_melody(melodic_contour, pitch_consistency)
         feature_values.append(melody_score)
 
@@ -161,12 +160,10 @@ def evaluate_music(file_path, selected_features):
         feature_values.append(harmony_score)
 
     if 'rhythm' in selected_features:
-        duration_consistency, offset_variance = evaluate_temporal_structure(durations, offsets)
         rhythm_score = evaluate_rhythm(duration_consistency, offset_variance)
         feature_values.append(rhythm_score)
 
     if 'overall_structure' in selected_features:
-        note_density, dynamic_range = evaluate_note_density_and_dynamic_range(notes, velocities, total_duration)
         structure_score = evaluate_overall_structure(note_density, dynamic_range)
         feature_values.append(structure_score)
 
@@ -191,8 +188,6 @@ def evaluate_music(file_path, selected_features):
 
 def main():
     print("Current Working Directory:", os.getcwd())
-    # input_folder = 'VL/1_output'
-    # input_folder = 'VL/1_output/samples'
     input_folder = 'VL/1_output/gen samples'
     output_folder = 'VL/4_evaluation_results'
     selected_features = [
@@ -215,7 +210,7 @@ def main():
     # Evaluate the quality of the music
     results_df = evaluate_music_df(results_df)
 
-    results_file_path = os.path.join(output_folder, 'midi_evaluation_results13.csv')
+    results_file_path = os.path.join(output_folder, 'midi_evaluation_results.csv')
     if os.path.exists(results_file_path):
         existing_df = pd.read_csv(results_file_path)
         combined_df = pd.concat([existing_df, results_df])

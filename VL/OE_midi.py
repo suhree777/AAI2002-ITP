@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import mido
+
 # Function to load a MIDI file
 def load_midi(file_path):
     return mido.MidiFile(file_path)
@@ -59,6 +60,49 @@ def classify_mood(pitch_consistency, duration_consistency, offset_variance, melo
         return "Happy"
     else:
         return "Neutral"
+
+# Define thresholds and weights for evaluation
+THRESHOLDS = {
+    "Pitch Consistency": (0, 20),
+    "Duration Consistency": (0, 30),
+    "Offset Variance": (0, 200),
+    "Melodic Contour": (0, 20),
+    "Note Density": (1, 10),
+    "Dynamic Range": (10, 100),
+    "Melody Score": (0, 1),
+    "Harmony Score": (0, 100),
+    "Rhythm Score": (0, 1),
+    "Overall Structure Score": (0, 100)
+}
+
+WEIGHTS = {
+    "Pitch Consistency": 1,
+    "Duration Consistency": 1,
+    "Offset Variance": 1,
+    "Melodic Contour": 1,
+    "Note Density": 1,
+    "Dynamic Range": 1,
+    "Melody Score": 2,
+    "Harmony Score": 1,
+    "Rhythm Score": 1,
+    "Overall Structure Score": 2
+}
+
+# Function to evaluate a single row of metrics
+def evaluate_row(row):
+    score = 0
+    for metric, (low, high) in THRESHOLDS.items():
+        value = row[metric]
+        if low <= value <= high:
+            score += WEIGHTS[metric] * (1 - abs(value - (low + high) / 2) / ((high - low) / 2))
+        else:
+            score -= WEIGHTS[metric]
+    return score
+
+# Function to evaluate the dataframe
+def evaluate_music_df(df):
+    df['Quality Score'] = df.apply(evaluate_row, axis=1)
+    return df
 
 # Function to dynamically evaluate music based on selected features
 def evaluate_music(file_path, selected_features):
@@ -147,7 +191,9 @@ def evaluate_music(file_path, selected_features):
 
 def main():
     print("Current Working Directory:", os.getcwd())
-    input_folder = 'VL/1_output'
+    # input_folder = 'VL/1_output'
+    # input_folder = 'VL/1_output/samples'
+    input_folder = 'VL/1_output/gen samples'
     output_folder = 'VL/4_evaluation_results'
     selected_features = [
         'pitch_consistency', 'temporal_structure', 'melodic_contour', 'note_density_dynamic_range',
@@ -166,7 +212,10 @@ def main():
     # Removing unnecessary columns
     results_df.drop(columns=['pitch_consistency', 'temporal_structure', 'melodic_contour', 'note_density_dynamic_range'], inplace=True, errors='ignore')
 
-    results_file_path = os.path.join(output_folder, 'midi_evaluation_results.csv')
+    # Evaluate the quality of the music
+    results_df = evaluate_music_df(results_df)
+
+    results_file_path = os.path.join(output_folder, 'midi_evaluation_results13.csv')
     if os.path.exists(results_file_path):
         existing_df = pd.read_csv(results_file_path)
         combined_df = pd.concat([existing_df, results_df])
