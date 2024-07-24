@@ -150,7 +150,7 @@ def evaluate_music(file_path, selected_features):
 
 def main():
     print("Current Working Directory:", os.getcwd())
-    input_folder = 'VL/1_output/gen samples'
+    input_folder = 'VL/1_output/samples'
     output_folder = 'VL/4_evaluation_results'
     selected_features = ['melody', 'harmony', 'rhythm', 'overall_structure']
     results = []
