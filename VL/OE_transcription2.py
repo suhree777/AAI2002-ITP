@@ -1,4 +1,5 @@
 import os
+import shutil
 import pandas as pd
 import mido
 
@@ -107,16 +108,19 @@ WEIGHTS = {
     "Overall Structure Score": 2
 }
 
+# Add a baseline score to prevent negative scores
+BASELINE_SCORE = 10
+
 # Function to evaluate a single row of metrics
 def evaluate_row(row):
-    score = 0
+    score = BASELINE_SCORE
     for metric, (low, high) in THRESHOLDS.items():
         value = row[metric]
         if low <= value <= high:
             score += WEIGHTS[metric] * (1 - abs(value - (low + high) / 2) / ((high - low) / 2))
         else:
             score -= WEIGHTS[metric]
-    return score
+    return max(score, 0)  # Ensure the score is not negative
 
 # Function to evaluate the dataframe
 def evaluate_music_df(df):
@@ -210,10 +214,14 @@ def evaluate_music(file_path, selected_features):
 
 def main():
     print("Current Working Directory:", os.getcwd())
-    # input_folder = 'VL/1_output'
-    # input_folder = 'VL/1_output/samples'
-    input_folder = 'VL/1_output/gen samples'
+    input_folder = 'VL/1_output/samples'
     output_folder = 'VL/4_evaluation_results'
+    
+    # Remove existing output folder and create a new one
+    if os.path.exists(output_folder):
+        shutil.rmtree(output_folder)
+    os.makedirs(output_folder, exist_ok=True)
+    
     selected_features = [
         'pitch_consistency', 'temporal_structure', 'melodic_contour', 'note_density_dynamic_range',
         'melody', 'harmony', 'rhythm', 'overall_structure'
@@ -234,18 +242,9 @@ def main():
     # Evaluate the quality of the music
     results_df = evaluate_music_df(results_df)
 
-    # results_file_path = os.path.join(output_folder, 'midi_evaluation_results21.csv')
-    # results_file_path = os.path.join(output_folder, 'midi_evaluation_results22.csv')
-    results_file_path = os.path.join(output_folder, 'midi_evaluation_results23.csv')
-    if os.path.exists(results_file_path):
-        existing_df = pd.read_csv(results_file_path)
-        combined_df = pd.concat([existing_df, results_df])
-        combined_df = combined_df.drop_duplicates(subset=["File"], keep='last')
-        combined_df.to_csv(results_file_path, index=False)
-        print(f"Results updated in {results_file_path}")
-    else:
-        results_df.to_csv(results_file_path, index=False)
-        print(f"Results saved in {results_file_path}")
+    results_file_path = os.path.join(output_folder, 'midi_evaluation_results01.csv')
+    results_df.to_csv(results_file_path, index=False)
+    print(f"Results saved in {results_file_path}")
 
 if __name__ == "__main__":
     main()
