@@ -53,12 +53,10 @@ def normalize_feature(value, min_value, max_value):
     if max_value == min_value:
         return 0
     normalized_value = (value - min_value) / (max_value - min_value)
-    # Ensure the normalized value is between 0 and 1
     return max(0, min(normalized_value, 1))
 
 # Function to classify mood based on the evaluated features using Russell's Emotion Circumplex model
 def classify_mood(pitch_consistency, duration_consistency, offset_variance, melodic_contour, note_density, dynamic_range):
-    # Normalize features
     norm_pitch_consistency = normalize_feature(pitch_consistency, 0, 20)
     norm_duration_consistency = normalize_feature(duration_consistency, 0, 30)
     norm_offset_variance = normalize_feature(offset_variance, 0, 200)
@@ -66,11 +64,9 @@ def classify_mood(pitch_consistency, duration_consistency, offset_variance, melo
     norm_note_density = normalize_feature(note_density, 1, 10)
     norm_dynamic_range = normalize_feature(dynamic_range, 10, 100)
     
-    # Calculate arousal and valence scores
     arousal = (norm_pitch_consistency + norm_duration_consistency + norm_offset_variance + norm_note_density + norm_dynamic_range) / 5
     valence = (1 - norm_pitch_consistency + 1 - norm_duration_consistency + 1 - norm_offset_variance + norm_note_density + norm_dynamic_range) / 5
 
-    # Determine mood based on arousal and valence
     if arousal > 0.5 and valence > 0.5:
         return "Happy"
     elif arousal > 0.5 and valence <= 0.5:
@@ -84,12 +80,6 @@ def classify_mood(pitch_consistency, duration_consistency, offset_variance, melo
 
 # Define thresholds and weights for evaluation
 THRESHOLDS = {
-    "Pitch Consistency": (0, 20),
-    "Duration Consistency": (0, 30),
-    "Offset Variance": (0, 200),
-    "Melodic Contour": (0, 20),
-    "Note Density": (1, 10),
-    "Dynamic Range": (10, 100),
     "Melody Score": (0, 1),
     "Harmony Score": (0, 100),
     "Rhythm Score": (0, 1),
@@ -97,12 +87,6 @@ THRESHOLDS = {
 }
 
 WEIGHTS = {
-    "Pitch Consistency": 1,
-    "Duration Consistency": 1,
-    "Offset Variance": 1,
-    "Melodic Contour": 1,
-    "Note Density": 1,
-    "Dynamic Range": 1,
     "Melody Score": 2,
     "Harmony Score": 1,
     "Rhythm Score": 1,
@@ -119,7 +103,6 @@ def evaluate_row_high_level(row):
             normalized_value = normalize_feature(value, THRESHOLDS[metric][0], THRESHOLDS[metric][1])
             score += WEIGHTS[metric] * normalized_value
             max_score += WEIGHTS[metric]
-    # Normalize score to a 0-100 scale
     return (score / max_score) * 100 if max_score != 0 else 0
 
 # Function to evaluate the dataframe using high-level quality score
@@ -155,59 +138,41 @@ def evaluate_music(file_path, selected_features):
     intervals = [pitches[i] - pitches[i-1] for i in range(1, len(pitches))]
     total_duration = midi_file.length
 
-    feature_values = []
+    pitch_consistency = evaluate_pitch_consistency(pitches)
+    duration_consistency, offset_variance = evaluate_temporal_structure(durations, offsets)
+    melodic_contour = evaluate_melodic_contour(intervals)
+    note_density, dynamic_range = evaluate_note_density_and_dynamic_range(notes, velocities, total_duration)
 
-    if 'pitch_consistency' in selected_features:
-        pitch_consistency = evaluate_pitch_consistency(pitches)
-        feature_values.append(pitch_consistency)
+    # Calculate high-level features
+    melody_score = evaluate_melody(melodic_contour, pitch_consistency)
+    harmony_score = evaluate_harmony(chords, len(midi_file.tracks))
+    rhythm_score = evaluate_rhythm(duration_consistency, offset_variance)
+    structure_score = evaluate_overall_structure(note_density, dynamic_range)
 
-    if 'temporal_structure' in selected_features:
-        duration_consistency, offset_variance = evaluate_temporal_structure(durations, offsets)
-        feature_values.extend([duration_consistency, offset_variance])
+    # Collect feature values based on selected features
+    feature_values = {
+        "Melody Score": melody_score,
+        "Harmony Score": harmony_score,
+        "Rhythm Score": rhythm_score,
+        "Overall Structure Score": structure_score
+    }
 
-    if 'melodic_contour' in selected_features:
-        melodic_contour = evaluate_melodic_contour(intervals)
-        feature_values.append(melodic_contour)
-
-    if 'note_density_dynamic_range' in selected_features:
-        note_density, dynamic_range = evaluate_note_density_and_dynamic_range(notes, velocities, total_duration)
-        feature_values.extend([note_density, dynamic_range])
-
-    if 'melody' in selected_features:
-        melodic_contour = evaluate_melodic_contour(intervals)
-        pitch_consistency = evaluate_pitch_consistency(pitches)
-        melody_score = evaluate_melody(melodic_contour, pitch_consistency)
-        feature_values.append(melody_score)
-
-    if 'harmony' in selected_features:
-        harmony_score = evaluate_harmony(chords, len(midi_file.tracks))
-        feature_values.append(harmony_score)
-
-    if 'rhythm' in selected_features:
-        duration_consistency, offset_variance = evaluate_temporal_structure(durations, offsets)
-        rhythm_score = evaluate_rhythm(duration_consistency, offset_variance)
-        feature_values.append(rhythm_score)
-
-    if 'overall_structure' in selected_features:
-        note_density, dynamic_range = evaluate_note_density_and_dynamic_range(notes, velocities, total_duration)
-        structure_score = evaluate_overall_structure(note_density, dynamic_range)
-        feature_values.append(structure_score)
-
-    predicted_mood = classify_mood(*feature_values[:6])  # Assuming first 6 features are used for mood classification
+    # Classify mood based on the evaluated features (using all features needed for mood classification)
+    predicted_mood = classify_mood(pitch_consistency, duration_consistency, offset_variance, melodic_contour, note_density, dynamic_range)
 
     result = {
         "File": os.path.basename(file_path),
         "Predicted Mood": predicted_mood,
-        "Pitch Consistency": feature_values[0] if 'pitch_consistency' in selected_features else None,
-        "Duration Consistency": feature_values[1] if 'temporal_structure' in selected_features else None,
-        "Offset Variance": feature_values[2] if 'temporal_structure' in selected_features else None,
-        "Melodic Contour": feature_values[3] if 'melodic_contour' in selected_features else None,
-        "Note Density": feature_values[4] if 'note_density_dynamic_range' in selected_features else None,
-        "Dynamic Range": feature_values[5] if 'note_density_dynamic_range' in selected_features else None,
-        "Melody Score": feature_values[6] if 'melody' in selected_features else None,
-        "Harmony Score": feature_values[7] if 'harmony' in selected_features else None,
-        "Rhythm Score": feature_values[8] if 'rhythm' in selected_features else None,
-        "Overall Structure Score": feature_values[9] if 'overall_structure' in selected_features else None,
+        "Pitch Consistency": pitch_consistency,
+        "Duration Consistency": duration_consistency,
+        "Offset Variance": offset_variance,
+        "Melodic Contour": melodic_contour,
+        "Note Density": note_density,
+        "Dynamic Range": dynamic_range,
+        "Melody Score": feature_values["Melody Score"],
+        "Harmony Score": feature_values["Harmony Score"],
+        "Rhythm Score": feature_values["Rhythm Score"],
+        "Overall Structure Score": feature_values["Overall Structure Score"]
     }
 
     return result
@@ -217,7 +182,6 @@ def main():
     input_folder = 'VL/1_output/samples'
     output_folder = 'VL/4_evaluation_results'
     selected_features = [
-        'pitch_consistency', 'temporal_structure', 'melodic_contour', 'note_density_dynamic_range',
         'melody', 'harmony', 'rhythm', 'overall_structure'
     ]
     results = []
@@ -231,9 +195,9 @@ def main():
     results_df = pd.DataFrame(results)
 
     # Removing unnecessary columns
-    results_df.drop(columns=['pitch_consistency', 'temporal_structure', 'melodic_contour', 'note_density_dynamic_range'], inplace=True, errors='ignore')
+    results_df.drop(columns=['pitch_consistency', 'duration_consistency', 'offset_variance', 'melodic_contour', 'note_density', 'dynamic_range'], inplace=True, errors='ignore')
 
-    # Evaluate the quality of the music
+    # Evaluate the quality of the music (high-level)
     results_df = evaluate_music_df_high_level(results_df)
 
     results_file_path = os.path.join(output_folder, 'midi_evaluation_results_hl.csv')
