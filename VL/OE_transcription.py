@@ -61,8 +61,51 @@ def classify_mood(pitch_consistency, duration_consistency, offset_variance, melo
     else:
         return "Neutral"
 
+# Define thresholds and weights for evaluation
+THRESHOLDS = {
+    "Pitch Consistency": (0, 20),
+    "Duration Consistency": (0, 30),
+    "Offset Variance": (0, 200),
+    "Melodic Contour": (0, 20),
+    "Note Density": (1, 10),
+    "Dynamic Range": (10, 100),
+    "Melody Score": (0, 1),
+    "Harmony Score": (0, 100),
+    "Rhythm Score": (0, 1),
+    "Overall Structure Score": (0, 100)
+}
+
+WEIGHTS = {
+    "Pitch Consistency": 1,
+    "Duration Consistency": 1,
+    "Offset Variance": 1,
+    "Melodic Contour": 1,
+    "Note Density": 1,
+    "Dynamic Range": 1,
+    "Melody Score": 2,
+    "Harmony Score": 1,
+    "Rhythm Score": 1,
+    "Overall Structure Score": 2
+}
+
+# Function to evaluate a single row of metrics
+def evaluate_row(row):
+    score = 0
+    for metric, (low, high) in THRESHOLDS.items():
+        value = row[metric]
+        if low <= value <= high:
+            score += WEIGHTS[metric] * (1 - abs(value - (low + high) / 2) / ((high - low) / 2))
+        else:
+            score -= WEIGHTS[metric]
+    return score
+
+# Function to evaluate the dataframe
+def evaluate_music_df(df):
+    df['Quality Score'] = df.apply(evaluate_row, axis=1)
+    return df
+
 # Function to dynamically evaluate music based on selected features
-def evaluate_music(file_path, selected_features, active_mood):
+def evaluate_music(file_path, selected_features):
     midi_file = load_midi(file_path)
 
     pitches = []
@@ -127,9 +170,11 @@ def evaluate_music(file_path, selected_features, active_mood):
         structure_score = evaluate_overall_structure(note_density, dynamic_range)
         feature_values.append(structure_score)
 
+    predicted_mood = classify_mood(*feature_values[:6])  # Assuming first 6 features are used for mood classification
+
     result = {
         "File": os.path.basename(file_path),
-        "Mood": active_mood,  # Insert the active mood here
+        "Predicted Mood": predicted_mood,
         "Pitch Consistency": feature_values[0] if 'pitch_consistency' in selected_features else None,
         "Duration Consistency": feature_values[1] if 'temporal_structure' in selected_features else None,
         "Offset Variance": feature_values[2] if 'temporal_structure' in selected_features else None,
@@ -146,7 +191,9 @@ def evaluate_music(file_path, selected_features, active_mood):
 
 def main():
     print("Current Working Directory:", os.getcwd())
-    input_folder = 'VL/1_output'
+    # input_folder = 'VL/1_output'
+    # input_folder = 'VL/1_output/samples'
+    input_folder = 'VL/1_output/gen samples'
     output_folder = 'VL/4_evaluation_results'
     selected_features = [
         'pitch_consistency', 'temporal_structure', 'melodic_contour', 'note_density_dynamic_range',
@@ -154,16 +201,10 @@ def main():
     ]
     results = []
 
-    # Extract active mood from 5_Gen_music_cleaning.py
-    active_mood = "Neutral"  # Default value
-    with open('path_to_summary.json', 'r') as f:
-        data = json.load(f)
-        active_mood = data.get('active_mood', active_mood)
-
     for filename in os.listdir(input_folder):
         if filename.endswith('.mid') or filename.endswith('.midi'):
             file_path = os.path.join(input_folder, filename)
-            evaluation_result = evaluate_music(file_path, selected_features, active_mood)
+            evaluation_result = evaluate_music(file_path, selected_features)
             results.append(evaluation_result)
 
     results_df = pd.DataFrame(results)
@@ -171,7 +212,10 @@ def main():
     # Removing unnecessary columns
     results_df.drop(columns=['pitch_consistency', 'temporal_structure', 'melodic_contour', 'note_density_dynamic_range'], inplace=True, errors='ignore')
 
-    results_file_path = os.path.join(output_folder, 'midi_evaluation_results.csv')
+    # Evaluate the quality of the music
+    results_df = evaluate_music_df(results_df)
+
+    results_file_path = os.path.join(output_folder, 'midi_evaluation_results13.csv')
     if os.path.exists(results_file_path):
         existing_df = pd.read_csv(results_file_path)
         combined_df = pd.concat([existing_df, results_df])
