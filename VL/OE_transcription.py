@@ -64,8 +64,12 @@ def normalize_feature(value, mean, std):
     if std == 0:
         return 0
     normalized_value = (value - mean) / std
-    # Ensure normalized values are within the range [0, 1]
-    return max(0, min(normalized_value, 1))
+    return normalized_value
+
+# Function to scale normalized values to 0-100 range
+def scale_to_100(normalized_value):
+    scaled_value = 50 + 50 * normalized_value
+    return max(0, min(scaled_value, 100))
 
 # Function to classify mood based on the evaluated features using Russell's Emotion Circumplex model
 def classify_mood(pitch_consistency, duration_consistency, offset_variance, melodic_contour, note_density, dynamic_range,
@@ -124,10 +128,9 @@ def evaluate_row_high_level(row, means, stds):
         value = row[metric]
         if value is not None:
             normalized_value = normalize_feature(value, means[metric], stds[metric])
-            print(f"{metric}: Value={value}, Mean={means[metric]}, Std={stds[metric]}, Normalized={normalized_value}")
-            score += weight * normalized_value
-            max_score += weight
-    print(f"Score={score}, Max Score={max_score}")
+            scaled_value = scale_to_100(normalized_value)
+            score += weight * scaled_value
+            max_score += weight * 100  # Max score after scaling
     return (score / max_score) * 100 if max_score != 0 else 0
 
 # Function to evaluate the dataframe using high-level quality score
@@ -190,10 +193,10 @@ def evaluate_music(file_path):
         "Overall Structure Score": structure_score
     }
 
+    print(f"Evaluated features for {file_path}: {feature_values}")
     return feature_values
 
 def main():
-    print("Current Working Directory:", os.getcwd())
     input_folder = 'VL/1_output/samples'
     output_folder = 'VL/4_evaluation_results'
     results = []
