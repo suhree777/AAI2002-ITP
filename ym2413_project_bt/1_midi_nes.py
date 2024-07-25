@@ -118,11 +118,11 @@ if __name__ == '__main__':
     input_dir = 'music_dataset/YM2413-MDB-v1.0.2/midi/adjust_tempo_remove_delayed_inst'
     output_dir = 'ym2413_project_bt/1_output_freq'
     process_path = 'ym2413_project_bt/3_processed_freq'
-    max_length = 10
-    min_length = 5
+    max_length = 120
+    min_length = 60
     preprocess_dataset(input_dir, output_dir, max_length, min_length)
     summary = {
-        'Midi file duration range': f"{min_length} sec to {max_length} sec",
+        'duration_range': f"{min_length} sec to {max_length} sec",
     }
     summary_path = os.path.join(process_path, 'summary.json')
     with open(summary_path, 'w') as f:

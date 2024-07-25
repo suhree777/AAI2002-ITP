@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 
-def resample_midi_instruments(midi_path, sample_rate_hz=44500):
+def resample_midi_instruments(midi_path, sample_rate_hz=880):
     midi_data = pretty_midi.PrettyMIDI(midi_path)
     
     # Define the end time based on the last event in the MIDI file
@@ -68,16 +68,16 @@ def plot_instrument_data(times, instrument_data):
         # Set block=True for the last plot
         plt.show(block=(idx == len(instrument_data) - 1))
 
-midi_directory = 'ym2413_project_bt/1_output_limited/Q1_happy'
+midi_directory = 'ym2413_project_bt/1_output_freq/Q1_happy/02 - Game de check! Koutsuu Anzen (FM) - Practice, Starting.mid'
 
 # Select a random MIDI file from the directory
-midi_files = [f for f in os.listdir(midi_directory) if f.endswith('.mid')]
+"""midi_files = [f for f in os.listdir(midi_directory) if f.endswith('.mid')]
 selected_midi = random.choice(midi_files)
 midi_path = os.path.join(midi_directory, selected_midi)
-print(f"Selected MIDI file for sampling: {selected_midi}")
+print(f"Selected MIDI file for sampling: {selected_midi}")"""
 
 # Resample MIDI data for each instrument at 50Hz
-times, instrument_data = resample_midi_instruments(midi_path)
+times, instrument_data = resample_midi_instruments(midi_directory)
 
 # Plot the resampled MIDI data for each instrument
 plot_instrument_data(times, instrument_data)

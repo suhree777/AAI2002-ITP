@@ -84,6 +84,11 @@ def transform_dataset(dataset_path, vocab, instrument_vocab, output_folder):
                     json.dump(transformed_data, out_file, indent=4)
                 processed_count += 1
     print(f'Total processed files: {processed_count}')
+    with open(summary_path, 'r') as file:
+        data = json.load(file)
+    data['processed_count'] = processed_count
+    with open(summary_path, 'w') as file:
+        json.dump(data, file, indent=4)
 
 # Paths
 dataset_path = 'ym2413_project_bt/2_feature_freq/data'

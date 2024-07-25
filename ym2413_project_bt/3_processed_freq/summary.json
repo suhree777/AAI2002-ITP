@@ -1,0 +1,19 @@
+{
+    "duration_range": "60 sec to 120 sec",
+    "desired_sample_rate": 67,
+    "mood_labels": [
+        "sad",
+        "angry",
+        "relaxed",
+        "happy"
+    ],
+    "top_instrument_names": [
+        "Acoustic Bass",
+        "Trumpet",
+        "Electric Guitar (clean)",
+        "Harpsichord"
+    ],
+    "processed_count": 185,
+    "size_multiplyer": 5,
+    "embedding_dim": 512
+}
