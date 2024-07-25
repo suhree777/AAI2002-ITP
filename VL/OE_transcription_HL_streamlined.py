@@ -80,9 +80,9 @@ def classify_mood(pitch_consistency, duration_consistency, offset_variance, melo
     if arousal > 0.5 and valence > 0.5:
         return "Happy"
     elif arousal > 0.5 and valence <= 0.5:
-        return "Angry"
+        return "Tensional"
     elif arousal <= 0.5 and valence > 0.5:
-        return "Relaxed"
+        return "Peaceful"
     elif arousal <= 0.5 and valence <= 0.5:
         return "Sad"
     else:

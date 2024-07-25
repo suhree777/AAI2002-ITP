@@ -3,115 +3,87 @@ import pandas as pd
 import mido
 import numpy as np
 
-# Function to load a MIDI file
 def load_midi(file_path):
+    """Load a MIDI file and handle errors gracefully."""
     try:
         return mido.MidiFile(file_path)
     except Exception as e:
         print(f"Error loading MIDI file {file_path}: {e}")
         return None
 
-# Function to evaluate pitch consistency
 def evaluate_pitch_consistency(pitches):
-    if not pitches:
-        return 0
-    pitch_variance = pd.Series(pitches).value_counts().std()
-    return pitch_variance
+    """Evaluate pitch consistency by calculating the standard deviation of pitch counts."""
+    return pd.Series(pitches).value_counts().std() if len(pitches) > 0 else 0
 
-# Function to evaluate temporal structure
 def evaluate_temporal_structure(durations, offsets):
+    """Evaluate temporal structure by calculating duration consistency and offset variance."""
     if not durations or not offsets:
         return 0, 0
     duration_consistency = pd.Series(durations).value_counts().std()
     offset_variance = pd.Series(offsets).diff().abs().mean()
     return duration_consistency, offset_variance
 
-# Function to evaluate melodic contour
 def evaluate_melodic_contour(intervals):
-    if not intervals:
-        return 0
-    contour_changes = pd.Series(intervals).diff().abs().mean()
-    return contour_changes
+    """Evaluate melodic contour by calculating the mean absolute difference of intervals."""
+    return pd.Series(intervals).diff().abs().mean() if len(intervals) > 0 else 0
 
-# Function to evaluate note density and dynamic range
 def evaluate_note_density_and_dynamic_range(notes, velocities, total_duration):
+    """Evaluate note density and dynamic range."""
     note_density = len(notes) / total_duration if total_duration else 0
     dynamic_range = max(velocities) - min(velocities) if velocities else 0
     return note_density, dynamic_range
 
-# Function to evaluate melody
 def evaluate_melody(melodic_contour, pitch_consistency):
-    melody_score = (1 / melodic_contour if melodic_contour != 0 else 0) + (1 / pitch_consistency if pitch_consistency != 0 else 0)
-    return melody_score
+    """Evaluate melody by combining melodic contour and pitch consistency."""
+    return (1 / melodic_contour if melodic_contour != 0 else 0) + (1 / pitch_consistency if pitch_consistency != 0 else 0)
 
-# Function to evaluate harmony
 def evaluate_harmony(chords, total_tracks):
-    harmony_score = chords / total_tracks if total_tracks != 0 else 0
-    return harmony_score
+    """Evaluate harmony by the ratio of chords to total tracks."""
+    return chords / total_tracks if total_tracks != 0 else 0
 
-# Function to evaluate rhythm
 def evaluate_rhythm(duration_consistency, offset_variance):
-    rhythm_score = (1 / duration_consistency if duration_consistency != 0 else 0) + (1 / offset_variance if offset_variance != 0 else 0)
-    return rhythm_score
+    """Evaluate rhythm by combining duration consistency and offset variance."""
+    return (1 / duration_consistency if duration_consistency != 0 else 0) + (1 / offset_variance if offset_variance != 0 else 0)
 
-# Function to evaluate overall structure
 def evaluate_overall_structure(note_density, dynamic_range):
-    structure_score = note_density + dynamic_range
-    return structure_score
+    """Evaluate overall structure by combining note density and dynamic range."""
+    return note_density + dynamic_range
 
-# Function to normalize feature values
 def normalize_feature(value, mean, std):
-    if std == 0:
-        return 0
-    normalized_value = (value - mean) / std
-    return normalized_value
+    """Normalize a feature value."""
+    return (value - mean) / std if std != 0 else 0
 
-# Function to scale normalized values to 0-100 range
 def scale_to_100(normalized_value):
-    scaled_value = 50 + 50 * normalized_value
-    return max(0, min(scaled_value, 100))
+    """Scale a normalized value to the range [0, 100]."""
+    return max(0, min(50 + 50 * normalized_value, 100))
 
-# Function to classify mood based on the evaluated features using Russell's Emotion Circumplex model
-def classify_mood(pitch_consistency, duration_consistency, offset_variance, melodic_contour, note_density, dynamic_range,
-                  means, stds):
-    norm_pitch_consistency = normalize_feature(pitch_consistency, means['Pitch Consistency'], stds['Pitch Consistency'])
-    norm_duration_consistency = normalize_feature(duration_consistency, means['Duration Consistency'], stds['Duration Consistency'])
-    norm_offset_variance = normalize_feature(offset_variance, means['Offset Variance'], stds['Offset Variance'])
-    norm_melodic_contour = normalize_feature(melodic_contour, means['Melodic Contour'], stds['Melodic Contour'])
-    norm_note_density = normalize_feature(note_density, means['Note Density'], stds['Note Density'])
-    norm_dynamic_range = normalize_feature(dynamic_range, means['Dynamic Range'], stds['Dynamic Range'])
+def classify_mood(features, means, stds):
+    """Classify mood based on normalized features."""
+    norm_features = {key: normalize_feature(value, means[key], stds[key]) for key, value in features.items()}
     
-    arousal = (norm_pitch_consistency + norm_duration_consistency + norm_offset_variance + norm_note_density + norm_dynamic_range) / 5
-    valence = (1 - norm_pitch_consistency + 1 - norm_duration_consistency + 1 - norm_offset_variance + norm_note_density + norm_dynamic_range) / 5
+    arousal = sum(norm_features.values()) / len(norm_features)
+    valence = sum(1 - v for v in norm_features.values()) / len(norm_features)
 
-    if arousal > 0.5 and valence > 0.5:
+    print(f"arousal: {arousal}, valence: {valence}")
+
+    if arousal > 0 and valence > 0:
         return "Happy"
-    elif arousal > 0.5 and valence <= 0.5:
+    elif arousal > 0 and valence <= 0:
         return "Angry"
-    elif arousal <= 0.5 and valence > 0.5:
+    elif arousal <= 0 and valence > 0:
         return "Relaxed"
-    elif arousal <= 0.5 and valence <= 0.5:
+    elif arousal <= 0 and valence <= 0:
         return "Sad"
-    else:
-        return "Neutral"
+    return "Neutral"
 
-# Function to impute missing values with the mean
 def impute_missing_values(df, metric):
-    mean_value = df[metric].mean()
-    df[metric] = df[metric].fillna(mean_value)
+    """Impute missing values in a dataframe column with the mean."""
+    df[metric] = df[metric].fillna(df[metric].mean())
     return df
 
-# Function to calculate mean and std for normalization
 def calculate_mean_std(df, metric):
+    """Calculate mean and standard deviation of a dataframe column."""
     return df[metric].mean(), df[metric].std()
-
-# Define thresholds and weights for evaluation
-THRESHOLDS = {
-    "Melody Score": (0, 1),
-    "Harmony Score": (0, 100),
-    "Rhythm Score": (0, 1),
-    "Overall Structure Score": (0, 100)
-}
 
 WEIGHTS = {
     "Melody Score": 2,
@@ -120,8 +92,8 @@ WEIGHTS = {
     "Overall Structure Score": 2
 }
 
-# Function to evaluate a single row of metrics for high-level quality score
 def evaluate_row_high_level(row, means, stds):
+    """Evaluate high-level quality score for a row of metrics."""
     score = 0
     max_score = 0
     for metric, weight in WEIGHTS.items():
@@ -130,26 +102,21 @@ def evaluate_row_high_level(row, means, stds):
             normalized_value = normalize_feature(value, means[metric], stds[metric])
             scaled_value = scale_to_100(normalized_value)
             score += weight * scaled_value
-            max_score += weight * 100  # Max score after scaling
+            max_score += weight * 100
     return (score / max_score) * 100 if max_score != 0 else 0
 
-# Function to evaluate the dataframe using high-level quality score
 def evaluate_music_df_high_level(df, means, stds):
+    """Evaluate high-level quality score for a dataframe of metrics."""
     df['Quality Score'] = df.apply(evaluate_row_high_level, axis=1, means=means, stds=stds)
     return df
 
-# Function to dynamically evaluate music based on selected features
 def evaluate_music(file_path):
+    """Evaluate various musical features from a MIDI file."""
     midi_file = load_midi(file_path)
     if midi_file is None:
         return None
 
-    pitches = []
-    durations = []
-    offsets = []
-    notes = []
-    velocities = []
-    intervals = []
+    pitches, durations, offsets, notes, velocities = [], [], [], [], []
     time = 0
     chords = 0
 
@@ -165,7 +132,7 @@ def evaluate_music(file_path):
                 if len(track) > 1 and track[1].type == 'note_on':
                     chords += 1
 
-    intervals = [pitches[i] - pitches[i-1] for i in range(1, len(pitches))]
+    intervals = np.diff(pitches) if len(pitches) > 1 else []
     total_duration = midi_file.length
 
     pitch_consistency = evaluate_pitch_consistency(pitches)
@@ -173,13 +140,11 @@ def evaluate_music(file_path):
     melodic_contour = evaluate_melodic_contour(intervals)
     note_density, dynamic_range = evaluate_note_density_and_dynamic_range(notes, velocities, total_duration)
 
-    # Calculate high-level features
     melody_score = evaluate_melody(melodic_contour, pitch_consistency)
     harmony_score = evaluate_harmony(chords, len(midi_file.tracks))
     rhythm_score = evaluate_rhythm(duration_consistency, offset_variance)
     structure_score = evaluate_overall_structure(note_density, dynamic_range)
 
-    # Collect feature values based on selected features
     feature_values = {
         "Pitch Consistency": pitch_consistency,
         "Duration Consistency": duration_consistency,
@@ -197,7 +162,7 @@ def evaluate_music(file_path):
     return feature_values
 
 def main():
-    input_folder = 'VL/1_output/samples'
+    input_folder = 'ym2413_project_bt/1_output_freq/Q1_happy'
     output_folder = 'VL/4_evaluation_results'
     results = []
 
@@ -213,31 +178,27 @@ def main():
 
     results_df = pd.DataFrame(results)
 
-    # Impute missing values with the mean
     for metric in ["Pitch Consistency", "Duration Consistency", "Offset Variance", "Melodic Contour", "Note Density", "Dynamic Range",
                    "Melody Score", "Harmony Score", "Rhythm Score", "Overall Structure Score"]:
         results_df = impute_missing_values(results_df, metric)
 
-    # Calculate mean and std for normalization
-    means = {}
-    stds = {}
+    means, stds = {}, {}
     for metric in ["Pitch Consistency", "Duration Consistency", "Offset Variance", "Melodic Contour", "Note Density", "Dynamic Range",
                    "Melody Score", "Harmony Score", "Rhythm Score", "Overall Structure Score"]:
         means[metric], stds[metric] = calculate_mean_std(results_df, metric)
 
-    # Classify mood and calculate quality score
     classified_results = []
     for index, row in results_df.iterrows():
-        pitch_consistency = row["Pitch Consistency"]
-        duration_consistency = row["Duration Consistency"]
-        offset_variance = row["Offset Variance"]
-        melodic_contour = row["Melodic Contour"]
-        note_density = row["Note Density"]
-        dynamic_range = row["Dynamic Range"]
-        
-        predicted_mood = classify_mood(
-            pitch_consistency, duration_consistency, offset_variance, melodic_contour, note_density, dynamic_range, means, stds
-        )
+        features = {
+            "Pitch Consistency": row["Pitch Consistency"],
+            "Duration Consistency": row["Duration Consistency"],
+            "Offset Variance": row["Offset Variance"],
+            "Melodic Contour": row["Melodic Contour"],
+            "Note Density": row["Note Density"],
+            "Dynamic Range": row["Dynamic Range"]
+        }
+
+        predicted_mood = classify_mood(features, means, stds)
         quality_score = evaluate_row_high_level(row, means, stds)
         
         classified_result = {
