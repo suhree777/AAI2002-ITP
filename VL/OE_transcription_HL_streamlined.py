@@ -4,21 +4,31 @@ import mido
 
 # Function to load a MIDI file
 def load_midi(file_path):
-    return mido.MidiFile(file_path)
+    try:
+        return mido.MidiFile(file_path)
+    except Exception as e:
+        print(f"Error loading MIDI file {file_path}: {e}")
+        return None
 
 # Function to evaluate pitch consistency
 def evaluate_pitch_consistency(pitches):
+    if not pitches:
+        return 0
     pitch_variance = pd.Series(pitches).value_counts().std()
     return pitch_variance
 
 # Function to evaluate temporal structure
 def evaluate_temporal_structure(durations, offsets):
+    if not durations or not offsets:
+        return 0, 0
     duration_consistency = pd.Series(durations).value_counts().std()
     offset_variance = pd.Series(offsets).diff().abs().mean()
     return duration_consistency, offset_variance
 
 # Function to evaluate melodic contour
 def evaluate_melodic_contour(intervals):
+    if not intervals:
+        return 0
     contour_changes = pd.Series(intervals).diff().abs().mean()
     return contour_changes
 
@@ -113,6 +123,8 @@ def evaluate_music_df_high_level(df):
 # Function to dynamically evaluate music based on selected features
 def evaluate_music(file_path, selected_features):
     midi_file = load_midi(file_path)
+    if midi_file is None:
+        return None
 
     pitches = []
     durations = []
@@ -184,7 +196,8 @@ def main():
         if filename.endswith('.mid') or filename.endswith('.midi'):
             file_path = os.path.join(input_folder, filename)
             evaluation_result = evaluate_music(file_path, selected_features)
-            results.append(evaluation_result)
+            if evaluation_result:
+                results.append(evaluation_result)
 
     results_df = pd.DataFrame(results)
 
