@@ -103,7 +103,7 @@ def evaluate_row_high_level(row, means, stds):
             scaled_value = scale_to_100(normalized_value)
             score += weight * scaled_value
             max_score += weight * 100
-    return (score / max_score) * 100 if max_score != 0 else 0
+    return round((score / max_score) * 100, 3) if max_score != 0 else 0
 
 def evaluate_music_df_high_level(df, means, stds):
     """Evaluate high-level quality score for a dataframe of metrics."""
@@ -163,6 +163,7 @@ def evaluate_music(file_path):
 
 def main():
     input_folder = 'ym2413_project_bt/1_output_freq/Q1_happy'
+    #input_folder = 'VL/1_output'
     output_folder = 'VL/4_evaluation_results'
     results = []
 
@@ -203,7 +204,7 @@ def main():
         
         classified_result = {
             "File": row["File"],
-            "Predicted Mood": predicted_mood,
+            "Russell's Mood": predicted_mood,
             "Melody Score": row["Melody Score"],
             "Harmony Score": row["Harmony Score"],
             "Rhythm Score": row["Rhythm Score"],
