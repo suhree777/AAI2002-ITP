@@ -162,7 +162,7 @@ def evaluate_music(file_path):
     return feature_values
 
 def main():
-    input_folder = 'ym2413_project_bt/1_output_freq/Q1_happy'
+    input_folder = 'ym2413_project_bt/gen_samples'
     #input_folder = 'VL/1_output'
     output_folder = 'VL/4_evaluation_results'
     results = []
